@@ -1,0 +1,345 @@
+/* Case study pages — shared layout (long-scroll hero + content) */
+:root {
+  --cs-max: 720px;
+  --cs-page-pad: clamp(20px, 4vw, 40px);
+  --cs-muted: rgba(255, 255, 255, 0.72);
+  --cs-surface: rgba(255, 255, 255, 0.06);
+  --cs-border: rgba(255, 255, 255, 0.14);
+  --cs-radius: 14px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 14px;
+  scroll-behavior: smooth;
+}
+
+body.case-study {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #f4f6ff;
+  background: #0a0e1a;
+}
+
+.case-study a:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 3px;
+}
+
+/* ── Bottom nav: view-dots + happy-face — fixed row, always 8px gap ─ */
+/* Center the pair as one unit: fit-content + horizontal auto margins (no transform — avoids VT/hover conflicts). */
+body.case-study .case-study-bottom-bar {
+  position: fixed;
+  bottom: max(24px, calc(env(safe-area-inset-bottom, 0px) + 12px));
+  left: 0;
+  right: 0;
+  width: fit-content;
+  max-width: calc(100vw - 24px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px));
+  margin-inline: auto;
+  z-index: 100;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+}
+
+body.case-study .case-study-bottom-bar .view-dots {
+  position: relative;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+body.case-study .case-study-bottom-bar .search-layers-btn {
+  position: relative;
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+body.case-study .search-layers-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: background 0.5s ease, color 0.5s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+body.case-study .search-layers-btn svg {
+  width: 28px;
+  height: 28px;
+}
+
+body.case-study .search-layers-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+body.case-study a.search-layers-btn {
+  text-decoration: none;
+  color: inherit;
+}
+
+body.case-study .view-dots {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  box-sizing: border-box;
+  padding: 6px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  cursor: default;
+  user-select: none;
+  touch-action: manipulation;
+  transition: box-shadow 0.2s ease;
+}
+
+body.case-study .view-dots:hover {
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.12);
+}
+
+body.case-study .view-pill {
+  position: relative;
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ffffff;
+  border: none;
+  background: transparent;
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: opacity 0.22s ease, transform 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+body.case-study a.view-pill {
+  text-decoration: none;
+  color: #ffffff;
+  display: inline-block;
+  -webkit-appearance: none;
+  appearance: none;
+  /* Do not use font: inherit — body is 14px; homepage uses <button> and keeps .view-pill 11px */
+}
+
+body.case-study .view-pill:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+body.case-study .view-pill.active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Match index.html: style.css @media (max-width: 720px) for view-dots / search-layers-btn */
+@media (max-width: 720px) {
+  body.case-study .case-study-bottom-bar {
+    bottom: max(20px, calc(env(safe-area-inset-bottom, 0px) + 8px));
+  }
+
+  body.case-study .view-pill {
+    font-size: 10px;
+    padding: 8px 10px;
+    letter-spacing: 0.08em;
+  }
+}
+
+/* ── Hero ─────────────────────────────────────────── */
+.case-study-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(20px, 3vw, 28px) var(--cs-page-pad) clamp(24px, 4vw, 36px);
+  background: var(--cs-hero-gradient, linear-gradient(160deg, #1a237e 0%, #0d1440 42%, #070a14 100%));
+}
+
+.case-study-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255, 255, 255, 0.12), transparent 55%);
+  pointer-events: none;
+}
+
+.case-study-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--cs-max);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.case-study-kicker {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cs-muted);
+  margin-bottom: 0;
+}
+
+/* ── Content ──────────────────────────────────────── */
+.case-study-main {
+  max-width: var(--cs-max);
+  margin: 0 auto;
+  padding: clamp(40px, 6vw, 72px) var(--cs-page-pad) calc(clamp(80px, 12vw, 120px) + 88px);
+}
+
+.case-study-section {
+  margin-bottom: clamp(48px, 8vw, 88px);
+  scroll-margin-top: 24px;
+}
+
+.case-study-section:last-child {
+  margin-bottom: 0;
+}
+
+.case-study-section h2 {
+  font-size: clamp(1.35rem, 2.5vw, 1.65rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+  color: #fff;
+}
+
+.case-study-section p {
+  margin: 0 0 16px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.case-study-section p:last-child {
+  margin-bottom: 0;
+}
+
+.case-study-meta {
+  display: grid;
+  gap: 20px;
+  margin-top: 28px;
+  padding: 20px 22px;
+  border-radius: var(--cs-radius);
+  background: var(--cs-surface);
+  border: 1px solid var(--cs-border);
+}
+
+.case-study-meta h3 {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cs-muted);
+  margin: 0 0 10px;
+}
+
+.case-study-meta ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.case-study-meta li {
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.case-study-meta li:last-child {
+  margin-bottom: 0;
+}
+
+.case-study-figure {
+  margin: 28px 0 0;
+  border-radius: var(--cs-radius);
+  overflow: hidden;
+  border: 1px solid var(--cs-border);
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.case-study-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+.case-study-caption {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--cs-muted);
+}
+
+.case-study-grid {
+  display: grid;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+@media (min-width: 640px) {
+  .case-study-grid--2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Per-brand hero gradients (body class on .case-study) */
+.case-study--management {
+  --cs-hero-gradient: linear-gradient(165deg, #311b92 0%, #1a0e42 45%, #070a14 100%);
+}
+
+.case-study--payitoff {
+  --cs-hero-gradient: linear-gradient(165deg, #004d40 0%, #0a2f28 48%, #070a14 100%);
+}
+
+.case-study--figma {
+  --cs-hero-gradient: linear-gradient(165deg, #c2185b 0%, #4a148c 42%, #070a14 100%);
+}
+
+.case-study--yahoo {
+  --cs-hero-gradient: linear-gradient(165deg, #5e35b1 0%, #1a237e 40%, #070a14 100%);
+}
+
+.case-study--asana {
+  --cs-hero-gradient: linear-gradient(165deg, #bf360c 0%, #4e342e 45%, #070a14 100%);
+}
+
+/* ── Cross-page view transitions (same-origin: ↔ index) ─ */
+/* Chromium 126+; ignored elsewhere. */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-group(root) {
+  animation-duration: 0.45s;
+  animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(root) {
+    animation-duration: 0.01ms;
+  }
+}
