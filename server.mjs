@@ -36,39 +36,36 @@ function normalizeText(value) {
 function hasOutOfScopeTerms(answer, baseAnswer) {
   const baseTokens = new Set(normalizeText(baseAnswer).split(' ').filter(Boolean));
   const answerTokens = normalizeText(answer).split(' ').filter(Boolean);
-  // Very short / opinion-style answers (e.g. "Obviously.") have no real tokens to compare against.
-  // Skip this strict guard so Ollama can naturally expand without getting rejected into "In short, Obviously."
   if (baseTokens.size < 3) return false;
   const allowedExtra = new Set([
-    'nico',
-    'matson',
-    'she',
-    'her',
-    'hers',
-    'organic',
-    'focused',
-    'focuses',
-    'across',
-    'works',
-    'work',
-    'experience',
-    'experiences',
-    'leader',
-    'leading',
-    'based',
-    'helps',
-    'building',
-    'products',
-    'product',
-    'design'
+    'nico', 'matson', 'she', 'her', 'hers', 'herself',
+    'organic', 'focused', 'focuses', 'across',
+    'works', 'work', 'working', 'experience', 'experiences',
+    'leader', 'leading', 'led', 'based', 'helps', 'helped',
+    'building', 'built', 'products', 'product', 'design', 'designs',
+    'designed', 'designer', 'designing', 'tools', 'users',
+    'role', 'roles', 'team', 'teams', 'while', 'during',
+    'through', 'where', 'which', 'that', 'there', 'these', 'those',
+    'about', 'notably', 'primarily', 'mainly', 'mostly',
+    'also', 'including', 'such', 'particularly'
   ]);
 
-  return answerTokens.some((token) => {
-    if (token.length < 5) return false;
+  const longTokens = answerTokens.filter((t) => t.length >= 5);
+  if (longTokens.length === 0) return false;
+
+  const outOfScope = longTokens.filter((token) => {
     if (baseTokens.has(token)) return false;
     if (allowedExtra.has(token)) return false;
+    for (const baseToken of baseTokens) {
+      if (baseToken.length < 4) continue;
+      if (token.startsWith(baseToken) || baseToken.startsWith(token)) {
+        return false;
+      }
+    }
     return true;
   });
+
+  return outOfScope.length / longTokens.length > 0.35;
 }
 
 function hasForbiddenNamedEntity(answer, baseAnswer) {

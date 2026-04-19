@@ -196,6 +196,10 @@
 
     const queryTokens = tokenize(normalizedQuery);
     const isBroadQuery = queryTokens.length <= 2;
+    // Raw words (stopwords included) for structural similarity scoring.
+    // "what did nico do at figma" vs "what did nico work on at figma" share
+    // ~80% of raw words, which is the clearest signal they're the same intent.
+    const queryRawWords = normalizedQuery.split(' ').filter(Boolean);
     const scored = entries.map((entry) => {
       const question = normalizeForMatch(entry.question || '');
       const answer = normalizeForMatch(entry.answer || '');
@@ -216,11 +220,26 @@
       if (normalizedQuery.includes(question)) score += 70;
       if (answer.includes(normalizedQuery)) score += 25;
 
+      // Structural similarity bonus: how much of the query's raw wording
+      // appears in the candidate question? Strong signal for near-duplicate
+      // phrasings like "do at X" vs "work at X".
+      if (queryRawWords.length > 0) {
+        const questionWords = new Set(question.split(' ').filter(Boolean));
+        const overlap = queryRawWords.filter((w) => questionWords.has(w)).length;
+        const ratio = overlap / queryRawWords.length;
+        if (ratio >= 0.8) score += 90;
+        else if (ratio >= 0.6) score += 45;
+        else if (ratio >= 0.4) score += 18;
+      }
+
       queryTokens.forEach((token) => {
         if (!token) return;
-        // Owner-declared keywords are strong triggers — one hit guarantees the entry surfaces.
-        if (keywordTokens.has(token)) score += 55;
-        else if (keywordsStr.includes(token)) score += 35;
+        // Owner-declared keywords are strong triggers, but on very sparse
+        // queries (1–2 tokens) a single keyword hit shouldn't dominate
+        // scoring — otherwise any entry tagged with that single surviving
+        // token hijacks the result.
+        if (keywordTokens.has(token)) score += isBroadQuery ? 20 : 55;
+        else if (keywordsStr.includes(token)) score += isBroadQuery ? 12 : 35;
 
         if (question.includes(token)) score += 10;
         else if (answer.includes(token)) score += 4;
