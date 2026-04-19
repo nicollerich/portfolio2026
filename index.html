@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="blue">
+<html lang="en" data-theme="terracotta" data-theme-mode="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,10 +16,30 @@
     <section class="center-content">
 
       <div id="section-about" class="section-about">
-      <h1 class="hero-name"><span class="hero-name-n">N<img class="hero-name-pop" src="images/Me.png" alt="Portrait of Nico"></span>I<span class="hero-name-c-top">C</span>O<br>M<span class="hero-name-a">A</span>TS<span class="hero-name-o" role="button" tabindex="0" aria-pressed="false"><span class="hero-name-o-letter">O</span><img class="hero-name-vinyl" src="images/black-vinyl-record-with-red-label-illustration-png.png" alt=""><span class="hero-name-o-hint" aria-hidden="true"><span class="hero-name-o-hint-text">Play</span></span></span><span class="hero-name-n-end">N</span></h1>
-      <p class="hero-tagline">DESIGNER OF SORTS</p>
+      <p class="hero-tagline">NYC DESIGNER</p>
+      <h1 class="hero-name"><span class="hero-name-n">N<img class="hero-name-pop" src="images/Me.png" alt="Portrait of Nico"></span>I<span class="hero-name-c-top">C</span>O<br><span class="hero-name-m">M</span><span class="hero-name-a">A</span>TS<span class="hero-name-o" role="button" tabindex="0" aria-pressed="false"><span class="hero-name-o-letter">O</span><img class="hero-name-vinyl" src="images/black-vinyl-record-with-red-label-illustration-png.png" alt=""><span class="hero-name-o-hint" aria-hidden="true"><span class="hero-name-o-hint-text">Play</span></span></span><span class="hero-name-n-end">N</span></h1>
+
+      <div class="search-group">
+        <form id="searchAboutForm" class="search-form" action="#" method="get" autocomplete="off">
+          <div class="search-bar">
+            <svg class="search-bar-stroke" viewBox="0 0 460 64" preserveAspectRatio="none" aria-hidden="true">
+              <rect x="1" y="1" width="458" height="62" rx="31" ry="31" pathLength="100"></rect>
+            </svg>
+            <svg class="search-bar-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="16.5" y1="16.5" x2="21" y2="21"/>
+            </svg>
+            <div class="search-bar-field">
+              <span class="search-bar-caret" aria-hidden="true"></span>
+              <input type="search" name="q" class="search-bar-input" placeholder="Ask me stuff, I might have an answer" spellcheck="false" autocomplete="off" aria-label="Search about Nico">
+            </div>
+          </div>
+        </form>
+      </div>
 
       <img class="hero-hi" src="images/Hi.svg" alt="Hi">
+
+      <img class="hero-explore" src="images/go%20exploring.svg" alt="Go exploring">
 
       <div class="hero-blurb">
         <p>I lead design for search at Yahoo, shaping AI-powered experiences across mobile, web, and beyond. I partner with product and engineering to define vision, scale systems, and untangle things that don&rsquo;t always start out clear (which is most things).</p>
@@ -58,50 +78,50 @@
       </span>
     </button>
 
-    <a class="project-folder project-folder--yellow" href="work/management.html" aria-label="Management — open case study">
+    <button type="button" class="project-folder project-folder--yellow" data-case-modal="management" aria-label="Management — open preview">
       <span class="folder-stack" aria-hidden="true">
         <img class="folder-back" src="images/back of folder.svg" alt="">
         <img class="folder-paper" src="images/paper.svg" alt="">
         <img class="folder-front" src="images/front of folder.svg" alt="">
       </span>
       <span class="folder-label">Management</span>
-    </a>
+    </button>
 
-    <a class="project-folder project-folder--yellow project-folder--yellow-two" href="work/payitoff.html" aria-label="Payitoff — open case study">
+    <button type="button" class="project-folder project-folder--yellow project-folder--yellow-two" data-case-modal="payitoff" aria-label="Payitoff — open preview">
       <span class="folder-stack" aria-hidden="true">
         <img class="folder-back" src="images/back of folder.svg" alt="">
         <img class="folder-paper" src="images/paper.svg" alt="">
         <img class="folder-front" src="images/front of folder.svg" alt="">
       </span>
       <span class="folder-label">Payitoff</span>
-    </a>
+    </button>
 
-    <a class="project-folder project-folder--yellow project-folder--yellow-three" href="work/figma.html" aria-label="Figma — open case study">
+    <button type="button" class="project-folder project-folder--yellow project-folder--yellow-three" data-case-modal="figma" aria-label="Figma — open preview">
       <span class="folder-stack" aria-hidden="true">
         <img class="folder-back" src="images/back of folder.svg" alt="">
         <img class="folder-paper" src="images/paper.svg" alt="">
         <img class="folder-front" src="images/front of folder.svg" alt="">
       </span>
       <span class="folder-label">Figma</span>
-    </a>
+    </button>
 
-    <a class="project-folder project-folder--yellow project-folder--yellow-four" href="work/yahoo.html" aria-label="Yahoo — open case study">
+    <button type="button" class="project-folder project-folder--yellow project-folder--yellow-four" data-case-modal="yahoo" aria-label="Yahoo — open preview">
       <span class="folder-stack" aria-hidden="true">
         <img class="folder-back" src="images/back of folder.svg" alt="">
         <img class="folder-paper" src="images/paper.svg" alt="">
         <img class="folder-front" src="images/front of folder.svg" alt="">
       </span>
       <span class="folder-label">Yahoo</span>
-    </a>
+    </button>
 
-    <a class="project-folder project-folder--yellow project-folder--yellow-five" href="work/asana.html" aria-label="Asana — open case study">
+    <button type="button" class="project-folder project-folder--yellow project-folder--yellow-five" data-case-modal="asana" aria-label="Asana — open preview">
       <span class="folder-stack" aria-hidden="true">
         <img class="folder-back" src="images/back of folder.svg" alt="">
         <img class="folder-paper" src="images/paper.svg" alt="">
         <img class="folder-front" src="images/front of folder.svg" alt="">
       </span>
       <span class="folder-label">Asana</span>
-    </a>
+    </button>
 
     <section id="section-work" class="experience-mini" aria-label="Recent experience">
       <p class="experience-mini-label">EXPERIENCE THE LAST 10 YEARS</p>
@@ -140,7 +160,6 @@
     </section>
 
     <nav id="section-connect" class="footer-nav footer-nav-primary footer-nav--social" aria-label="Social links">
-      <img class="social-cluster-letschat" src="images/letschat.svg" alt="" width="452" height="294" decoding="async" aria-hidden="true">
       <!-- Social hrefs -->
       <a class="social-icon-link social-icon-link--instagram" href="https://www.instagram.com/nicollerich/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
         <span class="social-icon-hint" aria-hidden="true">Instagram</span>
@@ -212,19 +231,6 @@
     </div>
   </div>
 
-  <div class="search-group">
-    <div class="search-bar">
-      <svg class="search-bar-stroke" viewBox="0 0 460 64" preserveAspectRatio="none" aria-hidden="true">
-        <rect x="1" y="1" width="458" height="62" rx="31" ry="31" pathLength="100"></rect>
-      </svg>
-      <svg class="search-bar-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="8"/>
-        <line x1="16.5" y1="16.5" x2="21" y2="21"/>
-      </svg>
-      <input type="text" placeholder="Ask me something, I might have an answer" readonly>
-    </div>
-  </div>
-
   <button class="search-layers-btn" type="button" aria-label="Recenter view">
     <svg class="search-layers-face" width="28" height="28" viewBox="0 0 34 35" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <circle cx="17" cy="17.5" r="14" stroke="currentColor" fill="none"/>
@@ -237,10 +243,12 @@
   </button>
 
   <nav class="theme-dots is-collapsed" id="themeDots" aria-expanded="false">
-    <button class="dot dot-white" data-theme="" aria-label="White theme" style="--dot-index: 0;"></button>
-    <button class="dot dot-blue active" data-theme="blue" aria-label="Blue theme" style="--dot-index: 1;"></button>
-    <button class="dot dot-orange" data-theme="orange" aria-label="Orange theme" style="--dot-index: 2;"></button>
-    <button class="dot dot-lime" data-theme="lime" aria-label="Lime theme" style="--dot-index: 3;"></button>
+    <button class="dot dot-terracotta active" data-theme="terracotta" data-theme-mode="light" aria-label="Terracotta theme" style="--dot-index: 0;"></button>
+    <button class="dot dot-ochre" data-theme="ochre" data-theme-mode="light" aria-label="Ochre theme" style="--dot-index: 1;"></button>
+    <button class="dot dot-cobalt" data-theme="cobalt" data-theme-mode="dark" aria-label="Cobalt theme" style="--dot-index: 2;"></button>
+    <button class="dot dot-olive" data-theme="olive" data-theme-mode="light" aria-label="Olive theme" style="--dot-index: 3;"></button>
+    <button class="dot dot-putty" data-theme="putty" data-theme-mode="light" aria-label="Putty theme" style="--dot-index: 4;"></button>
+    <button class="dot dot-lime" data-theme="lime" data-theme-mode="light" aria-label="Lime theme" style="--dot-index: 5;"></button>
   </nav>
 
   <nav class="view-dots" id="viewDots" aria-label="Jump to section">
@@ -261,6 +269,25 @@
   </div>
 
   <div id="spotifyMiniPlayer" class="spotify-mini-player" aria-label="Spotify player"></div>
+
+  <div id="caseStudyModal" class="case-study-modal" hidden aria-hidden="true">
+    <div class="case-study-modal-backdrop" aria-hidden="true"></div>
+    <div
+      class="case-study-modal-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="caseStudyModalTitle"
+    >
+      <button type="button" class="case-study-modal-close" data-case-modal-close aria-label="Close preview">&times;</button>
+      <h2 id="caseStudyModalTitle" class="case-study-modal-title" data-case-modal-title></h2>
+      <h3 id="caseStudyModalSubtitle" class="case-study-modal-subtitle" data-case-modal-subtitle hidden></h3>
+      <div class="case-study-modal-media" data-case-modal-media></div>
+      <p class="case-study-modal-desc" data-case-modal-desc></p>
+      <div class="case-study-modal-loader" data-case-modal-loader aria-hidden="true">
+        <span class="dot-fire"></span>
+      </div>
+    </div>
+  </div>
 
   <script>
     if ('scrollRestoration' in history) {
@@ -299,23 +326,44 @@
     let viewportPanStartY = 0;
     let viewportPanStartScrollX = 0;
     let viewportPanStartScrollY = 0;
+    /** True while the hero search field is focused — pauses piano keyboard */
+    let searchFieldCapturingKeyboard = false;
+    const searchBarInput = document.querySelector('.search-bar-input');
     /** Filled in after piano Web Audio init — Play nav chime */
     let playPlaySectionTone = () => {};
 
-    const getHeroAnchorClientCenter = () => {
+    const isElementLayoutVisible = (el) => {
+      if (!el || !el.isConnected) return false;
+      const cs = getComputedStyle(el);
+      return cs.display !== 'none' && cs.visibility !== 'hidden';
+    };
+
+    /** Hero + optional visible tagline — ignores display:none tagline so scroll math stays valid */
+    const getHeroGroupBounds = () => {
       const hero = document.querySelector('.hero-name');
+      if (!hero) return null;
+      const heroRect = hero.getBoundingClientRect();
+      let top = heroRect.top;
+      let bottom = heroRect.bottom;
+      let left = heroRect.left;
+      let right = heroRect.right;
       const tagline = document.querySelector('.hero-tagline');
-      const anchor = hero || document.querySelector('.center-content');
-      if (!anchor) return null;
-      const heroRect = anchor.getBoundingClientRect();
-      const taglineRect = tagline ? tagline.getBoundingClientRect() : heroRect;
-      const groupTop = Math.min(heroRect.top, taglineRect.top);
-      const groupBottom = Math.max(heroRect.bottom, taglineRect.bottom);
-      const groupLeft = Math.min(heroRect.left, taglineRect.left);
-      const groupRight = Math.max(heroRect.right, taglineRect.right);
+      if (tagline && isElementLayoutVisible(tagline)) {
+        const tr = tagline.getBoundingClientRect();
+        top = Math.min(top, tr.top);
+        bottom = Math.max(bottom, tr.bottom);
+        left = Math.min(left, tr.left);
+        right = Math.max(right, tr.right);
+      }
+      return { top, bottom, left, right };
+    };
+
+    const getHeroAnchorClientCenter = () => {
+      const b = getHeroGroupBounds();
+      if (!b) return null;
       return {
-        x: groupLeft + (groupRight - groupLeft) / 2,
-        y: groupTop + (groupBottom - groupTop) / 2
+        x: b.left + (b.right - b.left) / 2,
+        y: b.top + (b.bottom - b.top) / 2
       };
     };
 
@@ -351,10 +399,7 @@
       if (!mapCanvas) return;
 
       const hero = document.querySelector('.hero-name');
-      const tagline = document.querySelector('.hero-tagline');
-      const anchor = hero || document.querySelector('.center-content');
-
-      if (!anchor) {
+      if (!hero) {
         const fallbackLeft = Math.max(0, (mapCanvas.scrollWidth - window.innerWidth) / 2);
         const fallbackTop = Math.max(0, (mapCanvas.scrollHeight - window.innerHeight) / 2);
         window.scrollTo({ left: fallbackLeft, top: fallbackTop, behavior });
@@ -362,14 +407,10 @@
         return;
       }
 
-      const heroRect = anchor.getBoundingClientRect();
-      const taglineRect = tagline ? tagline.getBoundingClientRect() : heroRect;
-      const groupTop = Math.min(heroRect.top, taglineRect.top);
-      const groupBottom = Math.max(heroRect.bottom, taglineRect.bottom);
-      const groupLeft = Math.min(heroRect.left, taglineRect.left);
-      const groupRight = Math.max(heroRect.right, taglineRect.right);
-      const groupCenterX = groupLeft + (groupRight - groupLeft) / 2;
-      const groupCenterY = groupTop + (groupBottom - groupTop) / 2;
+      const b = getHeroGroupBounds();
+      if (!b) return;
+      const groupCenterX = b.left + (b.right - b.left) / 2;
+      const groupCenterY = b.top + (b.bottom - b.top) / 2;
 
       const rawLeft = window.scrollX + groupCenterX - (window.innerWidth / 2);
       const rawTop = window.scrollY + groupCenterY - (window.innerHeight / 2);
@@ -384,7 +425,7 @@
 
     const shouldSkipViewportPan = (target) => {
       return !!target.closest(
-        'button, input, textarea, select, a, [contenteditable="true"], .theme-dots, .view-dots, .search-group, .search-layers-btn, .post-it, .canvas-pencil, .canvas-pencil-btn, .canvas-eraser, .canvas-eraser-btn, .hero-name-o'
+        'button, input, textarea, select, a, [contenteditable="true"], .theme-dots, .view-dots, .search-group, .search-results, .search-layers-btn, .post-it, .canvas-pencil, .canvas-pencil-btn, .canvas-eraser, .canvas-eraser-btn, .hero-name-o'
       );
     };
 
@@ -758,16 +799,47 @@
       centerViewportOnCenterContent('auto');
     };
 
-    requestAnimationFrame(() => requestAnimationFrame(applyInitialViewportCenter));
-    window.addEventListener('load', applyInitialViewportCenter, { once: true });
+    /** Re-run after layout: fonts, images, and hidden tagline can change hero bounds */
+    const runHeroCenterAfterLayout = () => {
+      applyInitialViewportCenter();
+      requestAnimationFrame(() => {
+        applyInitialViewportCenter();
+        requestAnimationFrame(applyInitialViewportCenter);
+      });
+    };
+
+    runHeroCenterAfterLayout();
+
+    window.addEventListener(
+      'load',
+      () => {
+        runHeroCenterAfterLayout();
+        window.setTimeout(runHeroCenterAfterLayout, 120);
+      },
+      { once: true }
+    );
+
     if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(applyInitialViewportCenter);
+      document.fonts.ready.then(() => runHeroCenterAfterLayout());
     }
+
+    window.addEventListener('pageshow', (e) => {
+      if (e.persisted) {
+        runHeroCenterAfterLayout();
+      }
+    });
 
     document.addEventListener('pointerdown', (e) => {
       if (e.button !== 0) return;
       if (e.pointerType === 'touch') return;
       if (pencilDragging || eraserDragging) return;
+      if (
+        searchBarInput &&
+        document.activeElement === searchBarInput &&
+        !e.target.closest('.search-group')
+      ) {
+        searchBarInput.blur();
+      }
       if (shouldSkipViewportPan(e.target)) return;
 
       viewportPanActive = true;
@@ -800,6 +872,27 @@
     window.addEventListener('pointerup', stopViewportPan);
     window.addEventListener('pointercancel', stopViewportPan);
 
+    if (searchBarInput) {
+      searchBarInput.addEventListener('focus', () => {
+        searchFieldCapturingKeyboard = true;
+      });
+      searchBarInput.addEventListener('blur', () => {
+        searchFieldCapturingKeyboard = false;
+      });
+    }
+
+    document.addEventListener(
+      'keydown',
+      (e) => {
+        if (e.key !== 'Escape') return;
+        if (!searchFieldCapturingKeyboard || !searchBarInput) return;
+        searchBarInput.blur();
+        e.preventDefault();
+        e.stopPropagation();
+      },
+      true
+    );
+
     const panel = document.getElementById('themeDots');
     const dots = Array.from(panel.querySelectorAll('.dot'));
     let dotsExpanded = false;
@@ -815,15 +908,26 @@
       dot.classList.add('active');
       panel.style.setProperty('--active-index', String(dots.indexOf(dot)));
       const theme = dot.dataset.theme;
+      const mode = dot.dataset.themeMode;
       if (theme) {
         document.documentElement.setAttribute('data-theme', theme);
       } else {
         document.documentElement.removeAttribute('data-theme');
       }
+      if (mode) {
+        document.documentElement.setAttribute('data-theme-mode', mode);
+      } else {
+        document.documentElement.removeAttribute('data-theme-mode');
+      }
     };
 
-    const initialActiveDot = panel.querySelector('.dot.active') || dots[0];
-    if (initialActiveDot) setActiveDot(initialActiveDot);
+    const getRandomThemeDot = () => {
+      if (!dots.length) return null;
+      const randomIndex = Math.floor(Math.random() * dots.length);
+      return dots[randomIndex];
+    };
+    const initialThemeDot = getRandomThemeDot() || panel.querySelector('.dot.active') || dots[0];
+    if (initialThemeDot) setActiveDot(initialThemeDot);
     setDotsExpanded(false);
 
     dots.forEach(dot => {
@@ -1207,6 +1311,7 @@
     const pianoKeys = document.querySelectorAll('.pw-key');
     pianoKeys.forEach(key => {
       key.addEventListener('pointerdown', (e) => {
+        if (searchFieldCapturingKeyboard || document.activeElement === searchBarInput) return;
         e.stopPropagation();
         if (pianoCtx.state === 'suspended') pianoCtx.resume();
         playNote(noteFreqs[key.dataset.note]);
@@ -1221,6 +1326,7 @@
 
     const playKeyByLabel = (label, delayMs = 0) => {
       window.setTimeout(() => {
+        if (searchFieldCapturingKeyboard || document.activeElement === searchBarInput) return;
         const btn = keyMap[label.toUpperCase()];
         if (!btn) return;
         playNote(noteFreqs[btn.dataset.note]);
@@ -1267,6 +1373,7 @@
     };
 
     document.addEventListener('keydown', (e) => {
+      if (searchFieldCapturingKeyboard || document.activeElement === searchBarInput) return;
       const k = e.key.toUpperCase();
       const btn = keyMap[k];
       if (!btn || btn.classList.contains('pw-active')) return;
@@ -1276,6 +1383,7 @@
     });
 
     document.addEventListener('keyup', (e) => {
+      if (searchFieldCapturingKeyboard || document.activeElement === searchBarInput) return;
       const btn = keyMap[e.key.toUpperCase()];
       if (btn) btn.classList.remove('pw-active');
     });
@@ -1363,6 +1471,15 @@
     }
 
   </script>
+  <script>
+    window.PORTFOLIO_SEARCH_CONFIG = window.PORTFOLIO_SEARCH_CONFIG || {};
+  </script>
+  <script
+    src="config.js"
+    onerror="window.PORTFOLIO_SEARCH_CONFIG = window.PORTFOLIO_SEARCH_CONFIG || {}"
+  ></script>
+  <script src="case-study-modal.js" defer></script>
+  <script src="search-assistant.js" defer></script>
   <!-- Load after inline script so window.onSpotifyIframeApiReady is always defined (async race breaks Chrome). -->
   <script src="https://open.spotify.com/embed/iframe-api/v1"></script>
 </body>

@@ -1,0 +1,751 @@
+{
+  "version": 1,
+  "updatedAt": "2026-04-17",
+  "owner": "Nico Matson",
+  "entries": [
+    {
+      "category": "about",
+      "question": "Who is Nico Matson?",
+      "answer": "Nico Matson is a product design leader focused on search and AI-powered experiences across mobile and web.",
+      "tags": ["about", "bio", "intro"],
+      "keywords": ["who", "tell", "introduce", "intro", "about", "background", "overview", "summary", "story"]
+    },
+    {
+      "category": "about",
+      "question": "What does Nico do at Yahoo?",
+      "answer": "Nico leads design for Yahoo Search and the AI product Scout, managing a team of 8 designers in close collaboration with GM Eric Feng to revive Yahoo Search as a leading platform.",
+      "tags": ["yahoo", "current role", "search", "scout"]
+    },
+    {
+      "category": "about",
+      "question": "What is Nico's role right now?",
+      "answer": "Director, Head of Design for Yahoo Search.",
+      "tags": ["role", "title", "yahoo"]
+    },
+    {
+      "category": "about",
+      "question": "What kind of designer is Nico?",
+      "answer": "Nico is a product designer and design leader with strengths in interaction design, systems thinking, and cross-functional execution.",
+      "tags": ["designer type", "skills"]
+    },
+    {
+      "category": "about",
+      "question": "What does \"Designer of Sorts\" mean?",
+      "answer": "It reflects a multi-disciplinary style: product design, systems thinking, leadership, and hands-on experimentation.",
+      "tags": ["brand", "tagline"]
+    },
+    {
+      "category": "about",
+      "question": "What industries has Nico worked in?",
+      "answer": "Nico has worked across consumer tech, productivity software, fintech, and AI-enabled search products.",
+      "tags": ["industries", "background"],
+      "keywords": ["industries", "industry", "sectors", "sector", "domains", "domain", "fields", "field", "verticals"]
+    },
+    {
+      "category": "about",
+      "question": "What is Nico's design philosophy?",
+      "answer": "Build useful, clear, and human experiences by balancing detail, systems, and real user needs.",
+      "tags": ["philosophy", "design approach"],
+      "keywords": ["philosophy", "principles", "beliefs", "values", "approach", "mindset", "believe", "thinks"]
+    },
+    {
+      "category": "about",
+      "question": "How does Nico work with product and engineering?",
+      "answer": "Nico partners tightly with product and engineering to define vision, prioritize roadmap bets, and ship high-quality outcomes.",
+      "tags": ["collaboration", "cross-functional"]
+    },
+    {
+      "category": "about",
+      "question": "What kinds of problems does Nico like to solve?",
+      "answer": "Messy, ambiguous product problems that require both strategic direction and executional detail.",
+      "tags": ["problem-solving", "ambiguity"]
+    },
+    {
+      "category": "about",
+      "question": "What is Nico's leadership style?",
+      "answer": "High ownership, collaborative, and growth-oriented, with clear opinions and openness to better ideas.",
+      "tags": ["leadership", "style"],
+      "keywords": ["leadership", "leader", "manage", "management", "boss", "lead", "style"]
+    },
+    {
+      "category": "about",
+      "question": "Is Nico a manager or individual contributor?",
+      "answer": "Both. Nico has led design teams and also works hands-on in product and interaction design, a player-coach in every role.",
+      "tags": ["manager", "IC", "leadership"]
+    },
+    {
+      "category": "about",
+      "question": "What does Nico do outside of work?",
+      "answer": "Nico is a mom of two and enjoys creative projects like home design, experimenting with new tools, and speculative product design, including a wellness app concept exploring AI coaching, mood and activity tracking, and coach-facing dashboards.",
+      "tags": ["personal", "outside work", "speculative"],
+      "keywords": ["outside", "hobbies", "hobby", "personal", "family", "kids", "mom", "mother", "weekend", "free", "fun", "life", "home"]
+    },
+    {
+      "category": "about",
+      "question": "Does Nico do any speculative or personal design work?",
+      "answer": "Yes. Nico is designing a wellness app concept that explores AI-powered coaching, mood and food tracking, and a coach-facing dashboard with session prep tools. It's a space to experiment with systems thinking and product ideas outside of a work context.",
+      "tags": ["speculative", "personal", "wellness"],
+      "keywords": ["speculative", "side", "hobby", "personal", "wellness", "experiment", "concept", "passion", "exploration", "explore"]
+    },
+    {
+      "category": "experience",
+      "question": "What has Nico done in the last 10 years?",
+      "answer": "Nico has held senior design leadership and product design roles across Yahoo Search, Payitoff, Figma, and Asana, spanning AI search, fintech, collaboration tools, and productivity software.",
+      "tags": ["timeline", "experience"]
+    },
+    {
+      "category": "experience",
+      "question": "What is Nico's work history?",
+      "answer": "Yahoo Search (Director, Head of Design, 2024–present), Payitoff (Founding Designer/Co-founder, 2023), Figma (Lead Product Designer, Collaboration Pillar, 2021–2022), and Asana (Lead Product Designer and Manager, 2017–2021).",
+      "tags": ["work history", "companies"]
+    },
+    {
+      "category": "experience",
+      "question": "Where has Nico worked?",
+      "answer": "Yahoo Search, Payitoff, Figma, and Asana.",
+      "tags": ["companies", "experience"]
+    },
+    {
+      "category": "experience",
+      "question": "When did Nico work at Yahoo?",
+      "answer": "2024 to present.",
+      "tags": ["yahoo", "dates"]
+    },
+    {
+      "category": "experience",
+      "question": "When did Nico work at Payitoff?",
+      "answer": "2023.",
+      "tags": ["payitoff", "dates"]
+    },
+    {
+      "category": "experience",
+      "question": "When did Nico work at Figma?",
+      "answer": "2021–2022.",
+      "tags": ["figma", "dates"]
+    },
+    {
+      "category": "experience",
+      "question": "When did Nico work at Asana?",
+      "answer": "2017–2021.",
+      "tags": ["asana", "dates"]
+    },
+    {
+      "category": "experience",
+      "question": "What did Nico do at each company?",
+      "answer": "At Yahoo, Nico led the redesign of Yahoo Search's mobile app, worked as interim and then full-time Head of Design, and contributed to the early design of Scout, Yahoo's AI product. At Payitoff, Nico co-founded the company and was its founding designer. At Figma, Nico led design across the collaboration pillar including Spotlight, commenting, annotations, and Dev Mode. At Asana, Nico designed Timeline, Calendar, sections/task hierarchy, and managed a team of 4–5 designers.",
+      "tags": ["roles", "summary"]
+    },
+    {
+      "category": "experience",
+      "question": "Which company acquired Payitoff?",
+      "answer": "Array acquired Payitoff.",
+      "tags": ["acquisition", "payitoff"]
+    },
+    {
+      "category": "yahoo",
+      "question": "What did Nico lead at Yahoo Search?",
+      "answer": "Nico led the redesign of Yahoo Search's mobile app, shaped the product direction for the Slim Jim carousel on Yahoo.com (originally as a News contractor), and was a key early designer on Scout, Yahoo's AI-powered answer engine. Nico grew from interim to full-time Head of Design and now manages a team of 8 designers.",
+      "tags": ["yahoo", "scope", "leadership", "scout", "slim jim"]
+    },
+    {
+      "category": "yahoo",
+      "question": "What was Nico's Yahoo title?",
+      "answer": "Director, Head of Design, Yahoo Search.",
+      "tags": ["title", "yahoo"]
+    },
+    {
+      "category": "yahoo",
+      "question": "What is the Slim Jim?",
+      "answer": "The Slim Jim is a rotating content carousel on Yahoo.com. Nico was the original designer for it while contracted on the Yahoo News team, working on tentpole events and the early stages of Yahoo's broader redesign.",
+      "tags": ["yahoo", "slim jim", "news", "carousel", "homepage"],
+      "keywords": ["slim", "jim", "carousel", "homepage", "yahoo.com", "news", "tentpole"]
+    },
+    {
+      "category": "yahoo",
+      "question": "What mobile work did Nico do at Yahoo?",
+      "answer": "Nico led the product design redesign of Yahoo Search's mobile app, focused on differentiation, scalability, and discoverability.",
+      "tags": ["mobile", "yahoo"]
+    },
+    {
+      "category": "yahoo",
+      "question": "What is Yahoo Scout?",
+      "answer": "Scout is Yahoo's AI-powered answer engine, launched in beta in January 2026. It combines Yahoo's proprietary data with Anthropic's Claude model and Microsoft Bing's grounding API to deliver clear, trustworthy search responses across Yahoo Search, Mail, News, Finance, and Sports. Nico worked on the first iterations of Scout before it became a standalone product.",
+      "tags": ["scout", "ai", "yahoo"]
+    },
+    {
+      "category": "yahoo",
+      "question": "What AI work did Nico do at Yahoo?",
+      "answer": "Nico was a player-coach on the early design iterations of what is now Yahoo Scout, working on AI search experiences that balanced innovation, clarity, and trust. Scout launched publicly in January 2026 and is now available to Yahoo's 250 million US users.",
+      "tags": ["ai", "yahoo", "search", "scout"]
+    },
+    {
+      "category": "yahoo",
+      "question": "What was Nico's vision/systems work at Yahoo?",
+      "answer": "Nico developed cross-product design direction and systems-oriented patterns to scale quality across Yahoo Search surfaces, from mobile search to AI-integrated experiences.",
+      "tags": ["systems", "vision", "yahoo"]
+    },
+    {
+      "category": "yahoo",
+      "question": "Who is Nico's GM at Yahoo?",
+      "answer": "Eric Feng, Senior Vice President and General Manager of Yahoo Research Group.",
+      "tags": ["yahoo", "leadership", "eric feng"]
+    },
+    {
+      "category": "yahoo",
+      "question": "How big is Nico's team at Yahoo?",
+      "answer": "Nico manages a team of 8 designers.",
+      "tags": ["yahoo", "team", "management"]
+    },
+    {
+      "category": "figma",
+      "question": "What did Nico work on at Figma?",
+      "answer": "Nico was Lead Product Designer for Figma's collaboration pillar, leading designs from Figma's browser experience to collaborative tools including Spotlight, commenting, annotations, and Dev Mode.",
+      "tags": ["figma", "product", "collaboration"]
+    },
+    {
+      "category": "figma",
+      "question": "What was Nico's role at Figma?",
+      "answer": "Lead Product Designer, Collaboration Pillar.",
+      "tags": ["figma", "title"]
+    },
+    {
+      "category": "figma",
+      "question": "What is the Spotlight feature Nico worked on?",
+      "answer": "Spotlight is a Figma feature that lets a presenter share their view of a file or canvas, pulling all collaborators along in real time. It's used for design reviews, workshops, and team presentations. Nico led the design of this feature.",
+      "tags": ["figma", "spotlight", "collaboration"]
+    },
+    {
+      "category": "figma",
+      "question": "What other collaboration tools did Nico design at Figma?",
+      "answer": "Nico led design across commenting, annotations, Dev Mode, and the overall browser-based collaborative experience within Figma.",
+      "tags": ["figma", "collaboration", "dev mode"]
+    },
+    {
+      "category": "figma",
+      "question": "What systems/design thinking did Nico bring to Figma?",
+      "answer": "Nico brought systems-oriented thinking to interaction and product decisions so features could scale cleanly across Figma's millions of users.",
+      "tags": ["figma", "systems"]
+    },
+    {
+      "category": "figma",
+      "question": "How did Nico collaborate at Figma?",
+      "answer": "Through close partnership with product and engineering, emphasizing quality, clarity, and cross-team alignment.",
+      "tags": ["figma", "collaboration"]
+    },
+    {
+      "category": "payitoff",
+      "question": "What did Nico do at Payitoff?",
+      "answer": "Nico co-founded Payitoff with her husband and served as Founding Designer. Payitoff was a fintech company and debt infrastructure platform focused primarily on student loan management, built to help people understand and reduce their debt.",
+      "tags": ["payitoff", "role", "cofounder"]
+    },
+    {
+      "category": "payitoff",
+      "question": "What was Nico's role at Payitoff?",
+      "answer": "Co-founder and Founding Designer.",
+      "tags": ["payitoff", "title"]
+    },
+    {
+      "category": "payitoff",
+      "question": "What was Payitoff?",
+      "answer": "Payitoff was a fintech company and debt infrastructure platform focused on student loan management. It was built to help individuals better understand and pay down their debt, and was eventually acquired by Array.",
+      "tags": ["payitoff", "product", "fintech"]
+    },
+    {
+      "category": "payitoff",
+      "question": "What happened to Payitoff as a company?",
+      "answer": "Payitoff was acquired by Array.",
+      "tags": ["payitoff", "acquisition"]
+    },
+    {
+      "category": "payitoff",
+      "question": "What product work did Nico lead at Payitoff?",
+      "answer": "Nico led all product design and UX direction as the founding designer, shaping the core debt management product experience from the ground up.",
+      "tags": ["payitoff", "product"]
+    },
+    {
+      "category": "asana",
+      "question": "What did Nico work on at Asana?",
+      "answer": "Nico designed some of Asana's most impactful features: the original Timeline view, the Calendar view, and the foundational shift from Asana's flat task list to a section-based structure, making it possible to organize and view tasks in richer, more dynamic ways.",
+      "tags": ["asana", "product", "timeline"]
+    },
+    {
+      "category": "asana",
+      "question": "What was Nico's role at Asana?",
+      "answer": "Lead Product Designer and Manager.",
+      "tags": ["asana", "title"]
+    },
+    {
+      "category": "asana",
+      "question": "What is Nico's Asana timeline work?",
+      "answer": "Nico designed the original Timeline view at Asana, focused on scheduling, workload, and giving teams a clearer picture of project progress over time.",
+      "tags": ["asana", "timeline", "planning"]
+    },
+    {
+      "category": "asana",
+      "question": "What is the sections/task hierarchy work Nico did at Asana?",
+      "answer": "Nico was part of the team that transformed Asana from a flat task list into a structured, section-based system. This change made it possible to see and manage work in richer, more powerful ways, a foundational shift for the product.",
+      "tags": ["asana", "sections", "tasks"]
+    },
+    {
+      "category": "asana",
+      "question": "What other work did Nico do at Asana?",
+      "answer": "In addition to Timeline, Calendar, and task hierarchy, Nico contributed to templates design and individual user experience visioning within Asana.",
+      "tags": ["asana", "templates", "ux"]
+    },
+    {
+      "category": "asana",
+      "question": "What leadership work did Nico do at Asana?",
+      "answer": "Nico managed a team of 4–5 designers and acted as a player-coach, running critique practices and building cross-functional alignment across product and engineering.",
+      "tags": ["asana", "leadership"]
+    },
+    {
+      "category": "management",
+      "question": "What is in Nico's management case study?",
+      "answer": "It focuses on leadership approach, team development, and examples of management-influenced work across Yahoo, Asana, and beyond.",
+      "tags": ["management", "case study"]
+    },
+    {
+      "category": "management",
+      "question": "How does Nico approach design management?",
+      "answer": "With clear expectations, strong feedback loops, high trust, and close partnership across product and engineering.",
+      "tags": ["management", "approach"]
+    },
+    {
+      "category": "management",
+      "question": "What is Nico's approach to team growth and critique?",
+      "answer": "Nico uses concrete, constructive feedback and regular critique to raise both craft and confidence.",
+      "tags": ["management", "growth", "critique"]
+    },
+    {
+      "category": "management",
+      "question": "How does Nico build cross-functional alignment?",
+      "answer": "By creating shared product direction, defining tradeoffs early, and maintaining tight communication with partners.",
+      "tags": ["alignment", "cross-functional"]
+    },
+    {
+      "category": "management",
+      "question": "How large are the teams Nico has managed?",
+      "answer": "Nico managed a team of 4–5 designers at Asana and currently leads a team of 8 at Yahoo Search.",
+      "tags": ["management", "team size", "yahoo", "asana"]
+    },
+    {
+      "category": "process",
+      "question": "How does Nico run design critiques?",
+      "answer": "Structured discussions focused on problem framing, user impact, and actionable next steps.",
+      "tags": ["process", "critique"]
+    },
+    {
+      "category": "process",
+      "question": "How does Nico partner with engineering?",
+      "answer": "Early and often: shared planning, quick iteration, and practical tradeoffs to ship quality work.",
+      "tags": ["process", "engineering"]
+    },
+    {
+      "category": "process",
+      "question": "How does Nico handle ambiguous projects?",
+      "answer": "By turning ambiguity into clear hypotheses, exploring fast, and converging with partners on the strongest direction.",
+      "tags": ["process", "ambiguity"]
+    },
+    {
+      "category": "process",
+      "question": "How does Nico define product vision?",
+      "answer": "Through user-centered direction, system-level thinking, and alignment with business and technical realities.",
+      "tags": ["vision", "strategy"]
+    },
+    {
+      "category": "process",
+      "question": "How does Nico balance detail with systems thinking?",
+      "answer": "Nico pairs high craft in interactions with reusable patterns that scale across surfaces.",
+      "tags": ["systems", "craft"]
+    },
+    {
+      "category": "process",
+      "question": "How does Nico mentor designers?",
+      "answer": "With direct feedback, coaching, and opportunities for ownership and growth.",
+      "tags": ["mentorship", "leadership"]
+    },
+    {
+      "category": "process",
+      "question": "How does Nico prioritize roadmap bets?",
+      "answer": "By weighing user value, strategic importance, implementation cost, and learning potential.",
+      "tags": ["roadmap", "prioritization"]
+    },
+    {
+      "category": "process",
+      "question": "How does Nico approach speculative or exploratory design?",
+      "answer": "Nico treats speculative work like real product design, defining user needs, building systems, and pushing interaction fidelity. The wellness app concept is a good example: it spans multiple user types, complex data models, and an AI layer, all explored with the same rigor as production work.",
+      "tags": ["process", "speculative", "exploration"]
+    },
+    {
+      "category": "skills",
+      "question": "What are Nico's core strengths?",
+      "answer": "Product strategy, interaction design, systems thinking, cross-functional leadership, and execution.",
+      "tags": ["strengths", "skills"]
+    },
+    {
+      "category": "skills",
+      "question": "What are Nico's product design skills?",
+      "answer": "End-to-end product design, UX architecture, interaction design, prototyping, and design communication.",
+      "tags": ["product design", "skills"]
+    },
+    {
+      "category": "skills",
+      "question": "What is Nico's systems design experience?",
+      "answer": "Nico designs scalable patterns and frameworks that keep products coherent across teams and surfaces, from Asana's task hierarchy to Yahoo Search's cross-platform design direction.",
+      "tags": ["systems", "design systems"]
+    },
+    {
+      "category": "skills",
+      "question": "Does Nico have AI product experience?",
+      "answer": "Yes. Nico was an early designer on Yahoo Scout, Yahoo's AI-powered answer engine, and continues to lead design for AI-integrated search experiences across Yahoo.",
+      "tags": ["ai", "experience", "scout"],
+      "keywords": ["ai", "artificial", "intelligence", "llm", "ml", "gpt", "chatbot", "genai", "generative"]
+    },
+    {
+      "category": "skills",
+      "question": "Is Nico strong in mobile UX?",
+      "answer": "Yes. Nico led the redesign of Yahoo Search's mobile app and has shipped mobile product experiences across multiple companies.",
+      "tags": ["mobile", "ux"],
+      "keywords": ["mobile", "phone", "ios", "android", "app", "apps", "responsive", "touch"]
+    },
+    {
+      "category": "skills",
+      "question": "Is Nico a people manager?",
+      "answer": "Yes. Nico has managed designers at Asana (4–5 person team) and Yahoo Search (8-person team).",
+      "tags": ["management", "people leadership"],
+      "keywords": ["manager", "manage", "management", "reports", "direct", "people", "lead", "leader"]
+    },
+    {
+      "category": "skills",
+      "question": "Can Nico work as a design lead?",
+      "answer": "Yes. Design leadership is a core part of Nico's background, from player-coach at Asana and Payitoff to Head of Design at Yahoo Search.",
+      "tags": ["design lead", "leadership"]
+    },
+    {
+      "category": "skills",
+      "question": "What speculative design work has Nico done?",
+      "answer": "Nico is designing a wellness app concept covering user-facing mood, food, and activity tracking alongside a coach-facing dashboard. The work focuses on systems thinking, AI coach UX, and how to structure complex data for both end users and practitioners.",
+      "tags": ["speculative", "wellness", "ai"]
+    },
+    {
+      "category": "skills",
+      "question": "Does Nico have experience designing AI coach or practitioner tools?",
+      "answer": "Yes, through speculative design work. Nico has explored AI coach experiences including how to surface client data, support session prep, and structure note-taking into actionable plans, all within a wellness app concept.",
+      "tags": ["ai", "coach", "speculative"]
+    },
+    {
+      "category": "personality",
+      "question": "What kind of teammate is Nico?",
+      "answer": "Collaborative, curious, practical, and focused on getting strong outcomes with the team.",
+      "tags": ["teamwork", "personality"],
+      "keywords": ["teammate", "team", "colleague", "coworker", "peer", "partner", "collaborate", "collaborator", "collaborative"]
+    },
+    {
+      "category": "personality",
+      "question": "What motivates Nico?",
+      "answer": "Solving meaningful problems, building great products, and creating moments that feel more human.",
+      "tags": ["motivation", "values"],
+      "keywords": ["motivates", "motivation", "drives", "passion", "excited", "inspires", "inspired", "why", "love"]
+    },
+    {
+      "category": "personality",
+      "question": "How does Nico make decisions?",
+      "answer": "With strong hypotheses, partner input, and willingness to adapt when better evidence appears.",
+      "tags": ["decision making", "working style"],
+      "keywords": ["decision", "decisions", "decide", "choose", "judgment", "tradeoff", "tradeoffs", "choice"]
+    },
+    {
+      "category": "personality",
+      "question": "What does \"strong opinions, loosely held\" mean for Nico?",
+      "answer": "Nico brings clear points of view but updates quickly when new information leads to a better approach.",
+      "tags": ["working style", "collaboration"]
+    },
+    {
+      "category": "personality",
+      "question": "What kind of culture does Nico create on teams?",
+      "answer": "A culture of ownership, candor, craft quality, and supportive growth.",
+      "tags": ["culture", "leadership"],
+      "keywords": ["culture", "environment", "vibe", "atmosphere", "dynamic", "feel"]
+    },
+    {
+      "category": "personality",
+      "question": "Is Nico a cool person?",
+      "answer": "Obviously.",
+      "tags": ["personality", "fun"],
+      "keywords": ["cool", "awesome", "rad", "chill", "vibes", "fun", "nice", "kind", "likable", "great"]
+    },
+    {
+      "category": "contact",
+      "question": "How can I contact Nico?",
+      "answer": "Use email or social links on the Connect section of the portfolio.",
+      "tags": ["contact", "connect"],
+      "keywords": ["contact", "reach", "touch", "connect", "message", "dm", "hire", "hiring", "recruit", "recruiter"]
+    },
+    {
+      "category": "contact",
+      "question": "How do I email Nico?",
+      "answer": "Email Nicolle.matson@gmail.com.",
+      "tags": ["email", "contact"],
+      "keywords": ["email", "gmail", "mail", "address", "inbox", "write", "send"]
+    },
+    {
+      "category": "contact",
+      "question": "Where is Nico on LinkedIn?",
+      "answer": "https://www.linkedin.com/in/nicolle-matson/",
+      "tags": ["linkedin", "social"],
+      "keywords": ["linkedin", "profile", "professional", "resume", "cv"]
+    },
+    {
+      "category": "contact",
+      "question": "Where is Nico on Instagram?",
+      "answer": "https://www.instagram.com/nicollerich/",
+      "tags": ["instagram", "social"],
+      "keywords": ["instagram", "insta", "ig", "gram"]
+    },
+    {
+      "category": "contact",
+      "question": "Where is Nico on Pinterest?",
+      "answer": "https://www.pinterest.com/nicollerich/",
+      "tags": ["pinterest", "social"],
+      "keywords": ["pinterest", "pins", "boards", "moodboard"]
+    },
+    {
+      "category": "contact",
+      "question": "Where is Nico on Spotify?",
+      "answer": "https://open.spotify.com/user/nicollerich",
+      "tags": ["spotify", "social"],
+      "keywords": ["spotify", "music", "playlist", "playlists", "song", "songs", "listening"]
+    },
+    {
+      "category": "navigation",
+      "question": "Show me Nico's Yahoo case study.",
+      "answer": "Open /work/yahoo.html.",
+      "tags": ["navigation", "yahoo"],
+      "targetUrl": "/work/yahoo.html"
+    },
+    {
+      "category": "navigation",
+      "question": "Show me Nico's Figma case study.",
+      "answer": "Open /work/figma.html.",
+      "tags": ["navigation", "figma"],
+      "targetUrl": "/work/figma.html"
+    },
+    {
+      "category": "navigation",
+      "question": "Show me Nico's Payitoff case study.",
+      "answer": "Open /work/payitoff.html.",
+      "tags": ["navigation", "payitoff"],
+      "targetUrl": "/work/payitoff.html"
+    },
+    {
+      "category": "navigation",
+      "question": "Show me Nico's Asana case study.",
+      "answer": "Open /work/asana.html.",
+      "tags": ["navigation", "asana"],
+      "targetUrl": "/work/asana.html"
+    },
+    {
+      "category": "navigation",
+      "question": "Show me Nico's management work.",
+      "answer": "Open /work/management.html.",
+      "tags": ["navigation", "management"],
+      "targetUrl": "/work/management.html"
+    },
+    {
+      "category": "navigation",
+      "question": "Take me to the About section.",
+      "answer": "Jump to the About area on the homepage.",
+      "tags": ["navigation", "about"],
+      "targetUrl": "/#section-about"
+    },
+    {
+      "category": "navigation",
+      "question": "Take me to Work.",
+      "answer": "Jump to the Work area on the homepage.",
+      "tags": ["navigation", "work"],
+      "targetUrl": "/#section-work"
+    },
+    {
+      "category": "navigation",
+      "question": "Take me to Play.",
+      "answer": "Jump to the Play area on the homepage.",
+      "tags": ["navigation", "play"],
+      "targetUrl": "/#section-play"
+    },
+    {
+      "category": "navigation",
+      "question": "Take me to Connect.",
+      "answer": "Jump to the Connect area on the homepage.",
+      "tags": ["navigation", "connect"],
+      "targetUrl": "/#section-connect"
+    },
+    {
+      "category": "hiring",
+      "question": "Are you open to new opportunities?",
+      "answer": "Nico is currently focused on her work at Yahoo Search but is always open to conversations about exceptional opportunities, particularly roles that blend design leadership, AI product, and meaningful scale.",
+      "tags": ["hiring", "opportunities", "availability"],
+      "keywords": ["open", "opportunities", "opportunity", "hiring", "hire", "available", "looking", "interested", "job", "offer", "offers", "recruit", "recruiting"]
+    },
+    {
+      "category": "hiring",
+      "question": "What kind of role is Nico looking for?",
+      "answer": "Nico is drawn to roles at the Principal or Director level where she can operate as both a design leader and hands-on practitioner, ideally working on hard, ambiguous problems at the intersection of AI and consumer product.",
+      "tags": ["hiring", "role", "level"],
+      "keywords": ["role", "roles", "position", "title", "principal", "director", "level", "ideal", "looking", "seeking", "want"]
+    },
+    {
+      "category": "hiring",
+      "question": "What's Nico's ideal team size or structure?",
+      "answer": "Nico thrives leading small-to-mid-sized design teams, typically 4 to 10 designers, where she can stay close to the work while also shaping direction and growing people.",
+      "tags": ["hiring", "team size", "structure"],
+      "keywords": ["team", "size", "structure", "designers", "count", "many", "headcount", "ideal"]
+    },
+    {
+      "category": "hiring",
+      "question": "Does Nico prefer IC or management tracks?",
+      "answer": "Both, honestly. Nico has always been a player-coach, she leads teams and still does the work. The ideal role lets her do both rather than forcing a choice.",
+      "tags": ["hiring", "ic", "management"],
+      "keywords": ["ic", "individual", "contributor", "manager", "management", "track", "tracks", "hybrid", "player", "coach", "prefer"]
+    },
+    {
+      "category": "hiring",
+      "question": "What makes Nico different from other design leaders?",
+      "answer": "Nico has an unusual combination of range: she's co-founded a startup, shipped core features at Figma used by millions, redesigned a legacy search product, and led the early design of an AI product, all while managing teams and staying hands-on with the craft. That breadth, paired with deep product intuition, is rare at her level.",
+      "tags": ["hiring", "differentiator", "range"],
+      "keywords": ["stand out", "standout", "distinguishes", "unusual", "what makes nico different", "range", "breadth", "unique design leader"]
+    },
+    {
+      "category": "hiring",
+      "question": "What kind of company would Nico thrive in?",
+      "answer": "One where design has real influence, leadership moves fast, and the product problem is genuinely hard. Nico does her best work when there's something worth building and a team that cares about getting it right.",
+      "tags": ["hiring", "fit", "culture"],
+      "keywords": ["ideal company", "thrive", "company fit", "right environment", "company culture"]
+    },
+    {
+      "category": "work",
+      "question": "What's the most impactful thing Nico has shipped?",
+      "answer": "A few stand out: the Asana sections feature fundamentally changed how users organize work, turning a flat list into a dynamic, structured system. The Yahoo Search mobile redesign moved the needle on a product used by hundreds of millions. And the early Scout design work helped shape what is now Yahoo's flagship AI product.",
+      "tags": ["work", "impact", "shipped"],
+      "keywords": ["impactful", "impact", "most impactful", "biggest impact", "shipped", "achievement", "biggest"]
+    },
+    {
+      "category": "work",
+      "question": "Has Nico ever designed something from zero to one?",
+      "answer": "This is Nico's bread and butter. At Payitoff, she co-founded the company and built the entire product design from nothing. At Yahoo, she was one of the earliest designers on Scout, working on it before it had a name, a team, or a public launch. Zero to one is where Nico is most at home.",
+      "tags": ["work", "zero to one", "founding"],
+      "keywords": ["zero to one", "0 to 1", "0-1", "from scratch", "ground up", "greenfield", "founded", "founder"]
+    },
+    {
+      "category": "work",
+      "question": "Can you walk me through a project Nico is proud of?",
+      "answer": "The Yahoo Search mobile redesign is a good one, Nico inherited a product that needed differentiation and led it through a full redesign focused on discoverability and scale. She was also a player-coach on Scout while running the broader search design team. Check out the Yahoo case study for the full story.",
+      "tags": ["work", "project", "proud"],
+      "keywords": ["walk me through", "walkthrough", "proud of", "favorite project", "proudest", "showcase"]
+    },
+    {
+      "category": "work",
+      "question": "What's a decision Nico made that she'd change?",
+      "answer": "That's best answered in conversation, Nico is thoughtful about what she's learned from mistakes and happy to talk through it directly.",
+      "tags": ["work", "reflection", "lessons"],
+      "keywords": ["regret", "regrets", "mistake", "mistakes", "redo", "do over", "would change", "lessons learned"]
+    },
+    {
+      "category": "work",
+      "question": "What does Nico's design process actually look like?",
+      "answer": "It starts with understanding the real problem, not just the brief. Nico moves fast through rough explorations, loops in partners early, and converges on the strongest direction with clear rationale. She balances speed with craft and always keeps systems thinking in view so the solution scales.",
+      "tags": ["work", "process"],
+      "keywords": ["design process", "process", "workflow", "method", "methodology", "steps", "approach", "how does nico design", "nicos process"]
+    },
+    {
+      "category": "thinking",
+      "question": "How does Nico handle disagreement with a PM or engineer?",
+      "answer": "Directly and with curiosity. Nico comes with a point of view and clear reasoning, but she's genuinely interested in what she might be missing. She'd rather have a real debate and reach a better answer than win an argument and ship the wrong thing.",
+      "tags": ["thinking", "conflict", "collaboration"],
+      "keywords": ["disagreement", "disagree", "conflict", "debate", "pushback", "friction", "argue", "argument", "clash"]
+    },
+    {
+      "category": "thinking",
+      "question": "How does Nico know when a design is done?",
+      "answer": "When it solves the right problem clearly, holds up under edge cases, and the team can actually build it well. Done doesn't mean perfect, it means ready.",
+      "tags": ["thinking", "done", "quality"],
+      "keywords": ["when is it done", "design is done", "finished", "ready to ship", "good enough"]
+    },
+    {
+      "category": "thinking",
+      "question": "How does Nico balance speed and quality?",
+      "answer": "By being ruthless about what actually needs polish and what just needs to ship. Not everything deserves the same level of craft, knowing the difference is the skill.",
+      "tags": ["thinking", "speed", "quality"],
+      "keywords": ["speed vs quality", "balance speed", "balance quality", "polish vs ship", "craft vs speed", "tradeoff", "tradeoffs"]
+    },
+    {
+      "category": "thinking",
+      "question": "What does good design leadership look like to Nico?",
+      "answer": "Creating clarity where there's ambiguity, making space for the team to do their best work, and being the person who holds the bar without blocking progress. It's less about having all the answers and more about asking the right questions.",
+      "tags": ["thinking", "leadership"],
+      "keywords": ["good design leadership", "great leadership", "design lead", "design leader", "effective leader", "what makes a good lead"]
+    },
+    {
+      "category": "comparisons",
+      "question": "What was it like working at a startup vs. a big company?",
+      "answer": "Both have tradeoffs Nico genuinely values. At Payitoff, everything was fast and the stakes were existential, you had to be right and quick. At Asana and Figma, scale meant your decisions affected millions of users, which adds a different kind of weight. At Yahoo, it's somewhere in between, a legacy brand moving with startup urgency on something genuinely new.",
+      "tags": ["comparisons", "startup", "big company"],
+      "keywords": ["startup vs big", "startup vs enterprise", "small vs large", "big company", "enterprise", "startups"]
+    },
+    {
+      "category": "comparisons",
+      "question": "What was building Payitoff like?",
+      "answer": "Intense and clarifying. Nico co-founded it with her husband, which meant she was designing, making product decisions, and navigating the realities of an early-stage company all at once. It taught her a lot about what actually matters when you have limited time and resources.",
+      "tags": ["comparisons", "payitoff", "founding"],
+      "keywords": ["payitoff", "building payitoff", "cofounder", "co-founder", "husband", "founding payitoff"]
+    },
+    {
+      "category": "comparisons",
+      "question": "What's it like working on something as legacy as Yahoo?",
+      "answer": "Energizing, honestly. Yahoo has 30 years of user trust and 250 million US users, that's not nothing. The challenge is modernizing something that people have a relationship with, not just redesigning it. Nico finds that kind of problem genuinely interesting.",
+      "tags": ["comparisons", "yahoo", "legacy"],
+      "keywords": ["legacy brand", "legacy product", "modernize", "modernizing yahoo", "established brand"]
+    },
+    {
+      "category": "comparisons",
+      "question": "What was it like designing tools that other designers use at Figma?",
+      "answer": "Humbling and high-stakes. Designers are opinionated users, they notice everything. It meant the craft bar was extremely high and every interaction decision had to be defensible. Nico loved the challenge of designing for people who think about design all day.",
+      "tags": ["comparisons", "figma", "designers"],
+      "keywords": ["designing for designers", "tools for designers", "figma designers", "designer users", "opinionated users"]
+    },
+    {
+      "category": "ai",
+      "question": "How does Nico think about designing for AI?",
+      "answer": "AI changes what's possible but not what matters, users still need to understand what's happening, trust the output, and feel in control. Nico approaches AI design by focusing on clarity, appropriate confidence, and making sure the human is never lost in the system.",
+      "tags": ["ai", "philosophy"],
+      "keywords": ["designing for ai", "ai ux", "ai design", "llm design", "ai philosophy", "trust ai"]
+    },
+    {
+      "category": "ai",
+      "question": "What's different about designing Scout vs. traditional search?",
+      "answer": "Traditional search design is about helping people find things fast. With Scout, the challenge is different, you're synthesizing information, not just surfacing it, and users need to trust a response rather than evaluate a list of links. That shifts the entire interaction model and raises the design stakes around transparency and credibility.",
+      "tags": ["ai", "scout", "search"],
+      "keywords": ["scout vs search", "traditional search", "answer engine", "search vs ai", "scout design", "ai search"]
+    },
+    {
+      "category": "ai",
+      "question": "Do you think AI is changing how designers work?",
+      "answer": "Yes, and Nico thinks about this a lot. AI is compressing some parts of the process, exploration, prototyping, copy, but it's raising the bar on judgment. The designers who thrive will be the ones who know what good looks like and can direct AI toward it, not the ones who can just execute.",
+      "tags": ["ai", "future", "designers"],
+      "keywords": ["ai changing", "future of design", "ai replace", "ai replacing", "ai disrupt", "ai disrupting", "ai future"]
+    },
+    {
+      "category": "meta",
+      "question": "Did Nico use AI to generate her answers?",
+      "answer": "Nico used AI as a collaborator, not a ghostwriter. The answers here were shaped with AI tools, but the experiences, opinions, and voice are genuinely hers. Just like using Figma doesn't mean the design designed itself.",
+      "tags": ["meta", "ai", "transparency"],
+      "keywords": ["ai generated", "generated by ai", "ai wrote", "ghostwriter", "chatgpt wrote", "claude wrote", "her own words", "actually nico"]
+    },
+    {
+      "category": "meta",
+      "question": "How was this website created?",
+      "answer": "Nico designed and built this site herself, working alongside AI coding tools (primarily Cursor with Claude) as a hands-on collaborator. The design direction, content, voice, and product decisions are all hers. The code was written through a mix of hand-crafting and AI-assisted pairing, which is honestly how Nico thinks good design work will increasingly happen: humans directing the taste and judgment, AI compressing the execution. The search assistant on this page runs locally through Ollama so answers stay fast and private.",
+      "tags": ["meta", "website", "build", "process"],
+      "keywords": ["how was this site built", "how was this website built", "how did you build this site", "built this website", "build the website", "made this site", "create this website", "created this site", "cursor ai", "vibe coded", "ai coded", "ollama", "tech stack"]
+    }
+  ]
+}

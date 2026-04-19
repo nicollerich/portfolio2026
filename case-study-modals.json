@@ -1,0 +1,63 @@
+{
+  "yahoo": {
+    "title": "",
+    "subtitle": "",
+    "description": "",
+    "descriptionHtml": "Player / coach in all areas across Yahoo Search:<br>from the <a href=\"https://mobile.yahoo.com/search\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"case-study-modal-desc-link\">mobile app</a> to modernizing <a href=\"https://search.yahoo.com/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"case-study-modal-desc-link\">Yahoo Search</a><br>to a net new product <a href=\"https://scout.com/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"case-study-modal-desc-link\">Scout</a>.",
+    "media": [
+      {
+        "type": "video",
+        "src": "media/yahoomoble.mp4",
+        "poster": "images/Yahoo mobile.png",
+        "mimeType": "video/mp4",
+        "alt": "Yahoo Search mobile"
+      },
+      {
+        "type": "video",
+        "src": "media/hometown.mp4",
+        "poster": "images/Easter eggs.png",
+        "mimeType": "video/mp4",
+        "alt": "Hometown"
+      },
+      {
+        "type": "video",
+        "src": "media/Scout.mp4",
+        "poster": "images/Yahoo mobile.png",
+        "mimeType": "video/mp4",
+        "alt": "Yahoo Scout"
+      }
+    ]
+  },
+  "asana": {
+    "title": "Asana",
+    "description": "Nico shipped Timeline, Calendar, and the section-based hierarchy that reshaped how work appears in Asana. Nico also led a small design team as a player-coach while staying hands-on in core workflows.",
+    "media": [
+      { "type": "image", "src": "images/Asana timeline.png", "alt": "Asana timeline design" },
+      { "type": "image", "src": "images/Easter eggs.png", "alt": "Supporting product exploration" }
+    ]
+  },
+  "figma": {
+    "title": "Figma",
+    "description": "Nico was Lead Product Designer on Figma's collaboration pillar, including Spotlight, commenting, annotations, and Dev Mode. Systems and interaction craft kept complex flows trustworthy at Figma scale.",
+    "media": [
+      { "type": "image", "src": "images/Easter eggs.png", "alt": "Figma-era design work" },
+      { "type": "image", "src": "images/Yahoo mobile.png", "alt": "Product at scale" }
+    ]
+  },
+  "payitoff": {
+    "title": "Payitoff",
+    "description": "Nico co-founded Payitoff and was Founding Designer on a debt platform focused on student loans, later acquired by Array. The product paired clear UX with infrastructure thinking so people could understand and reduce their debt.",
+    "media": [
+      { "type": "image", "src": "images/Easter eggs.png", "alt": "Payitoff product exploration" },
+      { "type": "image", "src": "images/Asana timeline.png", "alt": "Flows and product states" }
+    ]
+  },
+  "management": {
+    "title": "Management",
+    "description": "Nico's management work centers on expectations, critique, growth, and cross-functional alignment across design orgs. This preview highlights leadership themes from Yahoo, Asana, and earlier roles.",
+    "media": [
+      { "type": "image", "src": "images/Me.png", "alt": "Nico" },
+      { "type": "image", "src": "images/Easter eggs.png", "alt": "Design leadership context" }
+    ]
+  }
+}
