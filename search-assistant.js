@@ -90,7 +90,7 @@
     if (!group) return null;
     llmStatusNode = document.createElement('p');
     llmStatusNode.className = 'search-llm-status';
-    llmStatusNode.textContent = 'Local AI: checking...';
+    llmStatusNode.textContent = 'AI: checking...';
     group.appendChild(llmStatusNode);
     return llmStatusNode;
   }
@@ -101,8 +101,8 @@
     node.classList.toggle('is-online', !!available);
     node.classList.toggle('is-offline', !available);
     node.textContent = available
-      ? `Local AI online${model ? ` (${model})` : ''}`
-      : 'Local AI offline';
+      ? `AI online${model ? ` (${model})` : ''}`
+      : 'AI offline';
   }
 
   async function refreshLlmStatus() {
