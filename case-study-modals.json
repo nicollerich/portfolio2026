@@ -8,7 +8,6 @@
       {
         "type": "video",
         "src": "media/yahoomoble.mp4",
-        "poster": "images/Yahoo mobile.png",
         "mimeType": "video/mp4",
         "alt": "Yahoo Search mobile"
       },
@@ -22,7 +21,6 @@
       {
         "type": "video",
         "src": "media/Scout.mp4",
-        "poster": "images/Yahoo mobile.png",
         "mimeType": "video/mp4",
         "alt": "Yahoo Scout"
       }
@@ -40,8 +38,7 @@
     "title": "Figma",
     "description": "Nico was Lead Product Designer on Figma's collaboration pillar, including Spotlight, commenting, annotations, and Dev Mode. Systems and interaction craft kept complex flows trustworthy at Figma scale.",
     "media": [
-      { "type": "image", "src": "images/Easter eggs.png", "alt": "Figma-era design work" },
-      { "type": "image", "src": "images/Yahoo mobile.png", "alt": "Product at scale" }
+      { "type": "image", "src": "images/Easter eggs.png", "alt": "Figma-era design work" }
     ]
   },
   "payitoff": {
