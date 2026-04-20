@@ -1533,6 +1533,97 @@ button.project-folder {
   pointer-events: auto;
 }
 
+/* ----- Dot-pulse loader (shown under the search field while a query runs) ----- */
+.search-loader {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  margin-top: 14px;
+  color: var(--text, #000);
+}
+
+.search-loader:not([hidden]) {
+  display: flex;
+}
+
+.search-loader-label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: inherit;
+  opacity: 0.9;
+}
+
+.dot-pulse {
+  position: relative;
+  left: -9999px;
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: currentColor;
+  color: inherit;
+  box-shadow: 9999px 0 0 -4px;
+  animation: dot-pulse 1.5s infinite linear;
+  animation-delay: 0.25s;
+}
+
+.dot-pulse::before,
+.dot-pulse::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: currentColor;
+  color: inherit;
+}
+
+.dot-pulse::before {
+  box-shadow: 9987px 0 0 -4px;
+  animation: dot-pulse-before 1.5s infinite linear;
+  animation-delay: 0s;
+}
+
+.dot-pulse::after {
+  box-shadow: 10011px 0 0 -4px;
+  animation: dot-pulse-after 1.5s infinite linear;
+  animation-delay: 0.5s;
+}
+
+@keyframes dot-pulse-before {
+  0% { box-shadow: 9987px 0 0 -4px; }
+  30% { box-shadow: 9987px 0 0 2px; }
+  60%, 100% { box-shadow: 9987px 0 0 -4px; }
+}
+
+@keyframes dot-pulse {
+  0% { box-shadow: 9999px 0 0 -4px; }
+  30% { box-shadow: 9999px 0 0 2px; }
+  60%, 100% { box-shadow: 9999px 0 0 -4px; }
+}
+
+@keyframes dot-pulse-after {
+  0% { box-shadow: 10011px 0 0 -4px; }
+  30% { box-shadow: 10011px 0 0 2px; }
+  60%, 100% { box-shadow: 10011px 0 0 -4px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot-pulse,
+  .dot-pulse::before,
+  .dot-pulse::after {
+    animation: none;
+  }
+  .dot-pulse { box-shadow: 9999px 0 0 0; }
+  .dot-pulse::before { box-shadow: 9987px 0 0 0; }
+  .dot-pulse::after { box-shadow: 10011px 0 0 0; }
+}
+
 .search-suggestion-pill {
   --pill-delay: 0ms;
   appearance: none;
@@ -1774,14 +1865,24 @@ button.project-folder {
 .search-results-fallback {
   margin: 0;
   font-size: 12px;
-  color: var(--text);
 }
 
-.search-results-fallback a {
-  color: inherit;
+/* Fallback + loading copy live on the dark glass panel — never use
+   var(--text) here or it becomes black-on-charcoal on green themes. */
+.search-results .search-results-loading,
+.search-results .search-results-fallback {
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.search-results .search-results-fallback a {
+  color: #ffffff;
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 2px;
+}
+
+.search-results .search-results-fallback a:hover {
+  color: rgba(255, 255, 255, 0.88);
 }
 
 
@@ -3296,8 +3397,8 @@ button.project-folder {
 .case-study-modal-nav {
   display: flex;
   justify-content: space-between;
-  align-items: stretch;
-  gap: 16px;
+  align-items: flex-start;
+  gap: 24px;
   margin: clamp(40px, 6vw, 72px) 0 0;
   padding-top: clamp(24px, 3vw, 36px);
   border-top: 1px solid rgba(0, 0, 0, 0.08);
@@ -3308,46 +3409,59 @@ button.project-folder {
 }
 
 .case-study-modal-nav-btn {
-  flex: 1 1 0;
-  min-width: 0;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 14px;
-  padding: 16px 20px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
+  padding: 6px 4px;
+  border: 0;
+  border-radius: 6px;
   background: transparent;
   color: inherit;
   font-family: 'Poppins', system-ui, -apple-system, sans-serif;
   text-align: left;
   cursor: pointer;
-  transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
-}
-
-.case-study-modal-nav-btn:hover {
-  background: rgba(0, 0, 0, 0.04);
-  border-color: rgba(0, 0, 0, 0.18);
-}
-
-.case-study-modal-nav-btn:active {
-  transform: translateY(1px);
+  min-width: 0;
+  max-width: 50%;
 }
 
 .case-study-modal-nav-btn:focus-visible {
   outline: 2px solid #1a1a1a;
-  outline-offset: 2px;
+  outline-offset: 4px;
 }
 
 .case-study-modal-nav-btn--next {
-  justify-content: flex-end;
   text-align: right;
 }
 
 .case-study-modal-nav-arrow {
-  font-size: 20px;
+  font-size: 22px;
   line-height: 1;
   flex: 0 0 auto;
   color: #6b6b6b;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  transition: background-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.case-study-modal-nav-btn:hover .case-study-modal-nav-arrow {
+  background: rgba(0, 0, 0, 0.06);
+  color: #1a1a1a;
+}
+
+.case-study-modal-nav-btn--prev:hover .case-study-modal-nav-arrow {
+  transform: translateX(-2px);
+}
+
+.case-study-modal-nav-btn--next:hover .case-study-modal-nav-arrow {
+  transform: translateX(2px);
+}
+
+.case-study-modal-nav-btn:active .case-study-modal-nav-arrow {
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .case-study-modal-nav-text {
@@ -3377,12 +3491,7 @@ button.project-folder {
 
 @media (max-width: 520px) {
   .case-study-modal-nav {
-    flex-direction: column;
     gap: 12px;
-  }
-  .case-study-modal-nav-btn--next {
-    justify-content: space-between;
-    text-align: right;
   }
 }
 
@@ -3423,7 +3532,20 @@ button.project-folder {
   display: none !important;
 }
 
-html.case-study-modal-open,
+/*
+ * Scroll-lock pattern: while the modal is open, pin <html> in place with
+ * `position: fixed` and a negative top/left (set inline from JS equal to
+ * the captured scrollX/scrollY). This preserves the visual scroll
+ * position without relying on browsers to remember scrollLeft/scrollTop
+ * through an `overflow: hidden` toggle on the map-canvas layout.
+ */
+html.case-study-modal-open {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 body.case-study-modal-open {
   overflow: hidden;
 }

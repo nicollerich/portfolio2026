@@ -152,9 +152,23 @@
   }
 
   function isYesNoQuestion(query) {
-    return /^(is|are|am|do|does|did|can|could|should|would|has|have|had)\b/i.test(
-      (query || '').trim()
-    );
+    const t = (query || '').trim();
+    if (!/^(is|are|am|do|does|did|can|could|should|would|has|have|had)\b/i.test(t)) {
+      return false;
+    }
+    // Open-ended "Can you tell me…" / "Could you describe…" is not a yes/no
+    // question — don't force a "Yes," prefix (and avoid mangling "I'm…").
+    if (/^(can|could)\s+you\s+(tell|describe|explain|share|walk|talk|help|give)\b/i.test(t)) {
+      return false;
+    }
+    return true;
+  }
+
+  function lowerCaseFirstLetterUnlessLeadingI(s) {
+    if (!s) return s;
+    // Keep first-person I / I'm / I've … intact after "Yes," / "No,".
+    if (/^I(['']|\b)/i.test(s)) return s;
+    return s.charAt(0).toLowerCase() + s.slice(1);
   }
 
   function ensureYesNoStyle(answer, query) {
@@ -164,7 +178,7 @@
     if (/^(yes|no)\b/i.test(trimmed)) return trimmed;
     const negativeCue = /\b(no|not|never|cannot|can't|doesn't|isn't|aren't|hasn't|haven't|without)\b/i;
     const prefix = negativeCue.test(trimmed) ? 'No,' : 'Yes,';
-    return `${prefix} ${trimmed.charAt(0).toLowerCase()}${trimmed.slice(1)}`;
+    return `${prefix} ${lowerCaseFirstLetterUnlessLeadingI(trimmed)}`;
   }
 
   async function getKnowledgeEntries() {
@@ -195,7 +209,16 @@
     }
 
     const queryTokens = tokenize(normalizedQuery);
-    const isBroadQuery = queryTokens.length <= 2;
+    // Drop noise tokens: single letters (e.g. "s" from "what's") and bare
+    // numbers — otherwise "what's 3+4" scores against any answer containing
+    // "4" or "10" and returns unrelated portfolio copy.
+    const semanticTokens = queryTokens.filter(
+      (t) => t.length >= 2 && !/^\d+$/.test(t)
+    );
+    if (semanticTokens.length === 0) {
+      return [];
+    }
+    const isBroadQuery = semanticTokens.length <= 2;
     // Raw words (stopwords included) for structural similarity scoring.
     // "what did nico do at figma" vs "what did nico work on at figma" share
     // ~80% of raw words, which is the clearest signal they're the same intent.
@@ -232,7 +255,7 @@
         else if (ratio >= 0.4) score += 18;
       }
 
-      queryTokens.forEach((token) => {
+      semanticTokens.forEach((token) => {
         if (!token) return;
         // Owner-declared keywords are strong triggers, but on very sparse
         // queries (1–2 tokens) a single keyword hit shouldn't dominate
@@ -396,6 +419,16 @@
 
   let pending = false;
 
+  function showSearchLoader() {
+    const el = document.getElementById('searchLoader');
+    if (el) el.hidden = false;
+  }
+
+  function hideSearchLoader() {
+    const el = document.getElementById('searchLoader');
+    if (el) el.hidden = true;
+  }
+
   async function runSearch(rawQuery) {
     const panel = getOrCreatePanel();
     const input = document.querySelector('#searchAboutForm .search-bar-input');
@@ -404,67 +437,76 @@
     if (!q) {
       panel.hidden = true;
       panel.innerHTML = '';
+      hideSearchLoader();
       return;
     }
 
-    const knowledgeEntries = await getKnowledgeEntries();
-    const localMatches = findKnowledgeMatches(q, knowledgeEntries);
-    if (localMatches.length) {
-      const primaryMatch = localMatches[0];
-      const yesNoBaseAnswer = ensureYesNoStyle(primaryMatch.snippet || '', q);
-      primaryMatch.snippet = yesNoBaseAnswer;
-      const organicAnswer = await fetchOrganicAnswer(q, yesNoBaseAnswer);
-      if (organicAnswer) {
-        primaryMatch.snippet = ensureYesNoStyle(organicAnswer, q);
-      }
-      await renderItems(panel, localMatches);
-      return;
-    }
-
-    // No index match — this is a playful/off-index question (e.g. "tell me a
-    // joke", "what do you think about X"). Give Claude a shot with an empty
-    // base answer; the backend prompt lets Claude respond in-voice using the
-    // full knowledge base as grounding, or gracefully decline if the question
-    // is genuinely out of scope.
-    await renderLoading(panel);
-    const freeformAnswer = await fetchOrganicAnswer(q, '');
-    if (freeformAnswer) {
-      const styledAnswer = ensureYesNoStyle(freeformAnswer, q);
-      await renderItems(panel, [{
-        title: '',
-        snippet: styledAnswer,
-        link: '',
-        sourceQuestion: ''
-      }]);
-      return;
-    }
-
-    const cfg = window.PORTFOLIO_SEARCH_CONFIG || {};
-    if (!cfg.googleApiKey || !cfg.googleCx) {
-      await renderFallback(panel);
-      return;
-    }
-
-    if (pending) return;
-    pending = true;
-    await renderLoading(panel);
-
+    showSearchLoader();
     try {
-      const result = await fetchGoogleCustomSearch(q);
-      if (!result.ok) {
+      const knowledgeEntries = await getKnowledgeEntries();
+      const localMatches = findKnowledgeMatches(q, knowledgeEntries);
+      if (localMatches.length) {
+        const primaryMatch = localMatches[0];
+        const yesNoBaseAnswer = ensureYesNoStyle(primaryMatch.snippet || '', q);
+        primaryMatch.snippet = yesNoBaseAnswer;
+        const organicAnswer = await fetchOrganicAnswer(q, yesNoBaseAnswer);
+        if (organicAnswer) {
+          primaryMatch.snippet = ensureYesNoStyle(organicAnswer, q);
+        }
+        await renderItems(panel, localMatches);
+        return;
+      }
+
+      // No index match — this is a playful/off-index question (e.g. "tell me a
+      // joke", "what do you think about X"). Give Claude a shot with an empty
+      // base answer; the backend prompt lets Claude respond in-voice using the
+      // full knowledge base as grounding, or gracefully decline if the question
+      // is genuinely out of scope.
+      const freeformAnswer = await fetchOrganicAnswer(q, '');
+      if (freeformAnswer) {
+        const styledAnswer = ensureYesNoStyle(freeformAnswer, q);
+        await renderItems(panel, [{
+          title: '',
+          snippet: styledAnswer,
+          link: '',
+          sourceQuestion: ''
+        }]);
+        return;
+      }
+
+      const cfg = window.PORTFOLIO_SEARCH_CONFIG || {};
+      if (!cfg.googleApiKey || !cfg.googleCx) {
         await renderFallback(panel);
         return;
       }
-      const relevant = (result.items || []).filter(isAboutNico);
-      if (relevant.length === 0) {
+
+      if (pending) return;
+      pending = true;
+
+      try {
+        const result = await fetchGoogleCustomSearch(q);
+        if (!result.ok) {
+          await renderFallback(panel);
+          return;
+        }
+        const relevant = (result.items || []).filter(isAboutNico);
+        if (relevant.length === 0) {
+          await renderFallback(panel);
+        } else {
+          await renderItems(panel, relevant);
+        }
+      } catch {
         await renderFallback(panel);
-      } else {
-        await renderItems(panel, relevant);
+      } finally {
+        pending = false;
       }
-    } catch {
-      await renderFallback(panel);
     } finally {
-      pending = false;
+      hideSearchLoader();
+      // Long queries sit with the caret at the end; scroll the field back so
+      // the start of the question stays visible after results load.
+      if (input && typeof input.scrollLeft === 'number') {
+        input.scrollLeft = 0;
+      }
     }
   }
 

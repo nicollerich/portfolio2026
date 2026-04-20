@@ -212,11 +212,35 @@
     });
   }
 
+  function getDocumentScrollX() {
+    const se = document.scrollingElement || document.documentElement;
+    return Math.max(window.scrollX || 0, se ? se.scrollLeft : 0);
+  }
+
+  function getDocumentScrollY() {
+    const se = document.scrollingElement || document.documentElement;
+    return Math.max(window.scrollY || 0, se ? se.scrollTop : 0);
+  }
+
   function setOpen(isOpen) {
+    const wasOpen = root.classList.contains('is-open');
     root.hidden = !isOpen;
     root.classList.toggle('is-open', isOpen);
     root.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
-    document.documentElement.classList.toggle('case-study-modal-open', isOpen);
+
+    const docEl = document.documentElement;
+    if (isOpen && !wasOpen) {
+      // Freeze the page at its current scroll position using the
+      // position:fixed lock pattern. Simply toggling `overflow: hidden`
+      // on html/body is not reliable on this map-canvas layout and
+      // often snaps scrollLeft/scrollTop to 0.
+      docEl.style.top = `-${savedScrollY}px`;
+      docEl.style.left = `-${savedScrollX}px`;
+    } else if (!isOpen && wasOpen) {
+      docEl.style.top = '';
+      docEl.style.left = '';
+    }
+    docEl.classList.toggle('case-study-modal-open', isOpen);
     document.body.classList.toggle('case-study-modal-open', isOpen);
   }
 
@@ -224,11 +248,8 @@
     mediaEl.querySelectorAll('video').forEach((v) => {
       v.pause();
     });
-    // Restore the viewport scroll position that was saved when the modal
-    // opened. `overflow: hidden` on html/body can drop scroll position on
-    // this map-canvas layout, which would otherwise snap the user back to
-    // About. Restore on the next frame so it happens after the overflow
-    // style is removed by setOpen(false).
+    // Remember the scroll position captured when the modal opened so we
+    // can restore it after the position:fixed lock is lifted.
     const targetScrollX = savedScrollX;
     const targetScrollY = savedScrollY;
     mediaEl.innerHTML = '';
@@ -269,8 +290,14 @@
       descEl.removeAttribute('aria-hidden');
     }
     setOpen(false);
+    // Unfixing <html> leaves the document at scroll (0,0). Restore the
+    // saved position synchronously, then one more time on the next
+    // frame as a safety net against any layout settling.
+    try { window.scrollTo(targetScrollX, targetScrollY); } catch (_) {}
     window.requestAnimationFrame(() => {
-      window.scrollTo(targetScrollX, targetScrollY);
+      if (window.scrollX !== targetScrollX || window.scrollY !== targetScrollY) {
+        try { window.scrollTo(targetScrollX, targetScrollY); } catch (_) {}
+      }
     });
     if (lastFocus && typeof lastFocus.focus === 'function') {
       try {
@@ -286,8 +313,8 @@
     const isNavigation = !!(opts && opts.isNavigation);
     if (!isNavigation) {
       lastFocus = document.activeElement;
-      savedScrollX = window.scrollX;
-      savedScrollY = window.scrollY;
+      savedScrollX = getDocumentScrollX();
+      savedScrollY = getDocumentScrollY();
     }
 
     if (panel) {
