@@ -74,20 +74,22 @@
       </span>
     </button>
 
-    <button type="button" class="project-folder project-folder--yellow" data-case-modal="management" aria-label="Management — open preview">
+    <button type="button" class="project-folder project-folder--yellow" data-case-modal="management" aria-label="Pet Projects — open preview">
       <span class="folder-stack" aria-hidden="true">
         <img class="folder-back" src="images/back of folder.svg" alt="">
         <img class="folder-paper" src="images/paper.svg" alt="">
         <img class="folder-front" src="images/front of folder.svg" alt="">
+        <img class="folder-sticker folder-sticker--smile" src="images/stickersmile.svg" alt="">
       </span>
-      <span class="folder-label">Management</span>
+      <span class="folder-label">Pet Projects</span>
     </button>
 
-    <button type="button" class="project-folder project-folder--yellow project-folder--yellow-two" data-case-modal="payitoff" aria-label="Payitoff — open preview">
+    <button type="button" class="project-folder project-folder--yellow project-folder--yellow-two project-folder--payitoff" data-case-modal="payitoff" aria-label="Payitoff — open preview">
       <span class="folder-stack" aria-hidden="true">
-        <img class="folder-back" src="images/back of folder.svg" alt="">
+        <img class="folder-back" src="images/back of folder payitoff.svg" alt="">
         <img class="folder-paper" src="images/paper.svg" alt="">
-        <img class="folder-front" src="images/front of folder.svg" alt="">
+        <img class="folder-front" src="images/front of folder payitoff.svg" alt="">
+        <img class="folder-sticker folder-sticker--payitoff" src="images/payitoff.io.svg" alt="">
       </span>
       <span class="folder-label">Payitoff</span>
     </button>
@@ -97,6 +99,7 @@
         <img class="folder-back" src="images/back of folder.svg" alt="">
         <img class="folder-paper" src="images/paper.svg" alt="">
         <img class="folder-front" src="images/front of folder.svg" alt="">
+        <img class="folder-sticker folder-sticker--figma" src="images/Figma-logo.svg.png" alt="">
       </span>
       <span class="folder-label">Figma</span>
     </button>
@@ -106,15 +109,17 @@
         <img class="folder-back" src="images/back of folder.svg" alt="">
         <img class="folder-paper" src="images/paper.svg" alt="">
         <img class="folder-front" src="images/front of folder.svg" alt="">
+        <img class="folder-sticker folder-sticker--yep" src="images/yep.svg" alt="">
       </span>
       <span class="folder-label">Yahoo</span>
     </button>
 
-    <button type="button" class="project-folder project-folder--yellow project-folder--yellow-five" data-case-modal="asana" aria-label="Asana — open preview">
+    <button type="button" class="project-folder project-folder--yellow project-folder--yellow-five project-folder--pink" data-case-modal="asana" aria-label="Asana — open preview">
       <span class="folder-stack" aria-hidden="true">
-        <img class="folder-back" src="images/back of folder.svg" alt="">
+        <img class="folder-back" src="images/back of folder pink.svg" alt="">
         <img class="folder-paper" src="images/paper.svg" alt="">
-        <img class="folder-front" src="images/front of folder.svg" alt="">
+        <img class="folder-front" src="images/front of folder pink.svg" alt="">
+        <img class="folder-sticker folder-sticker--asana" src="images/asana logo.png" alt="">
       </span>
       <span class="folder-label">Asana</span>
     </button>
@@ -178,6 +183,8 @@
         <img src="images/Spotify.png" alt="" width="96" height="96" decoding="async">
       </a>
     </nav>
+
+    <p class="hero-tagline hero-tagline--connect">COME FIND ME</p>
 
     <aside class="post-it">
       <div class="post-it-header">
@@ -403,8 +410,18 @@
         return;
       }
 
-      const b = getHeroGroupBounds();
-      if (!b) return;
+      // Center the viewport directly on NICO MATSON (the hero-name element
+      // itself) so the headline lands in the middle of the visible area. We
+      // intentionally ignore the "NYC DESIGNER" tagline here — including it
+      // skews the vertical center upward, which on mobile pushes the name
+      // above the visible center.
+      const heroRect = hero.getBoundingClientRect();
+      const b = {
+        left: heroRect.left,
+        right: heroRect.right,
+        top: heroRect.top,
+        bottom: heroRect.bottom
+      };
       const groupCenterX = b.left + (b.right - b.left) / 2;
       const groupCenterY = b.top + (b.bottom - b.top) / 2;
 
@@ -825,6 +842,32 @@
       }
     });
 
+    // Re-center the hero when the viewport size changes significantly — e.g.
+    // the user rotates their phone or the mobile keyboard opens/closes. We
+    // debounce so mid-pan resizes (virtual keyboard scroll, etc.) don't jerk
+    // the viewport around more than needed.
+    let heroRecenterResizeTimer = 0;
+    let lastHeroRecenterWidth = window.innerWidth;
+    let lastHeroRecenterHeight = window.innerHeight;
+    const scheduleHeroRecenterOnResize = () => {
+      if (heroRecenterResizeTimer) {
+        window.clearTimeout(heroRecenterResizeTimer);
+      }
+      heroRecenterResizeTimer = window.setTimeout(() => {
+        heroRecenterResizeTimer = 0;
+        const dw = Math.abs(window.innerWidth - lastHeroRecenterWidth);
+        const dh = Math.abs(window.innerHeight - lastHeroRecenterHeight);
+        if (dw < 20 && dh < 20) return;
+        lastHeroRecenterWidth = window.innerWidth;
+        lastHeroRecenterHeight = window.innerHeight;
+        runHeroCenterAfterLayout();
+      }, 150);
+    };
+    window.addEventListener('resize', scheduleHeroRecenterOnResize);
+    window.addEventListener('orientationchange', () => {
+      window.setTimeout(runHeroCenterAfterLayout, 120);
+    });
+
     document.addEventListener('pointerdown', (e) => {
       if (e.button !== 0) return;
       if (e.pointerType === 'touch') return;
@@ -926,6 +969,23 @@
     if (initialThemeDot) setActiveDot(initialThemeDot);
     setDotsExpanded(false);
 
+    // Auto-cycle through the theme dots every 20s so the background
+    // slowly dissolves into the next color on its own. The CSS transition
+    // on html's background/color gives it the gentle dissolve feel.
+    const THEME_CYCLE_MS = 10000;
+    const advanceTheme = () => {
+      if (!dots.length) return;
+      const active = panel.querySelector('.dot.active');
+      const currentIndex = active ? dots.indexOf(active) : -1;
+      const nextDot = dots[(currentIndex + 1) % dots.length];
+      if (nextDot) setActiveDot(nextDot);
+    };
+    let themeCycleTimer = window.setInterval(advanceTheme, THEME_CYCLE_MS);
+    const restartThemeCycle = () => {
+      window.clearInterval(themeCycleTimer);
+      themeCycleTimer = window.setInterval(advanceTheme, THEME_CYCLE_MS);
+    };
+
     dots.forEach(dot => {
       dot.addEventListener('click', e => {
         e.stopPropagation();
@@ -935,6 +995,8 @@
         }
         setActiveDot(dot);
         setDotsExpanded(false);
+        // Reset the 20s countdown so the user's manual pick stays for a full cycle.
+        restartThemeCycle();
       });
     });
 
@@ -1350,22 +1412,30 @@
       const sequence = ['C', 'V', 'N', 'B'];
       const stepMs = 550;
       sequence.forEach((label, index) => {
-        playKeyByLabel(label, index * stepMs);
+        window.setTimeout(() => {
+          if (searchFieldCapturingKeyboard || document.activeElement === searchBarInput) return;
+          const btn = keyMap[label.toUpperCase()];
+          if (!btn) return;
+          // Only queue audio when the context is already running. Otherwise
+          // the oscillators would sit queued inside a suspended AudioContext
+          // and fire the moment the user's first gesture (e.g. clicking Play
+          // in the bottom nav) resumes audio — overlapping with the Play-nav
+          // chime and producing two melodies at once.
+          if (pianoCtx.state === 'running') {
+            playNote(noteFreqs[btn.dataset.note]);
+          }
+          btn.classList.add('pw-active');
+          window.setTimeout(() => btn.classList.remove('pw-active'), 220);
+        }, index * stepMs);
       });
     };
 
     const startAutoplayPianoIntro = () => {
-      if (pianoCtx.state === 'running') {
-        autoplayPianoIntro();
-        return;
-      }
-
-      pianoCtx.resume()
-        .then(autoplayPianoIntro)
-        .catch(() => {
-          // If autoplay is blocked, still trigger key visuals so the intro feels alive.
-          autoplayPianoIntro();
-        });
+      // Don't call pianoCtx.resume() here — without a user gesture it won't
+      // actually resume, and any scheduled notes would queue up and fire
+      // later. We just run the visual intro; audio will kick in naturally
+      // once the user interacts with the piano or the Play nav.
+      autoplayPianoIntro();
     };
 
     document.addEventListener('keydown', (e) => {
