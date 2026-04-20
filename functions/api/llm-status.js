@@ -1,11 +1,12 @@
 // GET /api/llm-status
-// Reports whether the Workers AI binding is available and which model
-// the /api/organic-answer endpoint uses. Matches the response shape
-// the local Ollama dev server returns, so search-assistant.js needs
-// no frontend changes.
+// Reports which LLM path is currently active for /api/organic-answer.
+// Priority:
+//   1. Claude (if ANTHROPIC_API_KEY is configured)
+//   2. Workers AI (if env.AI binding exists)
+//   3. No AI (base-answer fallback)
 
-const MODEL = '@cf/meta/llama-3.1-8b-instruct';
-const MODEL_DISPLAY = 'llama-3.1-8b';
+const CLAUDE_MODEL_DISPLAY = 'Claude Opus 4.7';
+const WORKERS_AI_DISPLAY = 'llama-3.1-8b';
 
 function json(data) {
   return new Response(JSON.stringify(data), {
@@ -14,10 +15,34 @@ function json(data) {
 }
 
 export async function onRequestGet({ env }) {
-  const available = Boolean(env && env.AI);
+  const claudeAvailable = Boolean(env && env.ANTHROPIC_API_KEY);
+  const workersAvailable = Boolean(env && env.AI);
+
+  if (claudeAvailable) {
+    return json({
+      ok: true,
+      available: true,
+      model: CLAUDE_MODEL_DISPLAY,
+      source: 'claude',
+      fallback: workersAvailable ? WORKERS_AI_DISPLAY : null
+    });
+  }
+
+  if (workersAvailable) {
+    return json({
+      ok: true,
+      available: true,
+      model: WORKERS_AI_DISPLAY,
+      source: 'workers-ai',
+      fallback: null
+    });
+  }
+
   return json({
     ok: true,
-    available,
-    model: available ? MODEL_DISPLAY : null
+    available: false,
+    model: null,
+    source: null,
+    fallback: null
   });
 }
