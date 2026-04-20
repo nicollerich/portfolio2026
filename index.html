@@ -39,7 +39,11 @@
         <div class="search-suggestions" id="searchSuggestions" role="list" aria-label="Suggested questions"></div>
         <div class="search-loader" id="searchLoader" role="status" aria-live="polite" hidden>
           <span class="search-loader-label">Thinking</span>
-          <div class="dot-pulse" aria-hidden="true"></div>
+          <div class="dot-pulse" aria-hidden="true">
+            <span class="dot-pulse-dot"></span>
+            <span class="dot-pulse-dot"></span>
+            <span class="dot-pulse-dot"></span>
+          </div>
         </div>
       </div>
 
@@ -253,17 +257,6 @@
     </div>
   </div>
 
-  <button class="search-layers-btn" type="button" aria-label="Recenter view">
-    <svg class="search-layers-face" width="28" height="28" viewBox="0 0 34 35" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <circle cx="17" cy="17.5" r="14" stroke="currentColor" fill="none"/>
-      <g class="search-layers-face-features">
-        <circle cx="23.04" cy="15.4766" r="2.34668" fill="currentColor"/>
-        <circle cx="10.96" cy="15.4766" r="2.34668" fill="currentColor"/>
-        <path d="M13.5654 20.4482C14.7605 21.6911 17.3708 22.9024 20.3057 20.4482" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
-      </g>
-    </svg>
-  </button>
-
   <nav class="theme-dots is-collapsed" id="themeDots" aria-expanded="false">
     <button class="dot dot-terracotta active" data-theme="terracotta" data-theme-mode="light" aria-label="Terracotta theme" style="--dot-index: 0;"></button>
     <button class="dot dot-ochre" data-theme="ochre" data-theme-mode="light" aria-label="Ochre theme" style="--dot-index: 1;"></button>
@@ -273,12 +266,24 @@
     <button class="dot dot-lime" data-theme="lime" data-theme-mode="light" aria-label="Lime theme" style="--dot-index: 5;"></button>
   </nav>
 
-  <nav class="view-dots" id="viewDots" aria-label="Jump to section">
-    <button type="button" class="view-pill" data-section="about">About</button>
-    <button type="button" class="view-pill" data-section="work">Work</button>
-    <button type="button" class="view-pill" data-section="play">Play</button>
-    <button type="button" class="view-pill" data-section="connect">Connect</button>
-  </nav>
+  <div class="bottom-nav-cluster">
+    <nav class="view-dots" id="viewDots" aria-label="Jump to section">
+      <button type="button" class="view-pill" data-section="about">About</button>
+      <button type="button" class="view-pill" data-section="work">Work</button>
+      <button type="button" class="view-pill" data-section="play">Play</button>
+      <button type="button" class="view-pill" data-section="connect">Connect</button>
+    </nav>
+    <button class="search-layers-btn" type="button" aria-label="Recenter view">
+      <svg class="search-layers-face" width="28" height="28" viewBox="0 0 34 35" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="17" cy="17.5" r="14" stroke="currentColor" fill="none"/>
+        <g class="search-layers-face-features">
+          <circle cx="23.04" cy="15.4766" r="2.34668" fill="currentColor"/>
+          <circle cx="10.96" cy="15.4766" r="2.34668" fill="currentColor"/>
+          <path d="M13.5654 20.4482C14.7605 21.6911 17.3708 22.9024 20.3057 20.4482" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+        </g>
+      </svg>
+    </button>
+  </div>
 
   <div class="viewport-spotlight" aria-hidden="true">
     <svg class="viewport-spotlight-svg" preserveAspectRatio="none">
@@ -406,6 +411,14 @@
       };
     };
 
+    const getViewportLayoutSize = () => {
+      const vv = window.visualViewport;
+      if (vv && typeof vv.width === 'number' && typeof vv.height === 'number') {
+        return { vw: vv.width, vh: vv.height };
+      }
+      return { vw: window.innerWidth, vh: window.innerHeight };
+    };
+
     let recenterFaceLookRaf = 0;
     const updateRecenterFaceLook = () => {
       if (!recenterFaceFeatures) return;
@@ -414,11 +427,12 @@
         recenterFaceFeatures.setAttribute('transform', 'translate(0, 0)');
         return;
       }
-      const vcx = window.innerWidth / 2;
-      const vcy = window.innerHeight / 2;
+      const { vw, vh } = getViewportLayoutSize();
+      const vcx = vw / 2;
+      const vcy = vh / 2;
       const dx = vcx - anchorCenter.x;
       const dy = vcy - anchorCenter.y;
-      const norm = Math.min(window.innerWidth, window.innerHeight) || 1;
+      const norm = Math.min(vw, vh) || 1;
       const maxShift = 4.2;
       const gain = (maxShift * 2) / norm;
       const tx = Math.max(-maxShift, Math.min(maxShift, dx * gain));
@@ -438,9 +452,10 @@
       if (!mapCanvas) return;
 
       const hero = document.querySelector('.hero-name');
+      const { vw, vh } = getViewportLayoutSize();
       if (!hero) {
-        const fallbackLeft = Math.max(0, (mapCanvas.scrollWidth - window.innerWidth) / 2);
-        const fallbackTop = Math.max(0, (mapCanvas.scrollHeight - window.innerHeight) / 2);
+        const fallbackLeft = Math.max(0, (mapCanvas.scrollWidth - vw) / 2);
+        const fallbackTop = Math.max(0, (mapCanvas.scrollHeight - vh) / 2);
         window.scrollTo({ left: fallbackLeft, top: fallbackTop, behavior });
         scheduleUpdateRecenterFaceLook();
         return;
@@ -461,10 +476,10 @@
       const groupCenterX = b.left + (b.right - b.left) / 2;
       const groupCenterY = b.top + (b.bottom - b.top) / 2;
 
-      const rawLeft = window.scrollX + groupCenterX - (window.innerWidth / 2);
-      const rawTop = window.scrollY + groupCenterY - (window.innerHeight / 2);
-      const maxLeft = Math.max(0, document.documentElement.scrollWidth - window.innerWidth);
-      const maxTop = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      const rawLeft = window.scrollX + groupCenterX - (vw / 2);
+      const rawTop = window.scrollY + groupCenterY - (vh / 2);
+      const maxLeft = Math.max(0, document.documentElement.scrollWidth - vw);
+      const maxTop = Math.max(0, document.documentElement.scrollHeight - vh);
       const left = Math.min(Math.max(0, rawLeft), maxLeft);
       const top = Math.min(Math.max(0, rawTop), maxTop);
 
@@ -474,7 +489,7 @@
 
     const shouldSkipViewportPan = (target) => {
       return !!target.closest(
-        'button, input, textarea, select, a, [contenteditable="true"], .theme-dots, .view-dots, .search-group, .search-results, .search-layers-btn, .post-it, .canvas-pencil, .canvas-pencil-btn, .canvas-eraser, .canvas-eraser-btn, .hero-name-o, .hero-collage-item'
+        'button, input, textarea, select, a, [contenteditable="true"], .theme-dots, .bottom-nav-cluster, .view-dots, .search-group, .search-results, .search-layers-btn, .post-it, .canvas-pencil, .canvas-pencil-btn, .canvas-eraser, .canvas-eraser-btn, .hero-name-o, .hero-collage-item'
       );
     };
 
@@ -883,23 +898,32 @@
     // debounce so mid-pan resizes (virtual keyboard scroll, etc.) don't jerk
     // the viewport around more than needed.
     let heroRecenterResizeTimer = 0;
-    let lastHeroRecenterWidth = window.innerWidth;
-    let lastHeroRecenterHeight = window.innerHeight;
+    const readLayoutSize = () => {
+      const { vw, vh } = getViewportLayoutSize();
+      return { w: vw, h: vh };
+    };
+    let lastHeroRecenterWidth = readLayoutSize().w;
+    let lastHeroRecenterHeight = readLayoutSize().h;
     const scheduleHeroRecenterOnResize = () => {
       if (heroRecenterResizeTimer) {
         window.clearTimeout(heroRecenterResizeTimer);
       }
       heroRecenterResizeTimer = window.setTimeout(() => {
         heroRecenterResizeTimer = 0;
-        const dw = Math.abs(window.innerWidth - lastHeroRecenterWidth);
-        const dh = Math.abs(window.innerHeight - lastHeroRecenterHeight);
+        const { w, h } = readLayoutSize();
+        const dw = Math.abs(w - lastHeroRecenterWidth);
+        const dh = Math.abs(h - lastHeroRecenterHeight);
         if (dw < 20 && dh < 20) return;
-        lastHeroRecenterWidth = window.innerWidth;
-        lastHeroRecenterHeight = window.innerHeight;
+        lastHeroRecenterWidth = w;
+        lastHeroRecenterHeight = h;
         runHeroCenterAfterLayout();
       }, 150);
     };
     window.addEventListener('resize', scheduleHeroRecenterOnResize);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', scheduleHeroRecenterOnResize);
+      window.visualViewport.addEventListener('scroll', scheduleUpdateRecenterFaceLook);
+    }
     window.addEventListener('orientationchange', () => {
       window.setTimeout(runHeroCenterAfterLayout, 120);
     });

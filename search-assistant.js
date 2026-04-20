@@ -442,6 +442,11 @@
     }
 
     showSearchLoader();
+    // Ensure the results chrome stays hidden while fetching; `display:flex`
+    // on `.search-results` otherwise wins over the `hidden` attribute and
+    // shows an empty dark “pill” under the loader.
+    panel.hidden = true;
+    panel.classList.remove('is-fading-in', 'is-fading-out');
     try {
       const knowledgeEntries = await getKnowledgeEntries();
       const localMatches = findKnowledgeMatches(q, knowledgeEntries);
