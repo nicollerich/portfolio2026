@@ -90,10 +90,11 @@ function buildClaudeUserMessage(question, baseAnswer, contextBlob) {
 async function tryClaude({ env, question, baseAnswer, contextBlob, allAnswersBlob }) {
   if (!env || !env.ANTHROPIC_API_KEY) return null;
 
+  // Note: `temperature` is deprecated on Opus 4.7 and returns a 400 if
+  // included. Leave it out — the model picks a sensible default.
   const body = {
     model: CLAUDE_MODEL,
     max_tokens: 220,
-    temperature: 0.4,
     system: CLAUDE_SYSTEM_PROMPT,
     messages: [
       { role: 'user', content: buildClaudeUserMessage(question, baseAnswer, contextBlob) }

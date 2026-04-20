@@ -141,7 +141,6 @@ async function doFullSimulation({ env, request, question }) {
   const requestBody = {
     model: CLAUDE_MODEL,
     max_tokens: 220,
-    temperature: 0.4,
     system: CLAUDE_SYSTEM_PROMPT,
     messages: [{ role: 'user', content: userMessage }]
   };
