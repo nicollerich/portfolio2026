@@ -254,7 +254,7 @@
     });
 
     return scored
-      .filter((item) => item.score >= (isBroadQuery ? 18 : 30))
+      .filter((item) => item.score >= (isBroadQuery ? 25 : 30))
       .sort((a, b) => b.score - a.score)
       .slice(0, 1)
       .map((item) => ({
