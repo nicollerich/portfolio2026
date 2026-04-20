@@ -42,6 +42,8 @@
   let studiesCache = null;
   let loadPromise = null;
   let lastFocus = null;
+  let savedScrollX = 0;
+  let savedScrollY = 0;
 
   function loadStudies() {
     if (studiesCache) return Promise.resolve(studiesCache);
@@ -121,6 +123,13 @@
     mediaEl.querySelectorAll('video').forEach((v) => {
       v.pause();
     });
+    // Restore the viewport scroll position that was saved when the modal
+    // opened. `overflow: hidden` on html/body can drop scroll position on
+    // this map-canvas layout, which would otherwise snap the user back to
+    // About. Restore on the next frame so it happens after the overflow
+    // style is removed by setOpen(false).
+    const targetScrollX = savedScrollX;
+    const targetScrollY = savedScrollY;
     mediaEl.innerHTML = '';
     if (panel) {
       panel.classList.remove('case-study-modal-panel--media-only');
@@ -143,11 +152,14 @@
       descEl.removeAttribute('aria-hidden');
     }
     setOpen(false);
+    window.requestAnimationFrame(() => {
+      window.scrollTo(targetScrollX, targetScrollY);
+    });
     if (lastFocus && typeof lastFocus.focus === 'function') {
       try {
-        lastFocus.focus();
+        lastFocus.focus({ preventScroll: true });
       } catch (_) {
-        // no-op
+        try { lastFocus.focus(); } catch (_) {}
       }
     }
     lastFocus = null;
@@ -155,6 +167,8 @@
 
   async function openModal(slug, fallbackHref) {
     lastFocus = document.activeElement;
+    savedScrollX = window.scrollX;
+    savedScrollY = window.scrollY;
 
     if (panel) panel.classList.add('is-loading');
     setOpen(true);

@@ -497,16 +497,16 @@ input {
     0 6px 16px rgba(0, 0, 0, 0.16);
 }
 
-.hero-collage-item:nth-child(1)  { left: calc(50% - 800px); top:   0px; width: 170px; --rot: -8deg; }
-.hero-collage-item:nth-child(2)  { left: calc(50% - 680px); top:  30px; width: 170px; --rot: 5deg; }
-.hero-collage-item:nth-child(3)  { left: calc(50% - 560px); top:  10px; width: 160px; --rot: -3deg; }
-.hero-collage-item:nth-child(4)  { left: calc(50% - 780px); top: 130px; width: 180px; --rot: 4deg; }
-.hero-collage-item:nth-child(5)  { left: calc(50% - 650px); top: 150px; width: 160px; --rot: -5deg; }
-.hero-collage-item:nth-child(6)  { left: calc(50% - 530px); top: 120px; width: 170px; --rot: 6deg; }
-.hero-collage-item:nth-child(7)  { left: calc(50% - 770px); top: 250px; width: 170px; --rot: -6deg; }
-.hero-collage-item:nth-child(8)  { left: calc(50% - 640px); top: 270px; width: 180px; --rot: 3deg; }
-.hero-collage-item:nth-child(9)  { left: calc(50% - 520px); top: 240px; width: 160px; --rot: -4deg; }
-.hero-collage-item:nth-child(10) { left: calc(50% - 680px); top: 380px; width: 170px; --rot: 7deg; }
+.hero-collage-item:nth-child(1)  { left: calc(50% - 950px); top:   0px; width: 170px; --rot: -8deg; }
+.hero-collage-item:nth-child(2)  { left: calc(50% - 830px); top:  30px; width: 170px; --rot: 5deg; }
+.hero-collage-item:nth-child(3)  { left: calc(50% - 710px); top:  10px; width: 160px; --rot: -3deg; }
+.hero-collage-item:nth-child(4)  { left: calc(50% - 930px); top: 130px; width: 180px; --rot: 4deg; }
+.hero-collage-item:nth-child(5)  { left: calc(50% - 800px); top: 150px; width: 160px; --rot: -5deg; }
+.hero-collage-item:nth-child(6)  { left: calc(50% - 680px); top: 120px; width: 170px; --rot: 6deg; }
+.hero-collage-item:nth-child(7)  { left: calc(50% - 920px); top: 250px; width: 170px; --rot: -6deg; }
+.hero-collage-item:nth-child(8)  { left: calc(50% - 790px); top: 270px; width: 180px; --rot: 3deg; }
+.hero-collage-item:nth-child(9)  { left: calc(50% - 670px); top: 240px; width: 160px; --rot: -4deg; }
+.hero-collage-item:nth-child(10) { left: calc(50% - 830px); top: 380px; width: 170px; --rot: 7deg; }
 
 @media (max-width: 720px) {
   .hero-collage {
