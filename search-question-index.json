@@ -734,6 +734,111 @@
       "keywords": ["ai changing", "future of design", "ai replace", "ai replacing", "ai disrupt", "ai disrupting", "ai future"]
     },
     {
+      "category": "team",
+      "question": "Who is on Nico's team?",
+      "answer": "Nico manages an incredible team of designers at Yahoo Search: Alex Miller, John Finley, Inken Ahou, Jun Yu, Catherine Tai, Sarah Holliday, and Michael Yuan. She loves them all and genuinely thinks they're amazing.",
+      "tags": ["team", "direct reports", "designers", "yahoo"],
+      "keywords": ["team", "my team", "nico's team", "who is on your team", "who is on nicos team", "team members", "designers on team", "roster", "who do you work with", "nico team"]
+    },
+    {
+      "category": "team",
+      "question": "Who does Nico manage?",
+      "answer": "Nico manages seven designers at Yahoo Search: Alex Miller, John Finley, Inken Ahou, Jun Yu, Catherine Tai, Sarah Holliday, and Michael Yuan.",
+      "tags": ["team", "management", "direct reports"],
+      "keywords": ["who does nico manage", "who do you manage", "direct reports", "reports to nico", "nico's reports", "manage", "management"]
+    },
+    {
+      "category": "team",
+      "question": "Who is Alex Miller?",
+      "answer": "Alex Miller is one of the designers on Nico's team at Yahoo Search. Nico thinks Alex is an amazing designer.",
+      "tags": ["team", "alex miller", "designer"],
+      "keywords": ["alex miller", "alex", "miller"]
+    },
+    {
+      "category": "team",
+      "question": "Who is John Finley?",
+      "answer": "John Finley is one of the designers on Nico's team at Yahoo Search. Nico thinks John is an amazing designer.",
+      "tags": ["team", "john finley", "designer"],
+      "keywords": ["john finley", "john", "finley"]
+    },
+    {
+      "category": "team",
+      "question": "Who is Inken Ahou?",
+      "answer": "Inken Ahou is one of the designers on Nico's team at Yahoo Search. Nico thinks Inken is an amazing designer.",
+      "tags": ["team", "inken ahou", "designer"],
+      "keywords": ["inken ahou", "inken", "ahou"]
+    },
+    {
+      "category": "team",
+      "question": "Who is Jun Yu?",
+      "answer": "Jun Yu is one of the designers on Nico's team at Yahoo Search. Nico thinks Jun is an amazing designer.",
+      "tags": ["team", "jun yu", "designer"],
+      "keywords": ["jun yu", "jun", "yu"]
+    },
+    {
+      "category": "team",
+      "question": "Who is Catherine Tai?",
+      "answer": "Catherine Tai is one of the designers on Nico's team at Yahoo Search. Nico thinks Catherine is an amazing designer.",
+      "tags": ["team", "catherine tai", "designer"],
+      "keywords": ["catherine tai", "catherine", "tai"]
+    },
+    {
+      "category": "team",
+      "question": "Who is Sarah Holliday?",
+      "answer": "Sarah Holliday is one of the designers on Nico's team at Yahoo Search. Nico thinks Sarah is an amazing designer.",
+      "tags": ["team", "sarah holliday", "designer"],
+      "keywords": ["sarah holliday", "sarah", "holliday"]
+    },
+    {
+      "category": "team",
+      "question": "Who is Michael Yuan?",
+      "answer": "Michael Yuan is one of the designers on Nico's team at Yahoo Search. Nico thinks Michael is an amazing designer.",
+      "tags": ["team", "michael yuan", "designer"],
+      "keywords": ["michael yuan", "michael", "yuan"]
+    },
+    {
+      "category": "team",
+      "question": "Who does Nico partner with at Yahoo?",
+      "answer": "Nico partners closely with Melanie Pitson Evers, the PM for Scout who is incredibly great at her job, along with Bryon Jourdan (VP of Product), Rob Post, Matt Linford, and Marzia Polito. They're all great cross-functional partners.",
+      "tags": ["team", "partners", "cross-functional", "yahoo"],
+      "keywords": ["partners", "partner with", "work with", "collaborators", "cross functional", "xfn", "nico partners", "product partners", "pm partners"]
+    },
+    {
+      "category": "team",
+      "question": "Who is Melanie Pitson Evers?",
+      "answer": "Melanie Pitson Evers is the PM for Scout at Yahoo. Nico thinks she's incredibly great at her job.",
+      "tags": ["team", "melanie pitson evers", "pm", "scout"],
+      "keywords": ["melanie pitson evers", "melanie pitson", "melanie evers", "melanie", "pitson", "evers", "scout pm", "pm for scout"]
+    },
+    {
+      "category": "team",
+      "question": "Who is Bryon Jourdan?",
+      "answer": "Bryon Jourdan is the VP of Product at Yahoo and one of Nico's closest partners. She considers him a great partner.",
+      "tags": ["team", "bryon jourdan", "vp product", "yahoo"],
+      "keywords": ["bryon jourdan", "bryon", "jourdan", "vp of product", "vp product"]
+    },
+    {
+      "category": "team",
+      "question": "Who is Rob Post?",
+      "answer": "Rob Post is one of Nico's cross-functional partners at Yahoo. She considers him a great partner.",
+      "tags": ["team", "rob post", "partner", "yahoo"],
+      "keywords": ["rob post", "rob", "post"]
+    },
+    {
+      "category": "team",
+      "question": "Who is Matt Linford?",
+      "answer": "Matt Linford is one of Nico's cross-functional partners at Yahoo. She considers him a great partner.",
+      "tags": ["team", "matt linford", "partner", "yahoo"],
+      "keywords": ["matt linford", "matt", "linford"]
+    },
+    {
+      "category": "team",
+      "question": "Who is Marzia Polito?",
+      "answer": "Marzia Polito is one of Nico's cross-functional partners at Yahoo. Nico considers her a great partner.",
+      "tags": ["team", "marzia polito", "partner", "yahoo"],
+      "keywords": ["marzia polito", "marzia", "polito"]
+    },
+    {
       "category": "meta",
       "question": "Did Nico use AI to generate her answers?",
       "answer": "Nico used AI as a collaborator, not a ghostwriter. The answers here were shaped with AI tools, but the experiences, opinions, and voice are genuinely hers. Just like using Figma doesn't mean the design designed itself.",
