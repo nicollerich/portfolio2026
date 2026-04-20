@@ -2264,10 +2264,9 @@ button.project-folder {
 /* ── View dots (section nav, bottom / viewport-fixed) ─ */
 .view-dots {
   position: fixed;
-  /* Pin to the bottom of the *visible* viewport. We intentionally don't rely on
-     env(safe-area-inset-bottom) alone because on many Android/desktop browsers
-     that value resolves to 0 and we still want a small gap. */
-  bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+  /* Keep this in lock-step with .search-layers-btn so the recenter smiley and
+     the pill nav share the same baseline on every screen size. */
+  bottom: max(24px, calc(env(safe-area-inset-bottom, 0px) + 12px));
   left: 50%;
   right: auto;
   top: auto;
@@ -2275,8 +2274,7 @@ button.project-folder {
      fixed element pinned to the visible viewport even while the page is
      being panned/scrolled. translateX(-50%) alone can drift during scroll. */
   transform: translate3d(-50%, 0, 0);
-  /* Sit above every other fixed/floating element (modals handle their own stacking). */
-  z-index: 200;
+  z-index: 100;
   will-change: transform;
   display: flex;
   flex-direction: row;
@@ -2776,12 +2774,7 @@ button.project-folder {
   }
 
   .view-dots {
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
-    /* Make the nav unmistakably visible on mobile — stronger blur + background
-       so it reads clearly on any themed background. */
-    background: rgba(255, 255, 255, 0.28);
-    border-color: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.18);
+    bottom: max(22px, calc(env(safe-area-inset-bottom, 0px) + 8px));
   }
 
   .view-pill {
