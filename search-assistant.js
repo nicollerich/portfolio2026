@@ -421,6 +421,24 @@
       return;
     }
 
+    // No index match — this is a playful/off-index question (e.g. "tell me a
+    // joke", "what do you think about X"). Give Claude a shot with an empty
+    // base answer; the backend prompt lets Claude respond in-voice using the
+    // full knowledge base as grounding, or gracefully decline if the question
+    // is genuinely out of scope.
+    await renderLoading(panel);
+    const freeformAnswer = await fetchOrganicAnswer(q, '');
+    if (freeformAnswer) {
+      const styledAnswer = ensureYesNoStyle(freeformAnswer, q);
+      await renderItems(panel, [{
+        title: '',
+        snippet: styledAnswer,
+        link: '',
+        sourceQuestion: ''
+      }]);
+      return;
+    }
+
     const cfg = window.PORTFOLIO_SEARCH_CONFIG || {};
     if (!cfg.googleApiKey || !cfg.googleCx) {
       await renderFallback(panel);
