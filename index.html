@@ -22,8 +22,8 @@
       <div class="search-group">
         <form id="searchAboutForm" class="search-form" action="#" method="get" autocomplete="off">
           <div class="search-bar">
-            <svg class="search-bar-stroke" viewBox="0 0 460 64" preserveAspectRatio="none" aria-hidden="true">
-              <rect x="1" y="1" width="458" height="62" rx="31" ry="31" pathLength="100"></rect>
+            <svg class="search-bar-stroke" viewBox="0 0 600 76" preserveAspectRatio="none" aria-hidden="true">
+              <path class="search-bar-wiggle-path" d=""></path>
             </svg>
             <svg class="search-bar-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="11" cy="11" r="8"/>
@@ -35,11 +35,25 @@
             </div>
           </div>
         </form>
+        <div class="search-suggestions" id="searchSuggestions" role="list" aria-label="Suggested questions"></div>
       </div>
 
       <img class="hero-hi" src="images/Hi.svg" alt="Hi">
 
       <img class="hero-explore" src="images/go%20exploring.svg" alt="Go exploring">
+
+      <div class="hero-collage" id="heroCollage" aria-label="Drag the photos around">
+        <img class="hero-collage-item" src="images/gallery/01.png" alt="" draggable="false" decoding="async" loading="lazy">
+        <img class="hero-collage-item" src="images/gallery/02.png" alt="" draggable="false" decoding="async" loading="lazy">
+        <img class="hero-collage-item" src="images/gallery/03.png" alt="" draggable="false" decoding="async" loading="lazy">
+        <img class="hero-collage-item" src="images/gallery/04.png" alt="" draggable="false" decoding="async" loading="lazy">
+        <img class="hero-collage-item" src="images/gallery/05.png" alt="" draggable="false" decoding="async" loading="lazy">
+        <img class="hero-collage-item" src="images/gallery/06.png" alt="" draggable="false" decoding="async" loading="lazy">
+        <img class="hero-collage-item" src="images/gallery/07.png" alt="" draggable="false" decoding="async" loading="lazy">
+        <img class="hero-collage-item" src="images/gallery/08.png" alt="" draggable="false" decoding="async" loading="lazy">
+        <img class="hero-collage-item" src="images/gallery/09.png" alt="" draggable="false" decoding="async" loading="lazy">
+        <img class="hero-collage-item" src="images/gallery/10.png" alt="" draggable="false" decoding="async" loading="lazy">
+      </div>
 
       <div class="hero-blurb">
         <p>I lead design for search at Yahoo, shaping AI-powered experiences across mobile, web, and beyond. I partner with product and engineering to define vision, scale systems, and untangle things that don&rsquo;t always start out clear (which is most things).</p>
@@ -127,7 +141,7 @@
     <section id="section-work" class="experience-mini" aria-label="Recent experience">
       <p class="experience-mini-label">EXPERIENCE THE LAST 10 YEARS</p>
 
-      <article class="experience-mini-item">
+      <article class="experience-mini-item experience-mini-item--linked" data-case-modal="yahoo" role="button" tabindex="0" aria-label="Yahoo Search — open preview">
         <div class="experience-mini-main">
           <h3>Yahoo Search</h3>
           <p>Director, Head of Design</p>
@@ -135,7 +149,7 @@
         <p class="experience-mini-dates">2024 - 2025</p>
       </article>
 
-      <article class="experience-mini-item">
+      <article class="experience-mini-item experience-mini-item--linked" data-case-modal="payitoff" role="button" tabindex="0" aria-label="Payitoff.io — open preview">
         <div class="experience-mini-main">
           <h3>Payitoff.io</h3>
           <p>Founding Designer <span class="experience-mini-acquired"><span class="experience-mini-acquired-dot" aria-hidden="true">·</span> Acquired by Array</span></p>
@@ -143,7 +157,7 @@
         <p class="experience-mini-dates">2023</p>
       </article>
 
-      <article class="experience-mini-item">
+      <article class="experience-mini-item experience-mini-item--linked" data-case-modal="figma" role="button" tabindex="0" aria-label="Figma — open preview">
         <div class="experience-mini-main">
           <h3>Figma</h3>
           <p>Lead Product Designer</p>
@@ -151,7 +165,7 @@
         <p class="experience-mini-dates">2021 - 2022</p>
       </article>
 
-      <article class="experience-mini-item">
+      <article class="experience-mini-item experience-mini-item--linked" data-case-modal="asana" role="button" tabindex="0" aria-label="Asana — open preview">
         <div class="experience-mini-main">
           <h3>Asana</h3>
           <p>Lead Product Designer and Manager</p>
@@ -438,7 +452,7 @@
 
     const shouldSkipViewportPan = (target) => {
       return !!target.closest(
-        'button, input, textarea, select, a, [contenteditable="true"], .theme-dots, .view-dots, .search-group, .search-results, .search-layers-btn, .post-it, .canvas-pencil, .canvas-pencil-btn, .canvas-eraser, .canvas-eraser-btn, .hero-name-o'
+        'button, input, textarea, select, a, [contenteditable="true"], .theme-dots, .view-dots, .search-group, .search-results, .search-layers-btn, .post-it, .canvas-pencil, .canvas-pencil-btn, .canvas-eraser, .canvas-eraser-btn, .hero-name-o, .hero-collage-item'
       );
     };
 
@@ -1535,6 +1549,225 @@
         defaultCardBtn.setAttribute('aria-label', 'Reveal a random aura card');
       });
     }
+
+    // ── Wiggle border around the search input (hover animates, focus freezes straight) ─
+    (function initSearchWiggle() {
+      const CONFIG = {
+        width: 600,
+        height: 76,
+        cornerRadius: 38,
+        inset: 3,
+        hoverAmplitude: 2.2,
+        frequency: 0.075,
+        speed: 0.085,
+        step: 4,
+        easing: 0.18,
+      };
+      const SVG_NS = 'http://www.w3.org/2000/svg';
+
+      const buildPath = (phase, amplitude) => {
+        const W = CONFIG.width, H = CONFIG.height, R = CONFIG.cornerRadius;
+        const I = CONFIG.inset, F = CONFIG.frequency, S = CONFIG.step;
+        const top = [], right = [], bottom = [], left = [];
+
+        for (let x = R; x <= W - R; x += S) {
+          const y = I + (amplitude ? Math.sin(x * F + phase) * amplitude : 0);
+          top.push([x, y]);
+        }
+        for (let y = R; y <= H - R; y += S) {
+          const x = W - I + (amplitude ? Math.sin(y * F + phase + 1.5) * amplitude : 0);
+          right.push([x, y]);
+        }
+        for (let x = W - R; x >= R; x -= S) {
+          const y = H - I + (amplitude ? Math.sin(x * F + phase + 3) * amplitude : 0);
+          bottom.push([x, y]);
+        }
+        for (let y = H - R; y >= R; y -= S) {
+          const x = I + (amplitude ? Math.sin(y * F + phase + 4.5) * amplitude : 0);
+          left.push([x, y]);
+        }
+
+        if (!top.length || !right.length || !bottom.length || !left.length) return '';
+        const f = (n) => n.toFixed(2);
+        let d = `M ${f(top[0][0])} ${f(top[0][1])}`;
+        for (let i = 1; i < top.length; i++) d += ` L ${f(top[i][0])} ${f(top[i][1])}`;
+        d += ` Q ${f(W - I)} ${f(I)} ${f(right[0][0])} ${f(right[0][1])}`;
+        for (let i = 1; i < right.length; i++) d += ` L ${f(right[i][0])} ${f(right[i][1])}`;
+        d += ` Q ${f(W - I)} ${f(H - I)} ${f(bottom[0][0])} ${f(bottom[0][1])}`;
+        for (let i = 1; i < bottom.length; i++) d += ` L ${f(bottom[i][0])} ${f(bottom[i][1])}`;
+        d += ` Q ${f(I)} ${f(H - I)} ${f(left[0][0])} ${f(left[0][1])}`;
+        for (let i = 1; i < left.length; i++) d += ` L ${f(left[i][0])} ${f(left[i][1])}`;
+        d += ` Q ${f(I)} ${f(I)} ${f(top[0][0])} ${f(top[0][1])} Z`;
+        return d;
+      };
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      document.querySelectorAll('.search-bar').forEach((bar) => {
+        const path = bar.querySelector('.search-bar-wiggle-path');
+        if (!path) return;
+        const input = bar.querySelector('.search-bar-input');
+
+        path.setAttribute('d', buildPath(0, 0));
+
+        let phase = Math.random() * Math.PI * 2;
+        let currentAmp = 0;
+        let targetAmp = 0;
+        let rafId = null;
+        let settledFrames = 0;
+
+        const isFocused = () => input && document.activeElement === input;
+        const isHover = () => bar.matches(':hover');
+
+        const updateTarget = () => {
+          if (reduceMotion) { targetAmp = 0; ensureLoop(); return; }
+          targetAmp = (isHover() && !isFocused()) ? CONFIG.hoverAmplitude : 0;
+          ensureLoop();
+        };
+
+        const tick = () => {
+          currentAmp += (targetAmp - currentAmp) * CONFIG.easing;
+          if (targetAmp > 0.01 || currentAmp > 0.01) {
+            phase += CONFIG.speed;
+          }
+          path.setAttribute('d', buildPath(phase, currentAmp));
+
+          if (Math.abs(targetAmp - currentAmp) < 0.005 && targetAmp < 0.01) {
+            settledFrames += 1;
+            if (settledFrames > 8) {
+              currentAmp = 0;
+              path.setAttribute('d', buildPath(0, 0));
+              rafId = null;
+              return;
+            }
+          } else {
+            settledFrames = 0;
+          }
+          rafId = requestAnimationFrame(tick);
+        };
+
+        const ensureLoop = () => {
+          if (rafId == null) {
+            settledFrames = 0;
+            rafId = requestAnimationFrame(tick);
+          }
+        };
+
+        bar.addEventListener('mouseenter', updateTarget);
+        bar.addEventListener('mouseleave', updateTarget);
+        if (input) {
+          input.addEventListener('focus', updateTarget);
+          input.addEventListener('blur', updateTarget);
+        }
+      });
+    })();
+
+    // ── Suggested search pills ─
+    (function initSearchSuggestions() {
+      const container = document.getElementById('searchSuggestions');
+      const group = document.querySelector('.search-group');
+      const form = document.getElementById('searchAboutForm');
+      const input = document.querySelector('.search-bar-input');
+      if (!container || !group || !form || !input) return;
+
+      const SUGGESTIONS = [
+        { label: 'Leadership style', query: "What is Nico's leadership style?" },
+        { label: "What's Scout?", query: 'What is Yahoo Scout?' },
+        { label: 'Meet the team', query: "Who is on Nico's team?" },
+        { label: 'Designing with AI', query: 'How does Nico think about designing for AI?' },
+        { label: 'Outside of work', query: 'What does Nico do outside of work?' }
+      ];
+
+      SUGGESTIONS.forEach((s, i) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'search-suggestion-pill';
+        btn.setAttribute('role', 'listitem');
+        btn.style.setProperty('--pill-delay', `${i * 40}ms`);
+        btn.textContent = s.label;
+        btn.dataset.query = s.query;
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          input.value = s.query;
+          input.focus();
+          hidePills();
+          if (typeof form.requestSubmit === 'function') {
+            form.requestSubmit();
+          } else {
+            form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+          }
+        });
+        container.appendChild(btn);
+      });
+
+      function showPills() {
+        if (input.value.trim().length > 0) return;
+        if (document.querySelector('.search-results')) return;
+        container.classList.add('is-visible');
+      }
+      function hidePills() {
+        container.classList.remove('is-visible');
+      }
+
+      input.addEventListener('focus', showPills);
+      input.addEventListener('input', () => {
+        if (input.value.trim().length > 0) hidePills();
+        else if (document.activeElement === input) showPills();
+      });
+
+      document.addEventListener('pointerdown', (e) => {
+        if (!group.contains(e.target)) hidePills();
+      });
+
+      const resultsObserver = new MutationObserver(() => {
+        if (document.querySelector('.search-results')) hidePills();
+      });
+      resultsObserver.observe(document.body, { childList: true, subtree: true });
+    })();
+
+    // ── Draggable collage photos ─
+    (function initHeroCollage() {
+      const collage = document.getElementById('heroCollage');
+      if (!collage) return;
+      const items = Array.from(collage.querySelectorAll('.hero-collage-item'));
+      let topZ = 10;
+      items.forEach((item) => {
+        item.style.zIndex = String(++topZ);
+        item.addEventListener('pointerdown', (e) => {
+          if (e.button != null && e.button !== 0) return;
+          e.stopPropagation();
+          e.preventDefault();
+          try { item.setPointerCapture(e.pointerId); } catch (_) { /* noop */ }
+          item.classList.add('is-dragging');
+          item.style.zIndex = String(++topZ);
+
+          const startX = e.clientX;
+          const startY = e.clientY;
+          const rect = item.getBoundingClientRect();
+          const parentRect = collage.getBoundingClientRect();
+          const startLeft = rect.left - parentRect.left;
+          const startTop = rect.top - parentRect.top;
+          item.style.left = startLeft + 'px';
+          item.style.top = startTop + 'px';
+
+          const onMove = (ev) => {
+            const dx = ev.clientX - startX;
+            const dy = ev.clientY - startY;
+            item.style.left = (startLeft + dx) + 'px';
+            item.style.top = (startTop + dy) + 'px';
+          };
+          const onUp = () => {
+            item.classList.remove('is-dragging');
+            item.removeEventListener('pointermove', onMove);
+            item.removeEventListener('pointerup', onUp);
+            item.removeEventListener('pointercancel', onUp);
+          };
+          item.addEventListener('pointermove', onMove);
+          item.addEventListener('pointerup', onUp);
+          item.addEventListener('pointercancel', onUp);
+        });
+      });
+    })();
 
   </script>
   <script>

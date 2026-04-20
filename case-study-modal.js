@@ -279,8 +279,20 @@
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key !== 'Escape') return;
-    if (root.hidden) return;
-    closeModal();
+    if (e.key === 'Escape') {
+      if (root.hidden) return;
+      closeModal();
+      return;
+    }
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+      const target = e.target;
+      if (!target || !target.closest) return;
+      const trigger = target.closest('[data-case-modal][role="button"]');
+      if (!trigger) return;
+      const slug = trigger.getAttribute('data-case-modal');
+      if (!slug) return;
+      e.preventDefault();
+      openModal(slug.toLowerCase(), null);
+    }
   });
 })();
