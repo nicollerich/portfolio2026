@@ -1101,6 +1101,37 @@
         window.scrollTo({ left, top, behavior: 'smooth' });
       };
 
+      /** About → center viewport on the draggable hero photo cluster (not the blurb). */
+      const scrollToCollageCenter = () => {
+        const nodes = [...document.querySelectorAll('.hero-collage-item')];
+        if (!nodes.length) {
+          scrollToBlurbCenter();
+          return;
+        }
+        let minL = Infinity;
+        let minT = Infinity;
+        let maxR = -Infinity;
+        let maxB = -Infinity;
+        nodes.forEach((node) => {
+          const r = node.getBoundingClientRect();
+          const left = r.left + window.scrollX;
+          const top = r.top + window.scrollY;
+          const right = r.right + window.scrollX;
+          const bottom = r.bottom + window.scrollY;
+          minL = Math.min(minL, left);
+          minT = Math.min(minT, top);
+          maxR = Math.max(maxR, right);
+          maxB = Math.max(maxB, bottom);
+        });
+        const cx = minL + (maxR - minL) / 2;
+        const cy = minT + (maxB - minT) / 2;
+        const maxLeft = Math.max(0, document.documentElement.scrollWidth - window.innerWidth);
+        const maxTop = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+        const left = Math.min(Math.max(0, cx - window.innerWidth / 2), maxLeft);
+        const top = Math.min(Math.max(0, cy - window.innerHeight / 2), maxTop);
+        window.scrollTo({ left, top, behavior: 'smooth' });
+      };
+
       const schedulePlaySectionTone = () => {
         window.setTimeout(() => playPlaySectionTone(), 420);
       };
@@ -1182,7 +1213,7 @@
           return;
         }
         if (key === 'about') {
-          scrollToBlurbCenter();
+          scrollToCollageCenter();
           return;
         }
         if (key === 'play') {
