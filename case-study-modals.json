@@ -3,7 +3,17 @@
     "title": "Yahoo Search",
     "subtitle": "",
     "description": "",
-    "descriptionHtml": "Player / coach in all areas across Yahoo Search:<br>from the <a href=\"https://mobile.yahoo.com/search\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"case-study-modal-desc-link\">mobile app</a> to modernizing <a href=\"https://search.yahoo.com/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"case-study-modal-desc-link\">Yahoo Search</a><br>to a net new product <a href=\"https://scout.com/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"case-study-modal-desc-link\">Scout</a>.",
+    "header": {
+      "tag": "Yahoo Search",
+      "headline": "Heading up design for one of the web's oldest front doors.",
+      "description": "Leading design for Yahoo Search across mobile, web, and emerging surfaces shaping how millions of people find answers as the category itself gets rewritten by AI.",
+      "meta": [
+        { "label": "Year", "value": "2024 \u2013 Present" },
+        { "label": "Role", "value": "Director, Head of Design" },
+        { "label": "Team", "value": "Designers across web, mobile, and AI experiences" },
+        { "label": "Scope", "value": "Vision, systems, 0 to 1 AI experience, team leadership" }
+      ]
+    },
     "media": [
       {
         "type": "video",
@@ -28,7 +38,18 @@
   },
   "asana": {
     "title": "Asana",
-    "description": "Nico shipped Timeline, Calendar, and the section-based hierarchy that reshaped how work appears in Asana. Nico also led a small design team as a player-coach while staying hands-on in core workflows.",
+    "description": "",
+    "header": {
+      "tag": "Asana",
+      "headline": "Reshaping how a generation of teams plans their work.",
+      "description": "Led Timeline, Calendar, and the section-based hierarchy that changed how work shows up in Asana, while managing a team of 4 to 5 designers as a player-coach.",
+      "meta": [
+        { "label": "Year", "value": "2017 \u2013 2021" },
+        { "label": "Role", "value": "Lead Product Designer & Manager" },
+        { "label": "Team", "value": "4 to 5 designers across core workflows" },
+        { "label": "Scope", "value": "Timeline, Calendar, sections hierarchy, people leadership" }
+      ]
+    },
     "media": [
       { "type": "image", "src": "images/asanavision.png", "alt": "Asana vision" },
       { "type": "image", "src": "images/calendar.png", "alt": "Asana calendar" },
@@ -44,7 +65,17 @@
   "figma": {
     "title": "Figma",
     "description": "",
-    "descriptionHtml": "Nico was Lead Product Designer on Figma's Collaboration Pillar,<br>which encompassed feedback and browser organization features<br>including Spotlight, commenting, annotations, and Dev Mode",
+    "header": {
+      "tag": "Figma",
+      "headline": "Designing how teams see the same canvas in real time.",
+      "description": "Led product design across Figma's collaboration pillar, shaping how people present, comment, annotate, and hand off work together inside the browser.",
+      "meta": [
+        { "label": "Year", "value": "2021 \u2013 2022" },
+        { "label": "Role", "value": "Lead Product Designer, Collaboration Pillar" },
+        { "label": "Team", "value": "Collaboration designers" },
+        { "label": "Scope", "value": "Spotlight, commenting, annotations, Dev Mode" }
+      ]
+    },
     "media": [
       {
         "type": "video",
@@ -69,12 +100,34 @@
   "payitoff": {
     "title": "Payitoff",
     "description": "This is currently under construction 🚧",
+    "header": {
+      "tag": "Payitoff",
+      "headline": "Co-founding a fintech from the very first screen.",
+      "description": "Founding designer and co-founder at Payitoff, a debt infrastructure startup focused on student loans. Shaped product, brand, and the zero-to-one experience through to acquisition by Array.",
+      "meta": [
+        { "label": "Year", "value": "2023" },
+        { "label": "Role", "value": "Founding Designer, Co-founder" },
+        { "label": "Team", "value": "Founding team" },
+        { "label": "Scope", "value": "Product, brand, 0 to 1 experience" }
+      ]
+    },
     "media": []
   },
   "management": {
     "title": "",
     "subtitle": "",
-    "description": "Outside of work, Nico sharpens her craft by experimenting with new tools and taking on freelance projects, whether that's helping small business owners or pursuing her own ideas. Her curiosity never sleeps.",
+    "description": "",
+    "header": {
+      "tag": "Pet Projects",
+      "headline": "Keeping the craft sharp between big bets.",
+      "description": "Side work, freelance, and personal experiments where I explore new tools, help small business owners, and chase ideas that don't fit neatly into a day job.",
+      "meta": [
+        { "label": "Year", "value": "Ongoing" },
+        { "label": "Role", "value": "Designer, operator, friend" },
+        { "label": "Team", "value": "Solo or small partnerships" },
+        { "label": "Scope", "value": "Brand, product, experimentation" }
+      ]
+    },
     "media": [
       {
         "type": "video",

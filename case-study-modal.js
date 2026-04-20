@@ -7,9 +7,15 @@
   const titleEl = root.querySelector('[data-case-modal-title]');
   const subtitleEl = root.querySelector('[data-case-modal-subtitle]');
   const descEl = root.querySelector('[data-case-modal-desc]');
+  const headerEl = root.querySelector('[data-case-modal-header]');
   const mediaEl = root.querySelector('[data-case-modal-media]');
   const closeBtn = root.querySelector('[data-case-modal-close]');
   const loaderEl = root.querySelector('[data-case-modal-loader]');
+  const navEl = root.querySelector('[data-case-modal-nav]');
+  const navPrevBtn = root.querySelector('[data-case-modal-nav-prev]');
+  const navNextBtn = root.querySelector('[data-case-modal-nav-next]');
+  const navPrevLabelEl = root.querySelector('[data-case-modal-nav-prev-label]');
+  const navNextLabelEl = root.querySelector('[data-case-modal-nav-next-label]');
 
   const MODAL_MIN_LOADER_MS = 500;
   const MODAL_MEDIA_READY_TIMEOUT_MS = 2500;
@@ -40,6 +46,8 @@
   }
 
   let studiesCache = null;
+  let orderedSlugs = [];
+  let currentSlug = null;
   let loadPromise = null;
   let lastFocus = null;
   let savedScrollX = 0;
@@ -52,13 +60,52 @@
       .then((res) => (res.ok ? res.json() : {}))
       .then((data) => {
         studiesCache = data && typeof data === 'object' ? data : {};
+        orderedSlugs = Object.keys(studiesCache);
         return studiesCache;
       })
       .catch(() => {
         studiesCache = {};
+        orderedSlugs = [];
         return studiesCache;
       });
     return loadPromise;
+  }
+
+  function getStudyLabel(slug) {
+    const s = studiesCache && studiesCache[slug];
+    if (!s) return slug;
+    const headerTag = s.header && s.header.tag ? String(s.header.tag).trim() : '';
+    if (headerTag) return headerTag;
+    const title = s.title ? String(s.title).trim() : '';
+    if (title) return title;
+    return slug.charAt(0).toUpperCase() + slug.slice(1);
+  }
+
+  function renderNav(slug) {
+    if (!navEl) return;
+    const count = orderedSlugs.length;
+    if (count <= 1 || !slug) {
+      navEl.hidden = true;
+      return;
+    }
+    const idx = orderedSlugs.indexOf(slug);
+    if (idx < 0) {
+      navEl.hidden = true;
+      return;
+    }
+    const prevSlug = orderedSlugs[(idx - 1 + count) % count];
+    const nextSlug = orderedSlugs[(idx + 1) % count];
+    if (navPrevLabelEl) navPrevLabelEl.textContent = getStudyLabel(prevSlug);
+    if (navNextLabelEl) navNextLabelEl.textContent = getStudyLabel(nextSlug);
+    if (navPrevBtn) {
+      navPrevBtn.dataset.targetSlug = prevSlug;
+      navPrevBtn.setAttribute('aria-label', `Previous project: ${getStudyLabel(prevSlug)}`);
+    }
+    if (navNextBtn) {
+      navNextBtn.dataset.targetSlug = nextSlug;
+      navNextBtn.setAttribute('aria-label', `Next project: ${getStudyLabel(nextSlug)}`);
+    }
+    navEl.hidden = false;
   }
 
   function slugFromWorkHref(href) {
@@ -70,6 +117,60 @@
       const m = (href || '').match(/work\/([\w-]+)\.html$/i);
       return m ? m[1].toLowerCase() : null;
     }
+  }
+
+  function escapeHtml(value) {
+    return String(value == null ? '' : value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function renderHeader(header) {
+    if (!headerEl) return false;
+    if (!header || typeof header !== 'object') {
+      headerEl.innerHTML = '';
+      headerEl.hidden = true;
+      headerEl.setAttribute('aria-hidden', 'true');
+      return false;
+    }
+    const tag = header.tag ? String(header.tag).trim() : '';
+    const headline = header.headline ? String(header.headline).trim() : '';
+    const description = header.description ? String(header.description).trim() : '';
+    const meta = Array.isArray(header.meta) ? header.meta : [];
+
+    const metaRows = meta
+      .filter((row) => row && (row.label || row.value))
+      .map((row) => (
+        `<div class="case-study-modal-header-meta-row">` +
+          `<dt class="case-study-modal-header-meta-label">${escapeHtml(row.label || '')}</dt>` +
+          `<dd class="case-study-modal-header-meta-value">${escapeHtml(row.value || '')}</dd>` +
+        `</div>`
+      ))
+      .join('');
+
+    const tagMarkup = tag
+      ? `<p class="case-study-modal-header-tag">${escapeHtml(tag)}</p>`
+      : '';
+
+    const lead =
+      (headline ? `<h2 class="case-study-modal-header-headline" id="caseStudyModalHeaderHeadline">${escapeHtml(headline)}</h2>` : '') +
+      (description ? `<p class="case-study-modal-header-description">${escapeHtml(description)}</p>` : '');
+
+    const right = metaRows
+      ? `<aside class="case-study-modal-header-meta" aria-label="Project details"><dl>${metaRows}</dl></aside>`
+      : '';
+
+    headerEl.innerHTML = `<div class="case-study-modal-header-grid">` +
+      tagMarkup +
+      `<div class="case-study-modal-header-lead">${lead}</div>` +
+      right +
+      `</div>`;
+    headerEl.hidden = false;
+    headerEl.removeAttribute('aria-hidden');
+    return !!(tag || headline || description || metaRows);
   }
 
   function renderMedia(items) {
@@ -137,6 +238,19 @@
       panel.removeAttribute('aria-label');
       panel.setAttribute('aria-labelledby', 'caseStudyModalTitle');
     }
+    if (headerEl) {
+      headerEl.innerHTML = '';
+      headerEl.hidden = true;
+      headerEl.setAttribute('aria-hidden', 'true');
+    }
+    if (navEl) {
+      navEl.hidden = true;
+      if (navPrevBtn) { delete navPrevBtn.dataset.targetSlug; navPrevBtn.removeAttribute('aria-label'); }
+      if (navNextBtn) { delete navNextBtn.dataset.targetSlug; navNextBtn.removeAttribute('aria-label'); }
+      if (navPrevLabelEl) navPrevLabelEl.textContent = '';
+      if (navNextLabelEl) navNextLabelEl.textContent = '';
+    }
+    currentSlug = null;
     if (subtitleEl) {
       subtitleEl.textContent = '';
       subtitleEl.hidden = true;
@@ -145,6 +259,9 @@
     if (titleEl) {
       titleEl.hidden = false;
       titleEl.removeAttribute('aria-hidden');
+    }
+    if (panel) {
+      panel.classList.remove('case-study-modal-panel--has-header');
     }
     if (descEl) {
       descEl.textContent = '';
@@ -165,12 +282,20 @@
     lastFocus = null;
   }
 
-  async function openModal(slug, fallbackHref) {
-    lastFocus = document.activeElement;
-    savedScrollX = window.scrollX;
-    savedScrollY = window.scrollY;
+  async function openModal(slug, fallbackHref, opts) {
+    const isNavigation = !!(opts && opts.isNavigation);
+    if (!isNavigation) {
+      lastFocus = document.activeElement;
+      savedScrollX = window.scrollX;
+      savedScrollY = window.scrollY;
+    }
 
-    if (panel) panel.classList.add('is-loading');
+    if (panel) {
+      panel.classList.add('is-loading');
+      if (isNavigation) {
+        try { panel.scrollTo(0, 0); } catch (_) { panel.scrollTop = 0; }
+      }
+    }
     setOpen(true);
 
     const started = Date.now();
@@ -191,9 +316,25 @@
     const descStr = (study.description != null ? String(study.description) : '').trim();
     const descHtmlStr = (study.descriptionHtml != null ? String(study.descriptionHtml) : '').trim();
     const hasDesc = !!(descStr || descHtmlStr);
+    const hasHeader = renderHeader(study.header);
 
     if (panel) {
-      if (titleStr) {
+      panel.classList.toggle('case-study-modal-panel--has-header', hasHeader);
+
+      if (hasHeader) {
+        if (titleEl) {
+          titleEl.textContent = '';
+          titleEl.hidden = true;
+          titleEl.setAttribute('aria-hidden', 'true');
+        }
+        if (subtitleEl) {
+          subtitleEl.textContent = '';
+          subtitleEl.hidden = true;
+          subtitleEl.setAttribute('aria-hidden', 'true');
+        }
+        panel.setAttribute('aria-labelledby', 'caseStudyModalHeaderHeadline');
+        panel.removeAttribute('aria-label');
+      } else if (titleStr) {
         titleEl.textContent = titleStr;
         titleEl.hidden = false;
         titleEl.removeAttribute('aria-hidden');
@@ -212,7 +353,7 @@
         panel.setAttribute('aria-label', label);
       }
 
-      if (subtitleEl) {
+      if (!hasHeader && subtitleEl) {
         if (subtitleStr) {
           subtitleEl.textContent = subtitleStr;
           subtitleEl.hidden = false;
@@ -239,9 +380,12 @@
 
       panel.classList.toggle(
         'case-study-modal-panel--media-only',
-        !titleStr && !subtitleStr
+        !hasHeader && !titleStr && !subtitleStr
       );
     }
+
+    currentSlug = slug;
+    renderNav(slug);
 
     renderMedia(study.media || study.items);
     await waitForFirstMediaReady();
@@ -250,7 +394,20 @@
       await new Promise((r) => window.setTimeout(r, remaining));
     }
     if (panel) panel.classList.remove('is-loading');
-    try { closeBtn.focus(); } catch (_) {}
+    if (!isNavigation) {
+      try { closeBtn.focus(); } catch (_) {}
+    }
+  }
+
+  function navigateBy(direction) {
+    if (!orderedSlugs.length || !currentSlug) return;
+    const idx = orderedSlugs.indexOf(currentSlug);
+    if (idx < 0) return;
+    const n = orderedSlugs.length;
+    const nextIdx = (idx + direction + n) % n;
+    const nextSlug = orderedSlugs[nextIdx];
+    if (nextSlug === currentSlug) return;
+    openModal(nextSlug, null, { isNavigation: true });
   }
 
   document.addEventListener(
@@ -287,6 +444,21 @@
 
   closeBtn.addEventListener('click', closeModal);
   backdrop.addEventListener('click', closeModal);
+
+  if (navPrevBtn) {
+    navPrevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      navigateBy(-1);
+    });
+  }
+  if (navNextBtn) {
+    navNextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      navigateBy(1);
+    });
+  }
   root.addEventListener('click', (e) => {
     if (root.hidden) return;
     if (e.target === root) closeModal();
@@ -296,6 +468,14 @@
     if (e.key === 'Escape') {
       if (root.hidden) return;
       closeModal();
+      return;
+    }
+    if ((e.key === 'ArrowRight' || e.key === 'ArrowLeft') && !root.hidden) {
+      const tgt = e.target;
+      const tag = tgt && tgt.tagName ? tgt.tagName.toLowerCase() : '';
+      if (tag === 'input' || tag === 'textarea' || (tgt && tgt.isContentEditable)) return;
+      e.preventDefault();
+      navigateBy(e.key === 'ArrowRight' ? 1 : -1);
       return;
     }
     if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {

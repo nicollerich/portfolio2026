@@ -3036,7 +3036,7 @@ button.project-folder {
   max-height: none;
   overflow: auto;
   border-radius: 20px;
-  padding: 28px 24px 24px;
+  padding: 28px 24px 80px;
   box-sizing: border-box;
   background: #ffffff;
   color: #111111;
@@ -3160,6 +3160,230 @@ button.project-folder {
 .case-study-modal-panel--media-only .case-study-modal-media,
 .case-study-modal-media:has(.case-study-modal-media-item--video) {
   gap: 80px;
+}
+
+/* ----- Structured modal header (tag, headline, description, meta card) ----- */
+.case-study-modal-header {
+  --csm-header-accent: #7a7a7a;
+  --csm-header-text: #1a1a1a;
+  --csm-header-muted: #4a4a4a;
+  --csm-header-border: rgba(0, 0, 0, 0.08);
+  --csm-header-bg: #f2f2f2;
+
+  background: var(--csm-header-bg);
+  color: var(--csm-header-text);
+  border-radius: 14px;
+  padding: clamp(24px, 4vw, 40px);
+  margin: 0 0 clamp(20px, 3vw, 32px);
+}
+
+.case-study-modal-panel--has-header .case-study-modal-title,
+.case-study-modal-panel--has-header .case-study-modal-subtitle {
+  display: none;
+}
+
+.case-study-modal-header-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  grid-template-areas:
+    "tag  ."
+    "lead meta";
+  column-gap: clamp(24px, 4vw, 56px);
+  row-gap: 0;
+  align-items: start;
+}
+
+.case-study-modal-header-lead {
+  grid-area: lead;
+  min-width: 0;
+}
+
+.case-study-modal-header-meta {
+  grid-area: meta;
+}
+
+.case-study-modal-header-tag {
+  grid-area: tag;
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--csm-header-accent);
+  margin: 0 0 clamp(16px, 2.5vw, 24px);
+}
+
+.case-study-modal-header-headline {
+  font-family: 'Fraunces', 'Times New Roman', Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(28px, 4.2vw, 44px);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--csm-header-text);
+  margin: 0 0 clamp(16px, 2.4vw, 24px);
+}
+
+.case-study-modal-header-description {
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  font-size: clamp(15px, 1.2vw, 17px);
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--csm-header-muted);
+  margin: 0;
+  max-width: 44ch;
+}
+
+.case-study-modal-header-meta dl {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.case-study-modal-header-meta-row {
+  display: grid;
+  grid-template-columns: minmax(72px, 96px) 1fr;
+  gap: 16px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-top: 1px solid var(--csm-header-border);
+}
+
+.case-study-modal-header-meta-row:first-child {
+  border-top: 0;
+  padding-top: 4px;
+}
+
+.case-study-modal-header-meta-row:last-child {
+  padding-bottom: 4px;
+}
+
+.case-study-modal-header-meta-label {
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--csm-header-accent);
+  margin: 0;
+}
+
+.case-study-modal-header-meta-value {
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--csm-header-text);
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .case-study-modal-header-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "tag"
+      "lead"
+      "meta";
+    column-gap: 0;
+    row-gap: 28px;
+  }
+
+  .case-study-modal-header-description {
+    max-width: none;
+  }
+}
+
+/* ----- Prev/Next project navigation ----- */
+.case-study-modal-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 16px;
+  margin: clamp(40px, 6vw, 72px) 0 0;
+  padding-top: clamp(24px, 3vw, 36px);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.case-study-modal-nav[hidden] {
+  display: none;
+}
+
+.case-study-modal-nav-btn {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  background: transparent;
+  color: inherit;
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.case-study-modal-nav-btn:hover {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.18);
+}
+
+.case-study-modal-nav-btn:active {
+  transform: translateY(1px);
+}
+
+.case-study-modal-nav-btn:focus-visible {
+  outline: 2px solid #1a1a1a;
+  outline-offset: 2px;
+}
+
+.case-study-modal-nav-btn--next {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.case-study-modal-nav-arrow {
+  font-size: 20px;
+  line-height: 1;
+  flex: 0 0 auto;
+  color: #6b6b6b;
+}
+
+.case-study-modal-nav-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.case-study-modal-nav-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7a7a7a;
+}
+
+.case-study-modal-nav-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 520px) {
+  .case-study-modal-nav {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .case-study-modal-nav-btn--next {
+    justify-content: space-between;
+    text-align: right;
+  }
 }
 
 .case-study-modal-media-item {
