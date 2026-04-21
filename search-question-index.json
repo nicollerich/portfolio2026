@@ -13,7 +13,7 @@
     {
       "category": "about",
       "question": "What does Nico do at Yahoo?",
-      "answer": "I lead design for Yahoo Search and the AI product Scout, managing a team of 8 designers in close collaboration with GM Eric Feng to revive Yahoo Search as a leading platform.",
+      "answer": "I lead design for Yahoo Search and the AI product Scout, alongside a team of 10 designers, in close collaboration with GM Eric Feng to revive Yahoo Search as a leading platform.",
       "tags": ["yahoo", "current role", "search", "scout"]
     },
     {
@@ -144,7 +144,7 @@
     {
       "category": "yahoo",
       "question": "What did Nico lead at Yahoo Search?",
-      "answer": "I led the redesign of Yahoo Search's mobile app, shaped the product direction for the Slim Jim carousel on Yahoo.com (originally as a News contractor), and was a key early designer on Scout, Yahoo's AI-powered answer engine. I grew from interim to full-time Head of Design and now manage a team of 8 designers.",
+      "answer": "I led the redesign of Yahoo Search's mobile app, shaped the product direction for the Slim Jim carousel on Yahoo.com (originally as a News contractor), and was a key early designer on Scout, Yahoo's AI-powered answer engine. I grew from interim to full-time Head of Design, and my design team at Yahoo Search is now 10 people.",
       "tags": ["yahoo", "scope", "leadership", "scout", "slim jim"]
     },
     {
@@ -193,7 +193,7 @@
     {
       "category": "yahoo",
       "question": "How big is Nico's team at Yahoo?",
-      "answer": "I manage a team of 8 designers.",
+      "answer": "My design team at Yahoo Search is 10 people — each of them exceptional at what they do.",
       "tags": ["yahoo", "team", "management"]
     },
     {
@@ -325,7 +325,7 @@
     {
       "category": "management",
       "question": "How large are the teams Nico has managed?",
-      "answer": "I managed a team of 4–5 designers at Asana and currently lead a team of 8 at Yahoo Search.",
+      "answer": "I managed a team of 4–5 designers at Asana; at Yahoo Search my design team is 10 people.",
       "tags": ["management", "team size", "yahoo", "asana"]
     },
     {
@@ -411,7 +411,7 @@
     {
       "category": "skills",
       "question": "Is Nico a people manager?",
-      "answer": "Yes. I've managed designers at Asana (4–5 person team) and Yahoo Search (8-person team).",
+      "answer": "Yes. I've led designers at Asana (a 4–5 person team) and Yahoo Search (a 10-person design team).",
       "tags": ["management", "people leadership"],
       "keywords": ["manager", "manage", "management", "reports", "direct", "people", "lead", "leader"]
     },
@@ -610,7 +610,7 @@
     {
       "category": "hiring",
       "question": "What makes Nico different from other design leaders?",
-      "answer": "I have an unusual combination of range: I've co-founded a startup, shipped core features at Figma used by millions, redesigned a legacy search product, and led the early design of an AI product — all while managing teams and staying hands-on with the craft. That breadth, paired with deep product intuition, is rare at my level.",
+      "answer": "I have an unusual combination of range: I've co-founded a startup, shipped core features at Figma used by millions, redesigned a legacy search product, and led the early design of an AI product — all while leading teams and staying hands-on with the craft. That breadth, paired with deep product intuition, is rare at my level.",
       "tags": ["hiring", "differentiator", "range"],
       "keywords": ["stand out", "standout", "distinguishes", "unusual", "what makes nico different", "range", "breadth", "unique design leader"]
     },
@@ -736,14 +736,14 @@
     {
       "category": "team",
       "question": "Who is on Nico's team?",
-      "answer": "I manage an incredible team of designers at Yahoo Search: Alex Miller, John Finley, Inken Ahou, Jun Ye, Catherine Tai, Sarah Holliday, and Michael Yuan. I love them all and genuinely think they're amazing.",
+      "answer": "My team at Yahoo Search is made up of these great people: Alex Miller, John Finley, Inken Zhou, Jun Ye, Catherine Tai, Sarah Holliday, Michael Yuan, Nick Daze, James Davis, and Larry Chen. I love working with them and genuinely think they're amazing.",
       "tags": ["team", "direct reports", "designers", "yahoo"],
       "keywords": ["team", "my team", "nico's team", "who is on your team", "who is on nicos team", "team members", "designers on team", "roster", "who do you work with", "nico team"]
     },
     {
       "category": "team",
       "question": "Who does Nico manage?",
-      "answer": "I manage seven designers at Yahoo Search: Alex Miller, John Finley, Inken Ahou, Jun Ye, Catherine Tai, Sarah Holliday, and Michael Yuan.",
+      "answer": "My team at Yahoo Search includes ten designers I'm lucky to work with: Alex Miller, John Finley, Inken Zhou, Jun Ye, Catherine Tai, Sarah Holliday, Michael Yuan, Nick Daze, James Davis, and Larry Chen.",
       "tags": ["team", "management", "direct reports"],
       "keywords": ["who does nico manage", "who do you manage", "direct reports", "reports to nico", "nico's reports", "manage", "management"]
     },
@@ -763,43 +763,64 @@
     },
     {
       "category": "team",
-      "question": "Who is Inken Ahou?",
-      "answer": "Inken Ahou is one of the designers on my team at Yahoo Search. I think Inken is an amazing designer.",
-      "tags": ["team", "inken ahou", "designer"],
-      "keywords": ["inken ahou", "inken", "ahou"]
+      "question": "Who is Inken Zhou?",
+      "answer": "Inken Zhou is on my team at Yahoo Search. She's a magical artist who also has a sharp business side — she owns the B2B work at Yahoo Search and helps us ship work that actually moves the business.",
+      "tags": ["team", "inken zhou", "designer", "b2b"],
+      "keywords": ["inken zhou", "inken", "zhou", "inken ahou", "b2b", "yahoo search team"]
     },
     {
       "category": "team",
       "question": "Who is Jun Ye?",
-      "answer": "Jun Ye is one of the designers on my team at Yahoo Search. I think Jun is an amazing designer.",
+      "answer": "Jun Ye is on my team at Yahoo Search. He's a chameleon designer — put him in any problem space and he'll tackle it. He's a trusted, reliable partner to have on the team.",
       "tags": ["team", "jun ye", "designer"],
-      "keywords": ["jun ye", "jun", "ye"]
+      "keywords": ["jun ye", "jun", "ye", "chameleon designer"]
     },
     {
       "category": "team",
       "question": "Who is Catherine Tai?",
-      "answer": "Catherine Tai is one of the designers on my team at Yahoo Search. I think Catherine is an amazing designer.",
-      "tags": ["team", "catherine tai", "designer"],
-      "keywords": ["catherine tai", "catherine", "tai"]
+      "answer": "Catherine Tai — we call her Cat — is on my team at Yahoo Search. She's a thought leader and a woman of craft; her innovation and imagination are incredible.",
+      "tags": ["team", "catherine tai", "designer", "cat"],
+      "keywords": ["catherine tai", "catherine", "tai", "cat", "catherine cat"]
     },
     {
       "category": "team",
       "question": "Who is Sarah Holliday?",
-      "answer": "Sarah Holliday is one of the designers on my team at Yahoo Search. I think Sarah is an amazing designer.",
-      "tags": ["team", "sarah holliday", "designer"],
-      "keywords": ["sarah holliday", "sarah", "holliday"]
+      "answer": "Sarah Holliday is on my team at Yahoo Search. She works on all the News-related experiences in Search — she knows the scoop, pun intended.",
+      "tags": ["team", "sarah holliday", "designer", "news"],
+      "keywords": ["sarah holliday", "sarah", "holliday", "news", "yahoo news"]
     },
     {
       "category": "team",
       "question": "Who is Michael Yuan?",
-      "answer": "Michael Yuan is one of the designers on my team at Yahoo Search. I think Michael is an amazing designer.",
-      "tags": ["team", "michael yuan", "designer"],
-      "keywords": ["michael yuan", "michael", "yuan"]
+      "answer": "Michael Yuan is on my team at Yahoo Search. He's a master at tools — he can pick up any tool or process so fast it feels like he's been doing it for years. He and I help reshape what the mobile experience is and could be at Search, and he's a fantastic collaborator.",
+      "tags": ["team", "michael yuan", "designer", "mobile", "tools"],
+      "keywords": ["michael yuan", "michael", "yuan", "mobile search", "tools", "figma"]
+    },
+    {
+      "category": "team",
+      "question": "Who is Nick Daze?",
+      "answer": "Nick Daze is on my team at Yahoo Search. He's the imagination guy — except he turns creative ideas into real shipped work. He's one of the most talented designers I've ever worked with.",
+      "tags": ["team", "nick daze", "designer"],
+      "keywords": ["nick daze", "nick", "daze", "imagination"]
+    },
+    {
+      "category": "team",
+      "question": "Who is James Davis?",
+      "answer": "James Davis is on my team at Yahoo Search. He took Scout and ran with it. He's also the team's AI guru — always experimenting with the latest.",
+      "tags": ["team", "james davis", "designer", "scout", "ai"],
+      "keywords": ["james davis", "james", "davis", "scout", "ai guru", "yahoo ai"]
+    },
+    {
+      "category": "team",
+      "question": "Who is Larry Chen?",
+      "answer": "Larry Chen is on my team at Yahoo Search. He's a brilliant partner in how we think about product and design — he helps shape our thinking on framing, tradeoffs, and where to place our bets.",
+      "tags": ["team", "larry chen", "designer", "product", "design"],
+      "keywords": ["larry chen", "larry", "chen", "product design", "yahoo search", "direct reports"]
     },
     {
       "category": "team",
       "question": "Who does Nico partner with at Yahoo?",
-      "answer": "I partner closely with Melanie Pitson Evers, the PM for Scout who is incredibly great at her job, along with Bryon Jourdan (VP of Product), Rob Post, Matt Linford, and Marzia Polito. They're all great cross-functional partners.",
+      "answer": "I partner closely with Melanie Pitson Evers, the PM for Scout who is incredibly great at her job, along with Byron Jordan (VP of Product), Rob Post, Matt Linford, and Marzia Polito. They're all great cross-functional partners.",
       "tags": ["team", "partners", "cross-functional", "yahoo"],
       "keywords": ["partners", "partner with", "work with", "collaborators", "cross functional", "xfn", "nico partners", "product partners", "pm partners"]
     },
@@ -812,10 +833,10 @@
     },
     {
       "category": "team",
-      "question": "Who is Bryon Jourdan?",
-      "answer": "Bryon Jourdan is the VP of Product at Yahoo and one of my closest partners. I consider him a great partner.",
-      "tags": ["team", "bryon jourdan", "vp product", "yahoo"],
-      "keywords": ["bryon jourdan", "bryon", "jourdan", "vp of product", "vp product"]
+      "question": "Who is Byron Jordan?",
+      "answer": "Byron Jordan is the VP of Product at Yahoo and one of my closest partners. I consider him a great partner.",
+      "tags": ["team", "byron jordan", "vp product", "yahoo"],
+      "keywords": ["byron jordan", "byron", "jordan", "bryon jourdan", "byron jourdan", "jourdan", "vp of product", "vp product"]
     },
     {
       "category": "team",
