@@ -2586,12 +2586,13 @@ button.project-folder {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   gap: 2px;
   max-width: 100%;
   box-sizing: border-box;
-  padding: 6px 8px;
+  height: 45px;
+  padding: 0 8px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.92);
   background: rgba(255, 255, 255, 0.14);
@@ -2618,13 +2619,13 @@ button.project-folder {
   color: var(--text);
   border: none;
   background: transparent;
-  padding: 10px 14px;
+  padding: 0 14px;
   border-radius: 999px;
   cursor: pointer;
   transition: opacity 0.22s ease, transform 0.2s ease, background 0.2s ease;
   white-space: nowrap;
   line-height: 1;
-  min-height: 44px;
+  min-height: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -3116,7 +3117,8 @@ button.project-folder {
     justify-content: flex-start;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: 5px 6px;
+    height: 45px;
+    padding: 0 6px;
     gap: 0;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
@@ -3128,9 +3130,9 @@ button.project-folder {
 
   .view-pill {
     font-size: 10px;
-    padding: 8px 12px;
+    padding: 0 12px;
     letter-spacing: 0.08em;
-    min-height: 44px;
+    min-height: 0;
     flex: 0 0 auto;
   }
 
