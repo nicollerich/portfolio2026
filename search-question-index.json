@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-04-19",
+  "updatedAt": "2026-04-21",
   "owner": "Nico Matson",
   "entries": [
     {
@@ -86,6 +86,34 @@
       "answer": "Yes. I'm designing a wellness app concept that explores AI-powered coaching, mood and food tracking, and a coach-facing dashboard with session prep tools. It's a space for me to experiment with systems thinking and product ideas outside of a work context.",
       "tags": ["speculative", "personal", "wellness"],
       "keywords": ["speculative", "side", "hobby", "personal", "wellness", "experiment", "concept", "passion", "exploration", "explore"]
+    },
+    {
+      "category": "about",
+      "question": "What is Nico's heritage or ethnic background?",
+      "answer": "I'm half Puerto Rican and half Italian. I'm passionate and a little sassy, but never spicy.",
+      "tags": ["about", "personal", "heritage", "identity"],
+      "keywords": ["puerto rican", "puerto rico", "italian", "italy", "heritage", "ethnicity", "ethnic", "latina", "latino", "hispanic", "biracial", "mixed", "culture", "roots", "identity", "where is nico from", "background", "ancestry", "nationality"]
+    },
+    {
+      "category": "about",
+      "question": "Does Nico speak Spanish?",
+      "answer": "Yes — I'm fluent in Spanish: I read, write, and speak it. Don't let my appearance fool you.",
+      "tags": ["about", "personal", "language", "spanish"],
+      "keywords": ["spanish", "español", "fluent", "bilingual", "speak spanish", "read spanish", "write spanish", "second language", "language"]
+    },
+    {
+      "category": "about",
+      "question": "Does Nico cook or share food with friends?",
+      "answer": "If we're close enough, you'll get fed — flan, tostones, and occasionally coquito. Sharing food is one of my favorite ways to show love.",
+      "tags": ["about", "personal", "food", "culture"],
+      "keywords": ["cook", "cooking", "flan", "tostones", "coquito", "food", "host", "hosting", "dinner", "caribbean food", "boricua", "recipes", "kitchen", "entertaining"]
+    },
+    {
+      "category": "about",
+      "question": "What does Nico watch for fun?",
+      "answer": "I love true-crime documentaries and space-forward sci-fi movies and TV. Shout-out to my fellow Star Trek: The Next Generation fans — and if you haven't seen Project Hail Mary yet, it's incredible.",
+      "tags": ["about", "personal", "media", "tv", "movies"],
+      "keywords": ["watch", "tv", "television", "movies", "film", "sci-fi", "scifi", "science fiction", "space", "crime", "true crime", "documentaries", "documentary", "star trek", "tng", "next generation", "project hail mary", "hail mary", "streaming", "netflix", "shows", "series"]
     },
     {
       "category": "experience",
