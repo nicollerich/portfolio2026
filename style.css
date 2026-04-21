@@ -1180,6 +1180,21 @@ button.project-folder {
   animation: none;
 }
 
+/* Pet Projects + Figma: black folder shells (shared generic SVGs) */
+.project-folder--ink.project-folder--yellow .folder-back,
+.project-folder--ink.project-folder--yellow .folder-front {
+  filter: brightness(0) saturate(100%) drop-shadow(0 6px 14px rgba(0, 0, 0, 0.4));
+}
+
+.project-folder--ink.project-folder--yellow .folder-paper {
+  filter: brightness(0) invert(1) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.22));
+  opacity: 1;
+}
+
+.project-folder--ink.project-folder--yellow:hover .folder-paper {
+  opacity: 1;
+}
+
 .project-folder--yellow-four .folder-back,
 .project-folder--yellow-four .folder-front {
   filter: brightness(0) saturate(100%) invert(22%) sepia(94%) saturate(5894%) hue-rotate(264deg) brightness(102%) contrast(104%) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.35));
