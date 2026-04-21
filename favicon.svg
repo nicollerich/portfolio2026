@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Smile">
+  <style>
+    .face { fill: none; stroke: #111; stroke-width: 1.85; stroke-linejoin: round; }
+    .feature { fill: #111; }
+    @media (prefers-color-scheme: dark) {
+      .face { stroke: #f4f4f4; }
+      .feature { fill: #f4f4f4; }
+    }
+  </style>
+  <circle class="face" cx="16" cy="16" r="11"/>
+  <circle class="feature" cx="12" cy="14" r="2"/>
+  <circle class="feature" cx="20" cy="14" r="2"/>
+  <path class="face" d="M11.25 19.25c1.35 2.35 3.55 3.6 4.75 3.6s3.4-1.25 4.75-3.6" stroke-linecap="round"/>
+</svg>
