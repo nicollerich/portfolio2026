@@ -1,9 +1,11 @@
 import { createServer } from 'node:http';
 import { createReadStream, existsSync, statSync } from 'node:fs';
-import { extname, join, normalize } from 'node:path';
-import { cwd } from 'node:process';
+import { dirname, extname, join, normalize } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const ROOT = cwd();
+/* Serve files from this project folder, not from process.cwd() (which breaks if
+   `node server.mjs` is started from another directory — then every image/js 404s). */
+const ROOT = dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT || 3000);
 const OLLAMA_URL = process.env.OLLAMA_URL || 'http://127.0.0.1:11434';
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'llama3.2:1b';
@@ -108,6 +110,15 @@ function safePath(urlPath) {
   return join(ROOT, clean);
 }
 
+/** Browsers send spaces as %20; `URL.pathname` keeps them encoded, so we must decode or files with spaces 404. */
+function decodeUrlPathname(pathname) {
+  try {
+    return decodeURIComponent(pathname);
+  } catch {
+    return pathname;
+  }
+}
+
 async function askOllama(question, baseAnswer) {
   const prompt = [
     'Rewrite the answer naturally in 1-2 short sentences.',
@@ -204,6 +215,7 @@ const server = createServer(async (req, res) => {
     }
 
     let pathname = url.pathname === '/' ? '/index.html' : url.pathname;
+    pathname = decodeUrlPathname(pathname);
     const filePath = safePath(pathname);
     const exists = existsSync(filePath);
     const isFile = exists && statSync(filePath).isFile();
