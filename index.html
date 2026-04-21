@@ -1555,39 +1555,43 @@
 
     // Draggable piano widget
     const pianoWidget = document.querySelector('.piano-widget');
-    const pwHeader = pianoWidget.querySelector('.pw-header');
+    const pwHeader = pianoWidget?.querySelector('.pw-header');
     let pianoDragging = false;
-    let pianoStartX, pianoStartY, pianoStartLeft, pianoStartTop;
+    let pianoStartX;
+    let pianoStartY;
+    let pianoStartLeft;
+    let pianoStartTop;
 
-    pwHeader.style.cursor = 'grab';
-
-    pwHeader.addEventListener('pointerdown', (e) => {
-      e.stopPropagation();
-      pianoDragging = true;
-      pwHeader.style.cursor = 'grabbing';
-      pianoStartX = e.clientX;
-      pianoStartY = e.clientY;
-      const rect = pianoWidget.getBoundingClientRect();
-      pianoStartLeft = rect.left + window.scrollX;
-      pianoStartTop = rect.top + window.scrollY;
-      pianoWidget.setPointerCapture(e.pointerId);
-      e.preventDefault();
-    });
-
-    window.addEventListener('pointermove', (e) => {
-      if (!pianoDragging) return;
-      const dx = e.clientX - pianoStartX;
-      const dy = e.clientY - pianoStartY;
-      pianoWidget.style.left = (pianoStartLeft + dx) + 'px';
-      pianoWidget.style.top = (pianoStartTop + dy) + 'px';
-    });
-
-    window.addEventListener('pointerup', () => {
-      if (!pianoDragging) return;
-      pianoDragging = false;
+    if (pianoWidget && pwHeader) {
       pwHeader.style.cursor = 'grab';
-      console.log('Piano position — left:', pianoWidget.style.left, 'top:', pianoWidget.style.top);
-    });
+
+      pwHeader.addEventListener('pointerdown', (e) => {
+        e.stopPropagation();
+        pianoDragging = true;
+        pwHeader.style.cursor = 'grabbing';
+        pianoStartX = e.clientX;
+        pianoStartY = e.clientY;
+        const rect = pianoWidget.getBoundingClientRect();
+        pianoStartLeft = rect.left + window.scrollX;
+        pianoStartTop = rect.top + window.scrollY;
+        pianoWidget.setPointerCapture(e.pointerId);
+        e.preventDefault();
+      });
+
+      window.addEventListener('pointermove', (e) => {
+        if (!pianoDragging) return;
+        const dx = e.clientX - pianoStartX;
+        const dy = e.clientY - pianoStartY;
+        pianoWidget.style.left = `${pianoStartLeft + dx}px`;
+        pianoWidget.style.top = `${pianoStartTop + dy}px`;
+      });
+
+      window.addEventListener('pointerup', () => {
+        if (!pianoDragging) return;
+        pianoDragging = false;
+        pwHeader.style.cursor = 'grab';
+      });
+    }
 
     const defaultCardBtn = document.querySelector('.default-card');
     const defaultCardAura = defaultCardBtn?.querySelector('.default-card-aura');

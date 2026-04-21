@@ -109,9 +109,10 @@ body {
   --hero-name-top-offset: 90px;
   --piano-clearance-north-of-header: 100px;
   --piano-widget-outer-height: 188px;
-  /* Horizontal: inset from left edge of centered .page sheet */
   --piano-offset-from-page-left: 480px;
   --play-svg-gap-below-piano: 20px;
+  /* Single knob: shifts piano, Play/draw art, pencil, and eraser together on the map */
+  --play-section-vertical-nudge: 200px;
   /* Match desktop .page height so piano lines up with centered sheet */
   --page-block-height-desktop: 1117px;
   --page-hero-header-bottom: calc(var(--hero-name-top-offset) + (120px * 2) + 12px + (12px * 0.96));
@@ -1329,7 +1330,7 @@ button.project-folder {
   position: absolute;
   /* Positioned on #mapCanvas (same coords as draw layer) — not inside .page */
   left: calc(25% - 40px);
-  top: max(72px, 10%);
+  top: calc(max(72px, 10%) + var(--play-section-vertical-nudge, 0px));
   width: 210px;
   height: 90px;
   border: none;
@@ -1389,7 +1390,7 @@ button.project-folder {
   position: absolute;
   /* Snug to the right of the pencil hit area (210px) with a small gap; lower than pencil */
   left: calc(25% - 40px + 138px);
-  top: max(158px, calc(10% + 84px));
+  top: calc(max(158px, calc(10% + 84px)) + var(--play-section-vertical-nudge, 0px));
   width: 150px;
   height: 78px;
   border: none;
@@ -1469,6 +1470,7 @@ button.project-folder {
     - var(--piano-clearance-north-of-header)
     + var(--play-svg-gap-below-piano)
     + 35px
+    + var(--play-section-vertical-nudge, 0px)
   );
   width: 115px; /* 20% smaller than 144px */
   transform: rotate(-3.5deg);
@@ -1479,7 +1481,7 @@ button.project-folder {
 .canvas-decor--draw {
   /* Snug to pencil right edge (210px wide from 25% - 40px) */
   left: calc(25% - 40px + 138px);
-  top: max(72px, 10%);
+  top: calc(max(72px, 10%) + var(--play-section-vertical-nudge, 0px));
   width: 95px; /* 20% smaller than 119px */
   transform: rotate(-7deg);
   transform-origin: center;
@@ -2651,13 +2653,14 @@ button.project-folder {
   position: absolute;
   /* Horizontally: page sheet is centered in map; inset from page’s left edge */
   left: calc((100% - var(--page-sheet-width)) / 2 + var(--piano-offset-from-page-left));
-  /* Vertically: page is centered in map; sit 100px above hero headline top (see .map-canvas vars) */
+  /* Vertically: page is centered in map; sit above hero headline (see .map-canvas vars) */
   top: calc(
     (100% - var(--page-block-height-desktop)) / 2
     + var(--hero-name-top-offset)
     - var(--piano-clearance-north-of-header)
     - var(--piano-widget-outer-height)
     + 35px
+    + var(--play-section-vertical-nudge, 0px)
   );
   width: 388px;
   transform: rotate(-3deg);
