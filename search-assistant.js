@@ -294,6 +294,12 @@
     panel.classList.remove('is-fading-in', 'is-fading-out');
     panel.innerHTML = '';
     panel.remove();
+
+    const input = document.querySelector('#searchAboutForm .search-bar-input');
+    if (input) {
+      input.value = '';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+    }
   }
 
   function getOrCreatePanel() {

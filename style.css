@@ -338,19 +338,6 @@ input {
   display: inline-block;
   cursor: pointer;
   padding: 0 2px;
-  transform-origin: 50% 50%;
-  backface-visibility: hidden;
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-
-.hero-name-n-end:hover {
-  animation: heroNameNSomersault 1.05s cubic-bezier(0.22, 0.7, 0.22, 1);
-}
-
-@keyframes heroNameNSomersault {
-  0% { transform: rotateX(0deg) translateZ(0); }
-  100% { transform: rotateX(360deg) translateZ(0); }
 }
 
 .hero-name-vinyl {
