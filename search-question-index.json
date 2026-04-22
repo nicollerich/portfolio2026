@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-04-21",
+  "updatedAt": "2026-04-22",
   "owner": "Nico Matson",
   "entries": [
     {
@@ -760,6 +760,13 @@
       "answer": "Yes, and I think about this a lot. AI is compressing some parts of the process — exploration, prototyping, copy — but it's raising the bar on judgment. The designers who thrive will be the ones who know what good looks like and can direct AI toward it, not the ones who can just execute.",
       "tags": ["ai", "future", "designers"],
       "keywords": ["ai changing", "future of design", "ai replace", "ai replacing", "ai disrupt", "ai disrupting", "ai future"]
+    },
+    {
+      "category": "ai",
+      "question": "What's your perspective on AI?",
+      "answer": "I mainly think about design and the tech industry at the moment, and to that I'd say I'm still skeptical of AI hype — but know that your real edge is the judgment to decide what actually matters, something no tool can replicate.",
+      "tags": ["ai", "perspective", "opinion", "hype", "judgment"],
+      "keywords": ["perspective on ai", "ai perspective", "opinion on ai", "think about ai", "ai hype", "skeptical", "skeptical of ai", "ai skeptic", "judgment", "design and tech", "tech industry", "what do you think about ai", "nico ai opinion"]
     },
     {
       "category": "team",
