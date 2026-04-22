@@ -645,6 +645,21 @@
       e.preventDefault();
       runSearch(input.value);
     });
+
+    /* Capture + stopPropagation so the first Escape isn’t eaten by the browser’s
+       default behavior on <input type="search"> (often needs two Esc otherwise). */
+    document.addEventListener(
+      'keydown',
+      (e) => {
+        if (e.key !== 'Escape') return;
+        const panel = document.getElementById('searchResults');
+        if (!panel || panel.hidden) return;
+        e.preventDefault();
+        e.stopPropagation();
+        dismissPanel(panel);
+      },
+      true
+    );
   }
 
   if (document.readyState === 'loading') {
