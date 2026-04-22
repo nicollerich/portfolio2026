@@ -302,6 +302,29 @@
     }
   }
 
+  /** True when the results panel is actually showing content (not only `hidden` — some hosts differ). */
+  function searchResultsPanelIsDismissable(panel) {
+    if (!panel || !panel.isConnected) return false;
+    if (panel.hidden) return false;
+    if (!panel.querySelector('.search-results-body')) return false;
+    try {
+      const cs = window.getComputedStyle(panel);
+      if (cs.display === 'none' || cs.visibility === 'hidden') return false;
+    } catch (_) {
+      /* ignore */
+    }
+    return true;
+  }
+
+  function onGlobalSearchEscapeKeydown(e) {
+    if (e.key !== 'Escape' && e.code !== 'Escape') return;
+    const panel = document.getElementById('searchResults');
+    if (!searchResultsPanelIsDismissable(panel)) return;
+    e.preventDefault();
+    e.stopPropagation();
+    dismissPanel(panel);
+  }
+
   function getOrCreatePanel() {
     let panel = document.getElementById('searchResults');
     if (panel) return panel;
@@ -645,26 +668,18 @@
       e.preventDefault();
       runSearch(input.value);
     });
+  }
 
-    /* Capture + stopPropagation so the first Escape isn’t eaten by the browser’s
-       default behavior on <input type="search"> (often needs two Esc otherwise). */
-    document.addEventListener(
-      'keydown',
-      (e) => {
-        if (e.key !== 'Escape') return;
-        const panel = document.getElementById('searchResults');
-        if (!panel || panel.hidden) return;
-        e.preventDefault();
-        e.stopPropagation();
-        dismissPanel(panel);
-      },
-      true
-    );
+  function bootSearchAssistant() {
+    init();
+    /* Window + capture: runs before document/target handlers; avoids prod cases where
+       document-level capture did not fire or `hidden` alone was a false negative. */
+    window.addEventListener('keydown', onGlobalSearchEscapeKeydown, true);
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', bootSearchAssistant);
   } else {
-    init();
+    bootSearchAssistant();
   }
 })();
