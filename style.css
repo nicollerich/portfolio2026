@@ -76,6 +76,17 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  /* Hide scrollbars everywhere; touch / trackpad / wheel scrolling unchanged */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar,
+*::-webkit-scrollbar-corner {
+  width: 0;
+  height: 0;
+  display: none;
+  background: transparent;
 }
 
 html {
@@ -448,6 +459,11 @@ input {
   pointer-events: none;
 }
 
+/* Inner strip only on mobile; display:contents keeps desktop abs layout unchanged */
+.hero-collage-scroll {
+  display: contents;
+}
+
 .hero-collage-item {
   position: absolute;
   width: 240px;
@@ -495,29 +511,6 @@ input {
 .hero-collage-item:nth-child(8)  { left: calc(50% - 790px); top: 270px; width: 180px; --rot: 3deg; }
 .hero-collage-item:nth-child(9)  { left: calc(50% - 670px); top: 240px; width: 160px; --rot: -4deg; }
 .hero-collage-item:nth-child(10) { left: calc(50% - 830px); top: 380px; width: 170px; --rot: 7deg; }
-
-@media (max-width: 720px) {
-  .hero-collage {
-    top: 220px;
-    /* Anchor the polaroid stack to the left of the hero (not 50%-centered). */
-    --hc-root: max(18px, calc(10px + env(safe-area-inset-left, 0px)));
-  }
-  .hero-collage-item {
-    width: 150px;
-    padding: 6px 6px 20px;
-  }
-  /* Offsets preserve the previous 2-column stagger; only the anchor moves from 50% to --hc-root. */
-  .hero-collage-item:nth-child(1)  { left: var(--hc-root); top: 0px; width: 150px; }
-  .hero-collage-item:nth-child(2)  { left: calc(var(--hc-root) + 160px); top: 10px; width: 150px; }
-  .hero-collage-item:nth-child(3)  { left: calc(var(--hc-root) + 20px); top: 160px; width: 150px; }
-  .hero-collage-item:nth-child(4)  { left: calc(var(--hc-root) + 180px); top: 180px; width: 150px; }
-  .hero-collage-item:nth-child(5)  { left: calc(var(--hc-root) + 10px); top: 340px; width: 150px; }
-  .hero-collage-item:nth-child(6)  { left: calc(var(--hc-root) + 170px); top: 360px; width: 150px; }
-  .hero-collage-item:nth-child(7)  { left: var(--hc-root); top: 520px; width: 150px; }
-  .hero-collage-item:nth-child(8)  { left: calc(var(--hc-root) + 180px); top: 540px; width: 150px; }
-  .hero-collage-item:nth-child(9)  { left: calc(var(--hc-root) + 10px); top: 700px; width: 150px; }
-  .hero-collage-item:nth-child(10) { left: calc(var(--hc-root) + 180px); top: 720px; width: 150px; }
-}
 
 [data-theme-mode="dark"] .hero-hi {
   filter: brightness(0) invert(1);
@@ -1025,6 +1018,16 @@ input {
 }
 
 .default-card-face-front {
+  display: none;
+}
+
+/* Wrapper is display:contents on desktop so folder absolute positions match prior layout. */
+.project-folder-strip {
+  display: contents;
+}
+
+/* Edge insets for mobile carousel only (see @media max-width 720px); hidden on desktop. */
+.project-folder-strip-spacer {
   display: none;
 }
 
@@ -3069,23 +3072,456 @@ button.project-folder {
 
 /* ── Viewport-fixed controls only (nav / chrome) — map artboard stays fixed-size ─ */
 @media (max-width: 720px) {
+  /* Linear mobile column: no wide artboard pan; vertical scroll only. */
+  html {
+    overflow-x: hidden;
+    scroll-padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 96px);
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
   /* Match smaller hero type so search sits closer to “NICO MATSON” (desktop
      math still assumed 120px-tall lines). */
   .map-canvas {
     --page-hero-header-bottom: calc(var(--hero-name-top-offset) + 72px * 2 * 1.04 + 10px);
     --search-group-gap-below-hero: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    cursor: default;
+    position: relative;
+  }
+
+  #mapCanvas > .draw-layer {
+    display: none;
+  }
+
+  #mapCanvas > .canvas-pencil-btn,
+  #mapCanvas > .canvas-eraser-btn,
+  #mapCanvas > .canvas-decor {
+    display: none !important;
+  }
+
+  .map-canvas .piano-widget {
+    order: 1;
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: translateY(-24px);
+    width: min(388px, calc(100vw - 32px));
+    max-width: 100%;
+    align-self: center;
+    /* Breathing room below status bar / notch; bottom margin keeps air before hero / carousel */
+    margin: 0 auto clamp(32px, 7vw, 52px);
+    padding-top: max(14px, calc(env(safe-area-inset-top, 0px) + 12px));
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    z-index: 8;
+  }
+
+  .map-canvas > .page {
+    order: 2;
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    height: auto;
+    /* min-content avoids flex min-height:0 shrinking that clips carousels */
+    min-height: min-content;
+    flex: 1 1 auto;
+    margin: 0;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 128px);
+    overflow: visible;
+  }
+
+  .center-content {
+    position: relative;
+    inset: auto;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    padding-top: 0;
+    padding-bottom: 28px;
+    /* Was -22px: pulled hero/carousel under the piano; ease off so the strip clears the keys */
+    margin-top: 0;
+    flex: 0 0 auto;
+    align-items: stretch;
+    width: 100%;
+    overflow: visible;
   }
 
   .section-about {
-    min-height: min(620px, 92vh);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 16px 28px;
+    box-sizing: border-box;
+    min-height: min-content;
+    flex: 0 0 auto;
+    overflow: visible;
   }
 
-  html {
-    scroll-padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 96px);
+  .section-about > .hero-collage {
+    order: -3;
+    align-self: stretch;
+    width: auto;
+    max-width: none;
+    margin-top: -30px;
+    margin-bottom: 36px;
+    margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+    margin-right: calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+    padding: 0 max(16px, env(safe-area-inset-left, 0px)) 0 max(16px, env(safe-area-inset-right, 0px));
+    box-sizing: border-box;
+    overflow: visible;
+    pointer-events: auto;
+    z-index: 3;
+  }
+
+  .section-about .hero-collage {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    pointer-events: auto;
+  }
+
+  /* Horizontal scroll; extra vertical padding gives rotated cards + shadows room
+     above/below the scrollport when the UA treats overflow-x:auto as a scroll box. */
+  .section-about .hero-collage-scroll {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    scroll-snap-type: x proximity;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 36px 0 72px;
+    box-sizing: border-box;
+  }
+
+  .section-about .hero-collage-scroll::-webkit-scrollbar {
+    display: none;
+    height: 0;
+  }
+
+  .section-about .hero-collage-item {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    flex: 0 0 auto;
+    width: 128px !important;
+    scroll-snap-align: center;
+    touch-action: pan-x;
+    cursor: default;
+    padding: 0;
+    box-sizing: border-box;
+    border: 2px solid rgba(255, 255, 255, 0.96);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow:
+      0 18px 36px rgba(0, 0, 0, 0.2),
+      0 8px 16px rgba(0, 0, 0, 0.1);
+    will-change: auto;
+    /* Cross-axis margin helps flex row height include shadow/tilt outside the img box */
+    margin: 10px 0;
+  }
+
+  [data-theme-mode="light"] .section-about .hero-collage-item {
+    border-color: rgba(0, 0, 0, 0.12);
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  [data-theme-mode="dark"] .section-about .hero-collage-item {
+    border-color: rgba(255, 255, 255, 0.88);
+    background: rgba(0, 0, 0, 0.15);
+  }
+
+  .section-about .hero-collage-item:nth-child(odd) {
+    transform: rotate(-3deg);
+  }
+
+  .section-about .hero-collage-item:nth-child(even) {
+    transform: rotate(4deg);
+  }
+
+  .section-about > .hero-tagline {
+    order: -2;
+  }
+
+  .section-about > .hero-name {
+    order: -1;
+  }
+
+  /* Endless-style horizontal carousel (cover-flow): perspective + scroll-driven 3D from JS */
+  .project-folder-strip {
+    --folder-r: 0.62;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: clamp(28px, 6vw, 40px);
+    width: 100%;
+    max-width: none;
+    margin: 44px calc(-1 * max(16px, env(safe-area-inset-left, 0px))) 28px calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+    box-sizing: border-box;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    scroll-snap-type: x proximity;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* Extra vertical room so folder stack drop shadows aren’t clipped (3D scale + filter shadows) */
+    padding: clamp(28px, 8vw, 48px) max(16px, env(safe-area-inset-left, 0px)) clamp(48px, 12vw, 72px)
+      max(16px, env(safe-area-inset-right, 0px));
+    z-index: 5;
+    perspective: min(1400px, 220vw);
+    perspective-origin: 50% 42%;
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      #000 6%,
+      #000 94%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      #000 6%,
+      #000 94%,
+      transparent 100%
+    );
+    mask-size: 100% 100%;
+    -webkit-mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+  }
+
+  .project-folder-strip::-webkit-scrollbar {
+    display: none;
+    height: 0;
+  }
+
+  /* Lets first/last folders scroll until their centers can sit in the strip midpoint */
+  .project-folder-strip-spacer {
+    display: block;
+    flex: 0 0 auto;
+    width: max(28px, calc(50% - 120px));
+    min-width: 20px;
+    align-self: stretch;
+    pointer-events: none;
+    scroll-snap-align: none;
+  }
+
+  .project-folder-strip-spacer--start {
+    order: 0;
+  }
+
+  .project-folder-strip-spacer--end {
+    order: 6;
+  }
+
+  .project-folder-strip .project-folder {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    transform-origin: 50% 50%;
+    gap: 5px;
+    --focus-scale: 1;
+    --carousel-ry: 0deg;
+    --carousel-tz: 0px;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: rotateY(var(--carousel-ry)) translateZ(var(--carousel-tz)) scale(var(--focus-scale, 1));
+    transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 2;
+  }
+
+  .project-folder-strip.is-folder-dragging .project-folder {
+    transition: none;
+  }
+
+  /* Visual order: Asana → … → Payitoff (matches endless carousel scroll direction) */
+  .project-folder-strip [data-case-modal="asana"] {
+    order: 1;
+  }
+
+  .project-folder-strip [data-case-modal="figma"] {
+    order: 2;
+  }
+
+  .project-folder-strip [data-case-modal="yahoo"] {
+    order: 3;
+  }
+
+  .project-folder-strip [data-case-modal="management"] {
+    order: 4;
+  }
+
+  .project-folder-strip [data-case-modal="payitoff"] {
+    order: 5;
+  }
+
+  /* Whole stack (shell + paper + stickers) shares one footprint */
+  .project-folder-strip .project-folder--yellow .folder-stack {
+    width: calc(142px * var(--folder-r));
+    height: calc(142px * var(--folder-r));
+  }
+
+  .project-folder-strip .project-folder .folder-label {
+    font-size: 9px;
+  }
+
+  .project-folder-strip .project-folder--yellow .folder-sticker {
+    width: calc(40px * var(--folder-r));
+  }
+
+  .project-folder-strip .project-folder--yellow .folder-sticker--figma {
+    width: calc(36px * var(--folder-r));
+  }
+
+  .project-folder-strip .project-folder--yellow .folder-sticker--smile {
+    width: calc(56px * var(--folder-r));
+  }
+
+  .project-folder-strip .project-folder--yellow .folder-sticker--asana {
+    width: calc(42px * var(--folder-r));
+  }
+
+  .project-folder-strip .project-folder--yellow .folder-sticker--payitoff {
+    width: calc(72px * var(--folder-r));
+  }
+
+  .project-folder-strip .project-folder--yellow:hover .folder-paper {
+    transform: translateX(-50%) translateY(calc(-14px * var(--folder-r)));
+  }
+
+  .scene-card,
+  .default-card {
+    display: none !important;
+  }
+
+  .experience-mini {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    padding: 12px 16px 28px;
+    margin: 36px 0 0;
+    box-sizing: border-box;
+    opacity: 1;
+    animation: none;
+  }
+
+  .experience-mini-label {
+    font-size: 9px;
+    letter-spacing: 0.11em;
+    margin-bottom: 6px;
+  }
+
+  .experience-mini-main h3 {
+    font-size: 12px;
+  }
+
+  .experience-mini-main p {
+    font-size: 11px;
+    line-height: 1.18;
+    margin-top: 2px;
+  }
+
+  .experience-mini-dates {
+    font-size: 9px;
+    margin-top: 0;
+  }
+
+  .experience-mini-item {
+    opacity: 1;
+    transform: none;
+    animation: none;
+    gap: 10px;
+    padding: 5px 0;
+  }
+
+  .footer-nav.footer-nav--social {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin: 44px auto 40px;
+    padding: 0 max(12px, env(safe-area-inset-left, 0px)) 0 max(12px, env(safe-area-inset-right, 0px));
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .footer-nav--social {
+    gap: clamp(7px, 1.7vw, 11px);
+    flex-wrap: wrap;
+    row-gap: 12px;
+    justify-content: center;
+  }
+
+  .footer-nav--social .social-icon-link img {
+    width: clamp(40px, 9.5vw, 52px);
+    height: clamp(40px, 9.5vw, 52px);
+  }
+
+  .footer-nav--social .social-icon-link:hover img {
+    transform: scale(1.06);
+  }
+
+  .hero-tagline--connect,
+  .post-it {
+    display: none !important;
   }
 
   .search-group {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    transform: none;
     width: min(280px, calc(100% - 32px));
+    max-width: calc(100% - 32px);
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 6;
   }
 
   .search-bar {
@@ -3106,6 +3542,7 @@ button.project-folder {
     bottom: max(20px, calc(env(safe-area-inset-bottom, 0px) + 10px));
     gap: 8px;
     max-width: calc(100vw - 16px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px));
+    z-index: 120;
   }
 
   .view-dots {
@@ -3119,6 +3556,7 @@ button.project-folder {
     gap: 0;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
   .view-dots::-webkit-scrollbar {
@@ -3134,24 +3572,31 @@ button.project-folder {
   }
 
   /* Shrink the hero so the whole "NICO MATSON" fits on a mobile screen.
-     The centering JS uses getBoundingClientRect on .hero-name, so scaling
-     the font automatically keeps it centered in the viewport on load. */
+     Linear layout: headline + search stack in normal flow (centering JS uses
+     their combined bounds on narrow viewports). */
   .hero-name {
     font-size: 72px;
     line-height: 1.04;
-    left: 50%;
+    position: relative;
+    left: auto;
     right: auto;
-    transform: translateX(-50%);
-    margin-left: 0;
-    margin-right: 0;
+    top: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
   }
 
   .hero-tagline {
-    left: 50%;
+    position: relative;
+    left: auto;
     right: auto;
-    transform: translateX(-50%);
-    margin-left: 0;
-    margin-right: 0;
+    top: auto;
+    transform: none;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .hero-name-pop {

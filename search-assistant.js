@@ -24,7 +24,7 @@
     'What is Nico\'s leadership style?',
     'How can I contact Nico?'
   ];
-  const DEFAULT_PLACEHOLDER = 'Ask me stuff, I might have an answer';
+  const DEFAULT_PLACEHOLDER = 'Ask me a question';
 
   function isAboutNico(item) {
     const blob = `${item.title || ''} ${item.snippet || ''} ${item.link || ''}`.toLowerCase();

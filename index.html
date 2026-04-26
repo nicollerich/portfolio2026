@@ -33,7 +33,7 @@
             </svg>
             <div class="search-bar-field">
               <span class="search-bar-caret" aria-hidden="true"></span>
-              <input type="search" name="q" class="search-bar-input" placeholder="Ask me stuff, I might have an answer" spellcheck="false" autocomplete="off" aria-label="Search about Nico">
+              <input type="search" name="q" class="search-bar-input" placeholder="Ask me a question" spellcheck="false" autocomplete="off" aria-label="Search about Nico">
             </div>
           </div>
         </form>
@@ -52,6 +52,7 @@
       <img class="hero-explore" src="images/go-exploring.svg" alt="Go exploring">
 
       <div class="hero-collage" id="heroCollage" aria-label="Drag the photos around">
+        <div class="hero-collage-scroll">
         <img class="hero-collage-item" src="images/gallery/01.png" alt="" draggable="false" decoding="async" loading="lazy">
         <img class="hero-collage-item" src="images/gallery/02.png" alt="" draggable="false" decoding="async" loading="lazy">
         <img class="hero-collage-item" src="images/gallery/03.png" alt="" draggable="false" decoding="async" loading="lazy">
@@ -62,6 +63,7 @@
         <img class="hero-collage-item" src="images/gallery/08.png" alt="" draggable="false" decoding="async" loading="lazy">
         <img class="hero-collage-item" src="images/gallery/09.png" alt="" draggable="false" decoding="async" loading="lazy">
         <img class="hero-collage-item" src="images/gallery/10.png" alt="" draggable="false" decoding="async" loading="lazy">
+        </div>
       </div>
 
       <div class="hero-blurb">
@@ -97,6 +99,8 @@
       </span>
     </button>
 
+    <div class="project-folder-strip" aria-label="Project previews">
+    <div class="project-folder-strip-spacer project-folder-strip-spacer--start" aria-hidden="true"></div>
     <button type="button" class="project-folder project-folder--yellow project-folder--ink" data-case-modal="management" aria-label="Pet Projects — open preview">
       <span class="folder-stack" aria-hidden="true">
         <img class="folder-back" src="images/back-of-folder.svg" alt="">
@@ -146,6 +150,8 @@
       </span>
       <span class="folder-label">Asana</span>
     </button>
+    <div class="project-folder-strip-spacer project-folder-strip-spacer--end" aria-hidden="true"></div>
+    </div>
 
     <section id="section-work" class="experience-mini" aria-label="Recent experience">
       <p class="experience-mini-label">EXPERIENCE THE LAST 10 YEARS</p>
@@ -461,18 +467,38 @@
         return;
       }
 
-      // Center the viewport directly on NICO MATSON (the hero-name element
-      // itself) so the headline lands in the middle of the visible area. We
-      // intentionally ignore the "NYC DESIGNER" tagline here — including it
-      // skews the vertical center upward, which on mobile pushes the name
-      // above the visible center.
-      const heroRect = hero.getBoundingClientRect();
-      const b = {
-        left: heroRect.left,
-        right: heroRect.right,
-        top: heroRect.top,
-        bottom: heroRect.bottom
-      };
+      const mobileStackAnchor =
+        typeof window.matchMedia === 'function' &&
+        window.matchMedia('(max-width: 720px)').matches;
+
+      let b;
+      if (mobileStackAnchor) {
+        const heroRect = hero.getBoundingClientRect();
+        let top = heroRect.top;
+        let bottom = heroRect.bottom;
+        let left = heroRect.left;
+        let right = heroRect.right;
+        const searchGroup = document.querySelector('.search-group');
+        if (searchGroup && isElementLayoutVisible(searchGroup)) {
+          const sr = searchGroup.getBoundingClientRect();
+          top = Math.min(top, sr.top);
+          bottom = Math.max(bottom, sr.bottom);
+          left = Math.min(left, sr.left);
+          right = Math.max(right, sr.right);
+        }
+        b = { left, right, top, bottom };
+      } else {
+        // Desktop: center on NICO MATSON only (not tagline or search) so the
+        // headline lands in the middle of the artboard viewport.
+        const heroRect = hero.getBoundingClientRect();
+        b = {
+          left: heroRect.left,
+          right: heroRect.right,
+          top: heroRect.top,
+          bottom: heroRect.bottom
+        };
+      }
+
       const groupCenterX = b.left + (b.right - b.left) / 2;
       const groupCenterY = b.top + (b.bottom - b.top) / 2;
 
@@ -489,7 +515,7 @@
 
     const shouldSkipViewportPan = (target) => {
       return !!target.closest(
-        'button, input, textarea, select, a, [contenteditable="true"], .theme-dots, .bottom-nav-cluster, .view-dots, .search-group, .search-results, .search-layers-btn, .post-it, .canvas-pencil, .canvas-pencil-btn, .canvas-eraser, .canvas-eraser-btn, .hero-name-o, .hero-collage-item'
+        'button, input, textarea, select, a, [contenteditable="true"], .theme-dots, .bottom-nav-cluster, .view-dots, .search-group, .search-results, .search-layers-btn, .post-it, .canvas-pencil, .canvas-pencil-btn, .canvas-eraser, .canvas-eraser-btn, .hero-name-o, .hero-collage, .hero-collage-scroll, .hero-collage-item, .project-folder-strip'
       );
     };
 
@@ -853,6 +879,7 @@
       recenterButton.addEventListener('click', () => {
         triggerViewportSpotlight();
         centerViewportOnCenterContent('smooth');
+        window.setTimeout(() => centerProjectFolderStripOnYahoo('smooth'), 420);
       });
     }
 
@@ -863,12 +890,107 @@
       centerViewportOnCenterContent('auto');
     };
 
+    /** Mobile folder strip: grow + stack the folder whose center is nearest the strip midpoint. */
+    let folderStripFocusRaf = 0;
+    const scheduleFolderStripFocusUpdate = () => {
+      if (folderStripFocusRaf) return;
+      folderStripFocusRaf = requestAnimationFrame(() => {
+        folderStripFocusRaf = 0;
+        updateFolderStripFocusScales();
+      });
+    };
+
+    const updateFolderStripFocusScales = () => {
+      const narrow =
+        typeof window.matchMedia === 'function' && window.matchMedia('(max-width: 720px)').matches;
+      const strip = document.querySelector('.project-folder-strip');
+      if (!strip) return;
+      const folders = strip.querySelectorAll('.project-folder[data-case-modal]');
+      if (!narrow) {
+        folders.forEach((btn) => {
+          btn.style.removeProperty('--focus-scale');
+          btn.style.removeProperty('--carousel-ry');
+          btn.style.removeProperty('--carousel-tz');
+          btn.style.removeProperty('z-index');
+        });
+        return;
+      }
+      const stripRect = strip.getBoundingClientRect();
+      const centerX = stripRect.left + stripRect.width * 0.5;
+      const falloff = Math.max(stripRect.width * 0.38, 130);
+      const maxBoost = 1.22;
+      const half = Math.max(stripRect.width * 0.4, 128);
+      let bestBtn = null;
+      let bestFocus = 0;
+      folders.forEach((btn) => {
+        const r = btn.getBoundingClientRect();
+        const c = r.left + r.width * 0.5;
+        const dist = Math.abs(c - centerX);
+        const t = Math.min(1, dist / falloff);
+        const eased = 1 - t * t;
+        const focus = 1 + (maxBoost - 1) * eased;
+        btn.style.setProperty('--focus-scale', focus.toFixed(3));
+        const n = Math.max(-1, Math.min(1, (c - centerX) / half));
+        const ry = (-n * 52).toFixed(2);
+        const absN = Math.abs(n);
+        const tz = ((1 - absN) * 72 - 38).toFixed(1);
+        btn.style.setProperty('--carousel-ry', `${ry}deg`);
+        btn.style.setProperty('--carousel-tz', `${tz}px`);
+        if (focus > bestFocus) {
+          bestFocus = focus;
+          bestBtn = btn;
+        }
+      });
+      folders.forEach((btn) => {
+        if (btn === bestBtn && bestFocus > 1.04) {
+          btn.style.zIndex = '8';
+        } else {
+          btn.style.removeProperty('z-index');
+        }
+      });
+    };
+
+    /** Narrow strip: scroll so Yahoo sits in the horizontal middle (scrollLeft still reaches 0 for Asana). */
+    const centerProjectFolderStripOnYahoo = (behavior = 'auto') => {
+      if (
+        typeof window.matchMedia !== 'function' ||
+        !window.matchMedia('(max-width: 720px)').matches
+      ) {
+        return;
+      }
+      const strip = document.querySelector('.project-folder-strip');
+      const yahoo = strip?.querySelector('[data-case-modal="yahoo"]');
+      if (!strip || !yahoo) return;
+      const sr = strip.getBoundingClientRect();
+      const yr = yahoo.getBoundingClientRect();
+      const yahooCenter = yr.left + yr.width / 2;
+      const stripCenter = sr.left + sr.width / 2;
+      const delta = yahooCenter - stripCenter;
+      const maxScroll = Math.max(0, strip.scrollWidth - strip.clientWidth);
+      const next = Math.min(Math.max(0, strip.scrollLeft + delta), maxScroll);
+      if (typeof strip.scrollTo === 'function') {
+        strip.scrollTo({ left: next, behavior });
+      } else {
+        strip.scrollLeft = next;
+      }
+      requestAnimationFrame(() => {
+        scheduleFolderStripFocusUpdate();
+      });
+    };
+
     /** Re-run after layout: fonts, images, and hidden tagline can change hero bounds */
     const runHeroCenterAfterLayout = () => {
       applyInitialViewportCenter();
       requestAnimationFrame(() => {
         applyInitialViewportCenter();
-        requestAnimationFrame(applyInitialViewportCenter);
+        requestAnimationFrame(() => {
+          applyInitialViewportCenter();
+          centerProjectFolderStripOnYahoo('auto');
+          requestAnimationFrame(() => {
+            centerProjectFolderStripOnYahoo('auto');
+            window.setTimeout(() => centerProjectFolderStripOnYahoo('smooth'), 56);
+          });
+        });
       });
     };
 
@@ -928,9 +1050,149 @@
       window.setTimeout(runHeroCenterAfterLayout, 120);
     });
 
+    // Folder strip: mouse drag with light momentum + drag/click separation (touch keeps native inertia).
+    (function initFolderStripCarouselFeel() {
+      const strip = document.querySelector('.project-folder-strip');
+      if (!strip) return;
+      const isNarrow = () =>
+        typeof window.matchMedia === 'function' && window.matchMedia('(max-width: 720px)').matches;
+
+      let dragPointerId = null;
+      let startX = 0;
+      let startScroll = 0;
+      let lastX = 0;
+      let lastT = 0;
+      let vel = 0;
+      let suppressNextClick = false;
+      let momentumRaf = 0;
+
+      const maxScroll = () => Math.max(0, strip.scrollWidth - strip.clientWidth);
+
+      const stopMomentum = () => {
+        if (momentumRaf) cancelAnimationFrame(momentumRaf);
+        momentumRaf = 0;
+      };
+
+      const stepMomentum = () => {
+        if (!isNarrow()) {
+          momentumRaf = 0;
+          return;
+        }
+        const m = maxScroll();
+        if (Math.abs(vel) < 0.45) {
+          momentumRaf = 0;
+          vel = 0;
+          scheduleFolderStripFocusUpdate();
+          return;
+        }
+        let next = strip.scrollLeft - vel;
+        if (next <= 0) {
+          next = 0;
+          vel *= 0.32;
+        } else if (next >= m) {
+          next = m;
+          vel *= 0.32;
+        }
+        strip.scrollLeft = next;
+        vel *= 0.94;
+        scheduleFolderStripFocusUpdate();
+        momentumRaf = requestAnimationFrame(stepMomentum);
+      };
+
+      strip.addEventListener(
+        'pointerdown',
+        (e) => {
+          if (!isNarrow() || e.pointerType === 'touch') return;
+          if (e.button !== 0) return;
+          dragPointerId = e.pointerId;
+          startX = e.clientX;
+          startScroll = strip.scrollLeft;
+          lastX = e.clientX;
+          lastT = performance.now();
+          vel = 0;
+          suppressNextClick = false;
+          stopMomentum();
+          strip.classList.remove('is-folder-dragging');
+        },
+        true
+      );
+
+      strip.addEventListener(
+        'pointermove',
+        (e) => {
+          if (!isNarrow() || e.pointerId !== dragPointerId) return;
+          const dx = startX - e.clientX;
+          if (Math.abs(dx) > 6) {
+            suppressNextClick = true;
+            strip.classList.add('is-folder-dragging');
+            try {
+              strip.setPointerCapture(e.pointerId);
+            } catch (_) {
+              /* noop */
+            }
+            strip.scrollLeft = startScroll + dx;
+            const now = performance.now();
+            const dt = Math.max(1, now - lastT);
+            vel = ((e.clientX - lastX) / dt) * 18;
+            lastX = e.clientX;
+            lastT = now;
+            scheduleFolderStripFocusUpdate();
+            e.preventDefault();
+          }
+        },
+        true
+      );
+
+      const endDrag = (e) => {
+        if (e.pointerId !== dragPointerId) return;
+        const pid = e.pointerId;
+        dragPointerId = null;
+        strip.classList.remove('is-folder-dragging');
+        try {
+          strip.releasePointerCapture(pid);
+        } catch (_) {
+          /* noop */
+        }
+        if (isNarrow() && Math.abs(vel) > 1.1) {
+          stopMomentum();
+          momentumRaf = requestAnimationFrame(stepMomentum);
+        }
+        scheduleFolderStripFocusUpdate();
+      };
+
+      strip.addEventListener('pointerup', endDrag, true);
+      strip.addEventListener('pointercancel', endDrag, true);
+
+      strip.addEventListener(
+        'click',
+        (e) => {
+          if (!suppressNextClick) return;
+          suppressNextClick = false;
+          e.preventDefault();
+          e.stopPropagation();
+          if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+        },
+        true
+      );
+
+      const onStripScroll = () => {
+        scheduleFolderStripFocusUpdate();
+      };
+      strip.addEventListener('scroll', onStripScroll, { passive: true });
+      strip.addEventListener('scrollend', onStripScroll);
+      window.addEventListener('resize', onStripScroll);
+      onStripScroll();
+    })();
+
     document.addEventListener('pointerdown', (e) => {
       if (e.button !== 0) return;
       if (e.pointerType === 'touch') return;
+      if (
+        typeof window.matchMedia === 'function' &&
+        window.matchMedia('(max-width: 720px)').matches
+      ) {
+        return;
+      }
       if (pencilDragging || eraserDragging) return;
       if (
         searchBarInput &&
@@ -1154,6 +1416,7 @@
         const left = Math.min(Math.max(0, cx - window.innerWidth / 2), maxLeft);
         const top = Math.min(Math.max(0, cy - window.innerHeight / 2), maxTop);
         window.scrollTo({ left, top, behavior: 'smooth' });
+        window.setTimeout(() => centerProjectFolderStripOnYahoo('smooth'), 420);
       };
 
       const schedulePlaySectionTone = () => {
@@ -1163,7 +1426,10 @@
       const scrollToPlayAreaCenter = () => {
         const pencil = document.querySelector('.canvas-pencil-btn');
         const piano = document.getElementById('section-play');
-        const nodes = [pencil, piano].filter(Boolean);
+        const isNarrowPlay =
+          typeof window.matchMedia === 'function' &&
+          window.matchMedia('(max-width: 720px)').matches;
+        const nodes = isNarrowPlay ? [piano].filter(Boolean) : [pencil, piano].filter(Boolean);
         if (!nodes.length) {
           const fallback = sectionTargets.play;
           if (fallback) {
@@ -1566,6 +1832,12 @@
       pwHeader.style.cursor = 'grab';
 
       pwHeader.addEventListener('pointerdown', (e) => {
+        if (
+          typeof window.matchMedia === 'function' &&
+          window.matchMedia('(max-width: 720px)').matches
+        ) {
+          return;
+        }
         e.stopPropagation();
         pianoDragging = true;
         pwHeader.style.cursor = 'grabbing';
@@ -1809,12 +2081,24 @@
     (function initHeroCollage() {
       const collage = document.getElementById('heroCollage');
       if (!collage) return;
+      if (
+        typeof window.matchMedia === 'function' &&
+        window.matchMedia('(max-width: 720px)').matches
+      ) {
+        collage.setAttribute('aria-label', 'Swipe through photos');
+      }
       const items = Array.from(collage.querySelectorAll('.hero-collage-item'));
       let topZ = 10;
       items.forEach((item) => {
         item.style.zIndex = String(++topZ);
         item.addEventListener('pointerdown', (e) => {
           if (e.button != null && e.button !== 0) return;
+          if (
+            typeof window.matchMedia === 'function' &&
+            window.matchMedia('(max-width: 720px)').matches
+          ) {
+            return;
+          }
           e.stopPropagation();
           e.preventDefault();
           try { item.setPointerCapture(e.pointerId); } catch (_) { /* noop */ }
