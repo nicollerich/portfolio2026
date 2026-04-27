@@ -437,6 +437,90 @@
     openModal(nextSlug, null, { isNavigation: true });
   }
 
+  /** Same breakpoint as the linear mobile layout — swipe changes project like prev/next. */
+  function isMobileSwipeViewport() {
+    return typeof window.matchMedia === 'function' && window.matchMedia('(max-width: 720px)').matches;
+  }
+
+  const SWIPE_MIN_DX = 56;
+  const SWIPE_DOMINANCE = 1.35;
+  let swipeArmed = false;
+  let swipeStartX = 0;
+  let swipeStartY = 0;
+
+  function swipeTouchStartsOnExcluded(target) {
+    if (!target || !target.closest) return true;
+    if (target.closest('button')) return true;
+    if (target.closest('a[href]')) return true;
+    return false;
+  }
+
+  if (panel) {
+    panel.addEventListener(
+      'touchstart',
+      (e) => {
+        if (root.hidden || !isMobileSwipeViewport()) return;
+        if (orderedSlugs.length <= 1) return;
+        if (e.touches.length !== 1) return;
+        const t = e.touches[0];
+        if (swipeTouchStartsOnExcluded(e.target)) {
+          swipeArmed = false;
+          return;
+        }
+        swipeStartX = t.clientX;
+        swipeStartY = t.clientY;
+        swipeArmed = true;
+      },
+      { passive: true }
+    );
+
+    panel.addEventListener(
+      'touchmove',
+      (e) => {
+        if (!swipeArmed || root.hidden) return;
+        if (e.touches.length !== 1) {
+          swipeArmed = false;
+          return;
+        }
+        const t = e.touches[0];
+        const dx = t.clientX - swipeStartX;
+        const dy = t.clientY - swipeStartY;
+        if (Math.abs(dy) > 24 && Math.abs(dy) > Math.abs(dx) * 1.1) {
+          swipeArmed = false;
+        }
+      },
+      { passive: true }
+    );
+
+    panel.addEventListener(
+      'touchend',
+      (e) => {
+        if (!swipeArmed || root.hidden || !isMobileSwipeViewport()) {
+          swipeArmed = false;
+          return;
+        }
+        const t = e.changedTouches[0];
+        if (!t) {
+          swipeArmed = false;
+          return;
+        }
+        const dx = t.clientX - swipeStartX;
+        const dy = t.clientY - swipeStartY;
+        swipeArmed = false;
+        if (orderedSlugs.length <= 1) return;
+        if (Math.abs(dx) < SWIPE_MIN_DX) return;
+        if (Math.abs(dx) < Math.abs(dy) * SWIPE_DOMINANCE) return;
+        if (dx < 0) navigateBy(1);
+        else navigateBy(-1);
+      },
+      { passive: true }
+    );
+
+    panel.addEventListener('touchcancel', () => {
+      swipeArmed = false;
+    });
+  }
+
   document.addEventListener(
     'click',
     (e) => {
