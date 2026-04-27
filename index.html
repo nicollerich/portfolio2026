@@ -918,7 +918,8 @@
       const stripRect = strip.getBoundingClientRect();
       const centerX = stripRect.left + stripRect.width * 0.5;
       const falloff = Math.max(stripRect.width * 0.38, 130);
-      const maxBoost = 1.22;
+      /* Keep center emphasis subtle on phone — large boost reads as “wrong size / misaligned” */
+      const maxBoost = 1.1;
       const half = Math.max(stripRect.width * 0.4, 128);
       let bestBtn = null;
       let bestFocus = 0;

@@ -3287,7 +3287,7 @@ button.project-folder {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    align-items: center;
+    align-items: flex-end;
     justify-content: flex-start;
     gap: clamp(28px, 6vw, 40px);
     width: 100%;
@@ -3309,18 +3309,19 @@ button.project-folder {
     z-index: 5;
     perspective: min(1400px, 220vw);
     perspective-origin: 50% 42%;
+    /* Softer edge than 6%/94% — scaled “hero” folders were reading as clipped on iPhone */
     mask-image: linear-gradient(
       to right,
       transparent 0%,
-      #000 6%,
-      #000 94%,
+      #000 2.5%,
+      #000 97.5%,
       transparent 100%
     );
     -webkit-mask-image: linear-gradient(
       to right,
       transparent 0%,
-      #000 6%,
-      #000 94%,
+      #000 2.5%,
+      #000 97.5%,
       transparent 100%
     );
     mask-size: 100% 100%;
@@ -3338,7 +3339,7 @@ button.project-folder {
   .project-folder-strip-spacer {
     display: block;
     flex: 0 0 auto;
-    width: max(28px, calc(50% - 120px));
+    width: max(32px, calc(50% - 100px));
     min-width: 20px;
     align-self: stretch;
     pointer-events: none;
@@ -3463,10 +3464,14 @@ button.project-folder {
     opacity: 1;
   }
 
+  /*
+   * Yahoo purple: desktop uses saturate(~5900%). iOS WebKit can collapse extreme filter chains
+   * to solid black on <img>; this gentler chain targets a similar purple without huge saturate().
+   */
   .project-folder-strip .project-folder--yellow.project-folder--yellow-four .folder-back,
   .project-folder-strip .project-folder--yellow.project-folder--yellow-four .folder-front {
-    filter: brightness(0) saturate(100%) invert(22%) sepia(94%) saturate(5894%) hue-rotate(264deg) brightness(102%) contrast(104%) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.35));
-    -webkit-filter: brightness(0) saturate(100%) invert(22%) sepia(94%) saturate(5894%) hue-rotate(264deg) brightness(102%) contrast(104%) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.35));
+    filter: brightness(0) saturate(100%) invert(18%) sepia(100%) saturate(520%) hue-rotate(252deg) brightness(104%) contrast(108%) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.35));
+    -webkit-filter: brightness(0) saturate(100%) invert(18%) sepia(100%) saturate(520%) hue-rotate(252deg) brightness(104%) contrast(108%) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.35));
   }
 
   .project-folder-strip .project-folder--yellow.project-folder--yellow-four .folder-paper {
@@ -3590,6 +3595,8 @@ button.project-folder {
     margin-left: auto;
     margin-right: auto;
     z-index: 6;
+    /* Helps some iOS builds treat taps as intentional without extra gesture zoom */
+    touch-action: manipulation;
   }
 
   .search-bar {
