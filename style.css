@@ -3330,6 +3330,14 @@ button.project-folder {
     -webkit-mask-repeat: no-repeat;
   }
 
+  /* iOS: edge mask + scaled folders still felt clipped; full-opacity strip reads clearer */
+  @supports (-webkit-touch-callout: none) {
+    .project-folder-strip {
+      mask-image: none;
+      -webkit-mask-image: none;
+    }
+  }
+
   .project-folder-strip::-webkit-scrollbar {
     display: none;
     height: 0;
@@ -3452,13 +3460,17 @@ button.project-folder {
     will-change: auto;
   }
 
-  .project-folder-strip .project-folder--yellow.project-folder--ink .folder-back,
-  .project-folder-strip .project-folder--yellow.project-folder--ink .folder-front {
+  /*
+   * Selectors must include `.folder-stack > img` so specificity beats the strip reset above;
+   * otherwise `filter: none` wins and shells read wrong / iOS 3D can flatten to black.
+   */
+  .project-folder-strip .project-folder--yellow.project-folder--ink .folder-stack > img.folder-back,
+  .project-folder-strip .project-folder--yellow.project-folder--ink .folder-stack > img.folder-front {
     filter: brightness(0) saturate(100%) drop-shadow(0 6px 14px rgba(0, 0, 0, 0.4));
     -webkit-filter: brightness(0) saturate(100%) drop-shadow(0 6px 14px rgba(0, 0, 0, 0.4));
   }
 
-  .project-folder-strip .project-folder--yellow.project-folder--ink .folder-paper {
+  .project-folder-strip .project-folder--yellow.project-folder--ink .folder-stack > img.folder-paper {
     filter: brightness(0) invert(1) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.22));
     -webkit-filter: brightness(0) invert(1) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.22));
     opacity: 1;
@@ -3468,37 +3480,37 @@ button.project-folder {
    * Yahoo purple: desktop uses saturate(~5900%). iOS WebKit can collapse extreme filter chains
    * to solid black on <img>; this gentler chain targets a similar purple without huge saturate().
    */
-  .project-folder-strip .project-folder--yellow.project-folder--yellow-four .folder-back,
-  .project-folder-strip .project-folder--yellow.project-folder--yellow-four .folder-front {
+  .project-folder-strip .project-folder--yellow.project-folder--yellow-four .folder-stack > img.folder-back,
+  .project-folder-strip .project-folder--yellow.project-folder--yellow-four .folder-stack > img.folder-front {
     filter: brightness(0) saturate(100%) invert(18%) sepia(100%) saturate(520%) hue-rotate(252deg) brightness(104%) contrast(108%) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.35));
     -webkit-filter: brightness(0) saturate(100%) invert(18%) sepia(100%) saturate(520%) hue-rotate(252deg) brightness(104%) contrast(108%) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.35));
   }
 
-  .project-folder-strip .project-folder--yellow.project-folder--yellow-four .folder-paper {
+  .project-folder-strip .project-folder--yellow.project-folder--yellow-four .folder-stack > img.folder-paper {
     filter: brightness(0) invert(1) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.25));
     -webkit-filter: brightness(0) invert(1) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.25));
     opacity: 1;
   }
 
-  .project-folder-strip .project-folder--yellow.project-folder--pink .folder-back,
-  .project-folder-strip .project-folder--yellow.project-folder--pink .folder-front {
+  .project-folder-strip .project-folder--yellow.project-folder--pink .folder-stack > img.folder-back,
+  .project-folder-strip .project-folder--yellow.project-folder--pink .folder-stack > img.folder-front {
     filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.18));
     -webkit-filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.18));
   }
 
-  .project-folder-strip .project-folder--yellow.project-folder--pink .folder-paper {
+  .project-folder-strip .project-folder--yellow.project-folder--pink .folder-stack > img.folder-paper {
     filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.25));
     -webkit-filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.25));
     opacity: 1;
   }
 
-  .project-folder-strip .project-folder--yellow.project-folder--payitoff .folder-back,
-  .project-folder-strip .project-folder--yellow.project-folder--payitoff .folder-front {
+  .project-folder-strip .project-folder--yellow.project-folder--payitoff .folder-stack > img.folder-back,
+  .project-folder-strip .project-folder--yellow.project-folder--payitoff .folder-stack > img.folder-front {
     filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.28));
     -webkit-filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.28));
   }
 
-  .project-folder-strip .project-folder--yellow.project-folder--payitoff .folder-paper {
+  .project-folder-strip .project-folder--yellow.project-folder--payitoff .folder-stack > img.folder-paper {
     filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.25));
     -webkit-filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.25));
     opacity: 1;
@@ -3613,18 +3625,19 @@ button.project-folder {
    */
   #searchAboutForm .search-bar .search-bar-input,
   #searchAboutForm input.search-bar-input {
-    font-size: 16px !important;
+    /* 17px: some iOS builds still zoom at 16px when root html is 14px or with flex/compositing */
+    font-size: 17px !important;
     line-height: 1.35 !important;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
   }
 
   #searchAboutForm .search-bar-input::placeholder {
-    font-size: 16px !important;
+    font-size: 17px !important;
   }
 
   .search-bar-carousel-item {
-    font-size: 16px !important;
+    font-size: 17px !important;
   }
 
   .search-results {
