@@ -3121,7 +3121,7 @@ button.project-folder {
     align-self: center;
     /* Breathing room below status bar / notch; bottom margin keeps air before hero / carousel */
     margin: 0 auto clamp(32px, 7vw, 52px);
-    padding-top: max(14px, calc(env(safe-area-inset-top, 0px) + 12px));
+    padding-top: max(26px, calc(env(safe-area-inset-top, 0px) + 22px));
     box-sizing: border-box;
     flex: 0 0 auto;
     z-index: 8;
@@ -3431,6 +3431,34 @@ button.project-folder {
     transform: translateX(-50%) translateY(calc(-14px * var(--folder-r)));
   }
 
+  /*
+   * Yahoo folder: iOS Safari can paint the stack solid black when 3D transforms on the
+   * button interact with nested filter chains. Re-assert purple shell + white paper and
+   * promote each layer with translateZ so filters composite correctly.
+   */
+  .project-folder-strip .project-folder[data-case-modal="yahoo"] .folder-back,
+  .project-folder-strip .project-folder[data-case-modal="yahoo"] .folder-front {
+    filter: brightness(0) saturate(100%) invert(22%) sepia(94%) saturate(5894%) hue-rotate(264deg) brightness(102%) contrast(104%) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.35));
+    -webkit-filter: brightness(0) saturate(100%) invert(22%) sepia(94%) saturate(5894%) hue-rotate(264deg) brightness(102%) contrast(104%) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.35));
+    transform: translateZ(0.05px);
+  }
+
+  .project-folder-strip .project-folder[data-case-modal="yahoo"] .folder-paper {
+    filter: brightness(0) invert(1) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.25));
+    -webkit-filter: brightness(0) invert(1) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.25));
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) translateZ(0.08px);
+  }
+
+  .project-folder-strip .project-folder[data-case-modal="yahoo"]:hover .folder-paper {
+    transform: translateX(-50%) translateY(calc(-14px * var(--folder-r))) translateZ(0.08px);
+  }
+
+  .project-folder-strip .project-folder[data-case-modal="yahoo"] .folder-sticker {
+    filter: none;
+    -webkit-filter: none;
+  }
+
   .scene-card,
   .default-card {
     display: none !important;
@@ -3530,8 +3558,14 @@ button.project-folder {
     gap: 8px;
   }
 
+  /* 16px minimum prevents iOS Safari from zooming the page on focus (inputs < 16px trigger zoom). */
   .search-bar-input {
-    font-size: 11px;
+    font-size: 16px;
+    line-height: 1.3;
+  }
+
+  .search-bar-carousel-item {
+    font-size: 16px;
   }
 
   .search-results {
