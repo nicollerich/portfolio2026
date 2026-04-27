@@ -3365,8 +3365,7 @@ button.project-folder {
     --carousel-ry: 0deg;
     --carousel-tz: 0px;
     transform-style: preserve-3d;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
+    /* Do not set backface-visibility: hidden here — iOS Safari + 3D transform flattens nested filters to solid black. */
     transform: rotateY(var(--carousel-ry)) translateZ(var(--carousel-tz)) scale(var(--focus-scale, 1));
     transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
     z-index: 2;
@@ -3401,6 +3400,8 @@ button.project-folder {
   .project-folder-strip .project-folder--yellow .folder-stack {
     width: calc(142px * var(--folder-r));
     height: calc(142px * var(--folder-r));
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
   }
 
   .project-folder-strip .project-folder .folder-label {
@@ -3428,35 +3429,74 @@ button.project-folder {
   }
 
   .project-folder-strip .project-folder--yellow:hover .folder-paper {
-    transform: translateX(-50%) translateY(calc(-14px * var(--folder-r)));
+    transform: translateX(-50%) translateY(calc(-14px * var(--folder-r))) translateZ(0.12px);
   }
 
   /*
-   * Yahoo folder: iOS Safari can paint the stack solid black when 3D transforms on the
-   * button interact with nested filter chains. Re-assert purple shell + white paper and
-   * promote each layer with translateZ so filters composite correctly.
+   * Strip: cancel desktop .project-folder img (brightness/invert) on stack layers, then
+   * re-apply shell/paper filters with higher specificity so iOS + 3D carousel compositing
+   * matches desktop (ink black, Yahoo purple, pink/payitoff colored SVGs).
    */
-  .project-folder-strip .project-folder[data-case-modal="yahoo"] .folder-back,
-  .project-folder-strip .project-folder[data-case-modal="yahoo"] .folder-front {
-    filter: brightness(0) saturate(100%) invert(22%) sepia(94%) saturate(5894%) hue-rotate(264deg) brightness(102%) contrast(104%) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.35));
-    -webkit-filter: brightness(0) saturate(100%) invert(22%) sepia(94%) saturate(5894%) hue-rotate(264deg) brightness(102%) contrast(104%) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.35));
-    transform: translateZ(0.05px);
+  .project-folder-strip .project-folder .folder-stack > img.folder-back,
+  .project-folder-strip .project-folder .folder-stack > img.folder-front,
+  .project-folder-strip .project-folder .folder-stack > img.folder-paper {
+    filter: none;
+    -webkit-filter: none;
+    will-change: auto;
   }
 
-  .project-folder-strip .project-folder[data-case-modal="yahoo"] .folder-paper {
+  .project-folder-strip .project-folder .folder-sticker {
+    filter: none !important;
+    -webkit-filter: none !important;
+    will-change: auto;
+  }
+
+  .project-folder-strip .project-folder--yellow.project-folder--ink .folder-back,
+  .project-folder-strip .project-folder--yellow.project-folder--ink .folder-front {
+    filter: brightness(0) saturate(100%) drop-shadow(0 6px 14px rgba(0, 0, 0, 0.4));
+    -webkit-filter: brightness(0) saturate(100%) drop-shadow(0 6px 14px rgba(0, 0, 0, 0.4));
+  }
+
+  .project-folder-strip .project-folder--yellow.project-folder--ink .folder-paper {
+    filter: brightness(0) invert(1) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.22));
+    -webkit-filter: brightness(0) invert(1) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.22));
+    opacity: 1;
+  }
+
+  .project-folder-strip .project-folder--yellow.project-folder--yellow-four .folder-back,
+  .project-folder-strip .project-folder--yellow.project-folder--yellow-four .folder-front {
+    filter: brightness(0) saturate(100%) invert(22%) sepia(94%) saturate(5894%) hue-rotate(264deg) brightness(102%) contrast(104%) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.35));
+    -webkit-filter: brightness(0) saturate(100%) invert(22%) sepia(94%) saturate(5894%) hue-rotate(264deg) brightness(102%) contrast(104%) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.35));
+  }
+
+  .project-folder-strip .project-folder--yellow.project-folder--yellow-four .folder-paper {
     filter: brightness(0) invert(1) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.25));
     -webkit-filter: brightness(0) invert(1) drop-shadow(0 8px 14px rgba(0, 0, 0, 0.25));
     opacity: 1;
-    transform: translateX(-50%) translateY(0) translateZ(0.08px);
   }
 
-  .project-folder-strip .project-folder[data-case-modal="yahoo"]:hover .folder-paper {
-    transform: translateX(-50%) translateY(calc(-14px * var(--folder-r))) translateZ(0.08px);
+  .project-folder-strip .project-folder--yellow.project-folder--pink .folder-back,
+  .project-folder-strip .project-folder--yellow.project-folder--pink .folder-front {
+    filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.18));
+    -webkit-filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.18));
   }
 
-  .project-folder-strip .project-folder[data-case-modal="yahoo"] .folder-sticker {
-    filter: none;
-    -webkit-filter: none;
+  .project-folder-strip .project-folder--yellow.project-folder--pink .folder-paper {
+    filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.25));
+    -webkit-filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.25));
+    opacity: 1;
+  }
+
+  .project-folder-strip .project-folder--yellow.project-folder--payitoff .folder-back,
+  .project-folder-strip .project-folder--yellow.project-folder--payitoff .folder-front {
+    filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.28));
+    -webkit-filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.28));
+  }
+
+  .project-folder-strip .project-folder--yellow.project-folder--payitoff .folder-paper {
+    filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.25));
+    -webkit-filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.25));
+    opacity: 1;
   }
 
   .scene-card,
