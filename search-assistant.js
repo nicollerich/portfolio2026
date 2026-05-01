@@ -171,6 +171,19 @@
     return s.charAt(0).toLowerCase() + s.slice(1);
   }
 
+  /** Exact trap questions where models sometimes hallucinate; bypasses organic rewrite. */
+  function tryFixedIdentityAnswer(rawQuery) {
+    const t = (rawQuery || '').trim().toLowerCase();
+    if (!/\bnico\b|\bnicolle\b/.test(t)) return null;
+    if (
+      /\bboy\s+or\s+(a\s+)?girl\b/.test(t) ||
+      /\bgirl\s+or\s+(a\s+)?boy\b/.test(t)
+    ) {
+      return "I'm a woman, and I use she/her pronouns. Nico is my nickname — my full name is Nicolle.";
+    }
+    return null;
+  }
+
   function ensureYesNoStyle(answer, query) {
     if (!isYesNoQuestion(query)) return answer;
     const trimmed = (answer || '').trim();
@@ -477,6 +490,15 @@
     panel.hidden = true;
     panel.classList.remove('is-fading-in', 'is-fading-out');
     try {
+      const identitySnippet = tryFixedIdentityAnswer(q);
+      if (identitySnippet) {
+        const snippet = ensureYesNoStyle(identitySnippet, q);
+        await renderItems(panel, [
+          { title: '', snippet, link: '', sourceQuestion: '' }
+        ]);
+        return;
+      }
+
       const knowledgeEntries = await getKnowledgeEntries();
       const localMatches = findKnowledgeMatches(q, knowledgeEntries);
       if (localMatches.length) {

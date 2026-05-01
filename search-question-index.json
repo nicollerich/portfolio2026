@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-04-22",
+  "updatedAt": "2026-05-01",
   "owner": "Nico Matson",
   "entries": [
     {
@@ -9,6 +9,27 @@
       "answer": "I'm a product design leader focused on search and AI-powered experiences across mobile and web.",
       "tags": ["about", "bio", "intro"],
       "keywords": ["who", "tell", "introduce", "intro", "about", "background", "overview", "summary", "story"]
+    },
+    {
+      "category": "about",
+      "question": "What are Nico's pronouns?",
+      "answer": "She/her. I'm a woman, and Nico is the nickname I use — my full name is Nicolle.",
+      "tags": ["about", "identity", "pronouns"],
+      "keywords": ["pronoun", "pronouns", "she her", "she/her", "preferred pronouns", "what pronouns", "which pronouns", "address", "miss", "ms", "mrs"]
+    },
+    {
+      "category": "about",
+      "question": "Is Nico a boy or a girl?",
+      "answer": "I'm a woman — I use she/her pronouns. Nico is just my nickname; my full name is Nicolle.",
+      "tags": ["about", "identity", "gender"],
+      "keywords": ["boy", "girl", "boy or girl", "girl or boy", "male or female", "woman", "women", "female", "lady", "gender", "is nico a boy", "is nico a girl", "nico a boy", "nico a girl", "nonbinary", "non-binary", "enby"]
+    },
+    {
+      "category": "about",
+      "question": "Is Nico a woman?",
+      "answer": "Yes — I'm a woman, and I use she/her pronouns.",
+      "tags": ["about", "identity", "gender"],
+      "keywords": ["woman", "women", "female", "lady", "girl"]
     },
     {
       "category": "about",
