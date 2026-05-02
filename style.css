@@ -4193,6 +4193,70 @@ body.case-study-modal-open {
   }
 }
 
+/* ── Custom cursor (desktop / fine pointer only — see custom-cursor.js) ─ */
+.custom-cursor-ring {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 50%;
+  background: var(--text);
+  background: color-mix(in srgb, var(--text) 34%, transparent);
+  pointer-events: none;
+  z-index: 2147483646;
+  opacity: 0;
+  visibility: hidden;
+  will-change: transform;
+  transition:
+    opacity 0.14s ease,
+    width 0.14s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.14s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.2s ease;
+}
+
+.custom-cursor-ring.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.custom-cursor-ring.is-visible.is-pressed {
+  width: 38px;
+  height: 38px;
+  background: var(--text);
+  background: color-mix(in srgb, var(--text) 48%, transparent);
+}
+
+body.is-drawing-enabled .custom-cursor-ring {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+@media (pointer: fine) and (min-width: 721px) {
+  @media (prefers-reduced-motion: no-preference) {
+    html.has-custom-cursor,
+    html.has-custom-cursor * {
+      cursor: none !important;
+    }
+
+    html.has-custom-cursor input,
+    html.has-custom-cursor textarea,
+    html.has-custom-cursor select,
+    html.has-custom-cursor [contenteditable='true'] {
+      cursor: text !important;
+    }
+
+    /* Drawing mode still needs precise aim */
+    html.has-custom-cursor body.is-drawing-enabled .map-canvas {
+      cursor: crosshair !important;
+    }
+  }
+}
+
 /* ── Cross-page view transitions (same-origin: home ↔ case studies, etc.) ─ */
 /* Chromium 126+; ignored elsewhere. Makes full navigations cross-fade instead of a hard cut. */
 @view-transition {
